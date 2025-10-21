@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="openGL2.Objects.Figure" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIEkAQCAIAgBAAAABqAQgAAAAgEARABgAAAgSAAI=</HashCode>
+      <FileName>Objects\Figure.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="openGL2.Objects.ObjectHandler" Collapsed="true">
+    <Position X="5.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAIAAAAAAAAAAACAAACAAAAAAIAAIAAAAAAAAA=</HashCode>
+      <FileName>Objects\ObjectHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Objects.PrimitivesVertexFigures" Collapsed="true">
+    <Position X="7.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\PrimitivesVertexFigures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Objects.VertexInformation" Collapsed="true">
+    <Position X="5.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAIAAAEAAAABAgAAAAICAAAAAAAAAAAAACAAAAggA=</HashCode>
+      <FileName>Objects\PrimitivesVertexFigures.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Objects.VertexArrayObjectHandler" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Objects\VertexArrayObjectHandler.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Shaders.Matrix4Uniform" Collapsed="true">
+    <Position X="3.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEgAAAAAAAEAQAAQAA=</HashCode>
+      <FileName>Shaders\Matrix4Uniform.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Shaders.ProjectedTextureShader" Collapsed="true">
+    <Position X="10.75" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAgAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Shaders\ProjectedTextureShader.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Shaders.Shader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="3.75" Y="2.5" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="openGL2.Shaders.Shader.textureUnits" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Shaders\Shader.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AACCAQFAkCiUEAAABiAAIIDwgDAVgYyQECgEEAEwgAg=</HashCode>
+      <FileName>Shaders\Shader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="openGL2.Textures.ImageParser" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>Textures\ImageParser.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Textures.Texture" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABAEAAAAACAEhAQAAQAAAAUEAAIAIEAAAAAEAQBACAg=</HashCode>
+      <FileName>Textures\Texture.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="openGL2.Textures.TGAReader" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="7.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACACAAAAAAAQCAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Textures\TGAReader.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="openGL2.Window.Camera" Collapsed="true">
+    <Position X="3.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAQCCAAAABAEgAAAAAAAAAACAAgSQACBAgICAQBA=</HashCode>
+      <FileName>Window\Camera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Window.Controls" Collapsed="true">
+    <Position X="5.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAAAAAAEggAAACAAAAAAAAAAAAAAAQAAAAEAAAAAAAA=</HashCode>
+      <FileName>Window\Controls.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Window.FormWindowStart" Collapsed="true">
+    <Position X="9" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAggAAAgAAAAEAAAAAAAAAAAAAAAAAABAAAEgEIAA=</HashCode>
+      <FileName>Window\FormWindowStart.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.Window.Window" Collapsed="true">
+    <Position X="7.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAgAAAgBBAAAAQAAAAAACAAAAAiAAAAAAAUgUIAA=</HashCode>
+      <FileName>Window\Window.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OpenGL.Program" Collapsed="true">
+    <Position X="9" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.UI" Collapsed="true">
+    <Position X="9" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAgCAAEgAKEAIAQAEAAMACDQAAAQwDAgFoIAAJgQAA=</HashCode>
+      <FileName>UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="openGL2.UserInputs" Collapsed="true">
+    <Position X="10.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>UI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="openGL2.Shaders.ShaderPart" Collapsed="true">
+    <Position X="5.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAEAAA=</HashCode>
+      <FileName>Shaders\Shader.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="openGL2.Textures.TDAHeader" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAAVgQgAAAAAAgAAACAAAAAQQAAAAACA=</HashCode>
+      <FileName>Textures\TGAReader.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="openGL2.Textures.ImageInformation" Collapsed="true">
+    <Position X="3.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAQAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <FileName>Textures\TGAReader.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="openGL2.Textures.IParseImageToBytes" Collapsed="true">
+    <Position X="5.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Textures\TGAReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="openGL2.Textures.IChangeTGAColorToRGB" Collapsed="true">
+    <Position X="3.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQCAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Textures\TGAReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
