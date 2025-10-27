@@ -201,28 +201,47 @@ namespace openGL2.Objects
     }
 
 
-    public class VertexInformation 
+    public class VertexInformation
     {
-        float[] positions;
-        float[] normals;
-        float[] uvs;
+        float[] _positions;
+        float[] _normals;
+        float[] _uvs;
+        float[] _vbo;
 
-
+        public float[] Vertices { get; }
+        
 
         public VertexInformation(float[] positions, float[] uvs, float[] normals)
         {
-            this.positions = positions;
-            this.normals = normals;
-            this.uvs = uvs;
+            this._positions = positions;
+            this._normals = normals;
+            this._uvs = uvs;
+
+            Vertices = GetCombinedInfoForVertecis(this);
         }
 
-       
-        public float[] Positions { get => positions; }
-        public float[] Normals { get => normals; }
-        public float[] Uvs { get => uvs; }
+        public VertexInformation(float[] positions, float[] uvs, float[] normals, float[] vertices)
+        {
+            this._positions = positions;
+            this._normals = normals;
+            this._uvs = uvs;
+
+            Vertices = vertices;
+        }
 
 
-        public static float[] GetCombinedInfoForVertecis(VertexInformation vertexInfo)
+
+
+
+        public float[] Positions { get => _positions; }
+        public float[] Normals { get => _normals; }
+        public float[] Uvs { get => _uvs; }
+
+
+        public float[] VBO { get => _vbo; }
+
+
+        private static float[] GetCombinedInfoForVertecis(VertexInformation vertexInfo)
         {
 
             int positionLength = vertexInfo.Positions.Length;
@@ -243,11 +262,15 @@ namespace openGL2.Objects
 
             int binormalAndTangetCounter = 0;
             int triangleCounter = 0;
-            float[] tangetAndBinormals = MakeTangentsAndBiNormalsForTriangles(vertexInfo.Positions, vertexInfo.Uvs);
+            float[] tangetAndBinormals = TangentAndBiNormalLogic.MakeTangentsAndBiNormalsForTriangles(vertexInfo.Positions, vertexInfo.Uvs);
 
             bool firstTriangle = true;
+
+  
+
             for (int i = 0; i < totalLength; i += dataLengthInVertex)
             {
+                Vertex vertex = new Vertex();
 
                 // add positions
                 combinedInfo[i] = vertexInfo.Positions[vertexCount++];
@@ -264,9 +287,8 @@ namespace openGL2.Objects
                 combinedInfo[i + 6] = vertexInfo.Normals[normalCounter++];
                 combinedInfo[i + 7] = vertexInfo.Normals[normalCounter++];
 
-
                 // add binormal and tanget til hver trekant ved at sætte de samme 3 gange i træk
-                
+
                 if (triangleCounter % 3 == 0 && firstTriangle)
                 {
                     binormalAndTangetCounter += 6;
@@ -277,70 +299,60 @@ namespace openGL2.Objects
                 combinedInfo[i + 8] = tangetAndBinormals[binormalAndTangetCounter ];
                 combinedInfo[i + 9] = tangetAndBinormals[binormalAndTangetCounter  +1];
                 combinedInfo[i + 10] = tangetAndBinormals[binormalAndTangetCounter +2];
+
                 combinedInfo[i + 11] = tangetAndBinormals[binormalAndTangetCounter +3];
                 combinedInfo[i + 12] = tangetAndBinormals[binormalAndTangetCounter +4];
-                combinedInfo[i + 13] = tangetAndBinormals[binormalAndTangetCounter +5];
+                combinedInfo[i + 13] = tangetAndBinormals[binormalAndTangetCounter + 5];
 
-                
+
             }
             return combinedInfo;
         }
-       
 
-        private static float[] MakeTangentsAndBiNormalsForTriangles(float[] positions, float[] uv)
+        private static float[] CombineVBOFromFaces(int[] faces, float[] positions, float[] uvs, float[] normals)
         {
-            Vector3 pos1, pos2, pos3;
-            Vector2 uv1, uv2, uv3;
+            // every face has 3 informations pos, uv and normal
+            List<float> vboBuilder = new List<float>();
 
+            List<Vertex> vertices = new List<Vertex>(); 
 
-            int positionsCounter = 0;
-            int uvCounter = 0;
-            float[] tangetAndBiNormal = new float[(uv.Length / 2) * 6];
-            for (int i = 0; i < uv.Length / 2; i += 6)
+            for (int i = 0; i < faces.Length; i++)
             {
-                pos1 = new Vector3(positions[positionsCounter++], positions[positionsCounter++], positions[positionsCounter++]);
-                pos2 = new Vector3(positions[positionsCounter++], positions[positionsCounter++], positions[positionsCounter++]);
-                pos3 = new Vector3(positions[positionsCounter++], positions[positionsCounter++], positions[positionsCounter++]);
+                // position
+                int pos = faces[i];
+                vboBuilder.Add( positions[3 * (pos - 1)]);
+                vboBuilder.Add( positions[3 * (pos - 1) + 1]);
+                vboBuilder.Add( positions[3 * (pos - 1) + 2]);
 
-                uv1 = new Vector2(uv[uvCounter++], uv[uvCounter++]);
-                uv2 = new Vector2(uv[uvCounter++], uv[uvCounter++]);
-                uv3 = new Vector2(uv[uvCounter++], uv[uvCounter++]);
+                // uvs
+                i++;
+                int uvPos = faces[i];
+                vboBuilder.Add(  uvs[2 * (uvPos - 1)]);
+                vboBuilder.Add(  uvs[2 * (uvPos - 1) + 1]);
 
-                float[] calculatedBnT = CalculateBiNormalerOgTangenter(pos1, pos2, pos3, uv1, uv2, uv3);
-                tangetAndBiNormal[i] = calculatedBnT[0];
-                tangetAndBiNormal[i + 1] = calculatedBnT[1];
-                tangetAndBiNormal[i + 2] = calculatedBnT[2];
-                tangetAndBiNormal[i + 3] = calculatedBnT[3];
-                tangetAndBiNormal[i + 4] = calculatedBnT[4];
-                tangetAndBiNormal[i + 5] = calculatedBnT[5];
+                // normal
+                i++;
+                int normalPos = faces[i];
+                vboBuilder.Add(  normals[3 * (normalPos - 1)]);
+                vboBuilder.Add(  normals[3 * (normalPos - 1) + 1]);
+                vboBuilder.Add(  normals[3 * (normalPos - 1) + 2]);
             }
-            return tangetAndBiNormal;
+
+  
+
+            return vboBuilder.ToArray();
         }
 
-        private static float[] CalculateBiNormalerOgTangenter(Vector3 pos1, Vector3 pos2, Vector3 pos3, Vector2 uv1, Vector2 uv2, Vector2 uv3)
+        private static Vertex[] CalculateVertices  (int[] faces)
         {
-            Vector3 tangent = new Vector3(0, 0, 0);
-            Vector3 binormal = new Vector3(0, 0, 0);
+            Vertex[] vertices = new Vertex[faces.Length / 6];
+            for (int i = 0; i < faces.Length /6; i ++)
+            {
+                vertices[i] = new Vertex();
 
-            Vector3 edge1 = pos2 - pos1;
-            Vector3 edge2 = pos3 - pos1;
-            Vector2 delta1 = uv2 - uv1;
-            Vector2 delta2 = uv3 - uv1;
-
-            float f = 1.0f / (delta1.X * delta2.Y  - delta2.X * delta1.Y);
-
-            tangent.X = f *  ((delta2.Y  * edge1.X) - (delta1.Y * edge2.X));
-            tangent.Y = f *  ((delta2.Y  * edge1.Y) - (delta1.Y * edge2.Y));
-            tangent.Z = f *  ((delta2.Y  * edge1.Z) - (delta1.Y * edge2.Z));
-
-            binormal.X = f * ((-delta2.X * edge1.X) + (delta1.X * edge2.X));
-            binormal.Y = f * ((-delta2.X * edge1.Y) + (delta1.X * edge2.Y));
-            binormal.Z = f * ((-delta2.X * edge1.Z) + (delta1.X * edge2.Z));
-
-            tangent.Normalize();
-            binormal.Normalize();
-
-            return [tangent.X, tangent.Y, tangent.Z, binormal.X, binormal.Y, binormal.Z];
+            }
+            return vertices;
         }
+
     }
 }

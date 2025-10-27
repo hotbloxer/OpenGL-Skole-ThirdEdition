@@ -1,8 +1,9 @@
 ﻿using ImGuiNET;
+using ImGuiNET;
+using Microsoft.VisualBasic.ApplicationServices;
 using openGL2.Objects;
 using openGL2.Shaders;
 using openGL2.Textures;
-using ImGuiNET;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
@@ -13,8 +14,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vortice;
 using Vortice.Direct3D11;
 using Xunit;
+using static System.Formats.Asn1.AsnWriter;
 
 
 
@@ -39,9 +42,11 @@ namespace openGL2.Window
             base(gameWindowSettings, nativeWindowSettings)
         {
             shader = new Shader();
-            cube = new Figure(shader, Figure.FigureType.CUBE, false);
+            //cube = new Figure(shader, Figure.FigureType.CUBE, false);
+            cube = new Figure(shader, @"..\..\..\Objects\OBJfiler\AdvancedCube.obj", false);
 
-            square = new Figure(shader, Figure.FigureType.QUAD, true)
+
+            square = new Figure(shader, Figure.FigureType.CUBE, true)
             {
                 Render = true
             };

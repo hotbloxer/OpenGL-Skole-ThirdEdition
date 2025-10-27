@@ -37,6 +37,7 @@ namespace openGL2.Objects
             GL.EnableVertexAttribArray(2);
             offset += NormalLength;
 
+            
             int tangetLength = 3;
             GL.VertexAttribPointer(3, tangetLength, VertexAttribPointerType.Float, false, stride * sizeof(float), offset * sizeof(float));
             GL.EnableVertexAttribArray(3);
@@ -50,13 +51,6 @@ namespace openGL2.Objects
 
             return VAO;
         }
-
-
-
-
-
     }
-
-
 }
 

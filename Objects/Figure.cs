@@ -41,23 +41,39 @@ namespace openGL2.Objects
         private Texture _normalTexture;
         public Texture NormalTexture { get => _normalTexture; set => _normalTexture = value; }
 
-
         public Figure (Shader shader, FigureType type = FigureType.QUAD,  bool withUV = true)
         {
             _shader = shader;
 
             _vertexInformation = GetVertexInformation(type);
-            _vertices = VertexInformation.GetCombinedInfoForVertecis(_vertexInformation);
+            _vertices = _vertexInformation.Vertices;
 
             _VBOHandle = GenerateVBOHandle();
             _VAOHandle = VertexArrayObjectHandler.VAO;
         
-            
             _modelSpace = Matrix4.Identity;
             _name = ObjectNamer();
 
             ObjectHandler.AddFigureToScene(this);
         }
+
+        public Figure(Shader shader, string OBJPath, bool withUV = true)
+        {
+            _shader = shader;
+
+            _vertexInformation = OBJParser.LoadOBJ(OBJPath).VertexInformation;
+            _vertices = _vertexInformation.Vertices;
+
+            _VBOHandle = GenerateVBOHandle();
+            _VAOHandle = VertexArrayObjectHandler.VAO;
+
+            _modelSpace = Matrix4.Identity;
+            _name = ObjectNamer();
+
+            ObjectHandler.AddFigureToScene(this);
+        }
+
+
 
         private string ObjectNamer ()
         {
@@ -106,9 +122,6 @@ namespace openGL2.Objects
 
             return VBO;
         }
-        
-        
-
 
         public void Draw ()
         {

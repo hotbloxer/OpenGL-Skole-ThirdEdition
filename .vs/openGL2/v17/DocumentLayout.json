@@ -1,58 +1,53 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\",
+  "WorkspaceRootPath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\window\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6FADF2C3-DF1B-4D9F-BE7B-2AC2DBC7A2C2}|..\\OpenGL2 testSuite\\OpenGL2 testSuite.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl2 testsuite\\objparsertest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\objects\\figure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\figure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\obj parse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\obj parse.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\objects\\primitivesvertexfigures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\primitivesvertexfigures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\shaders\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\objects\\vertexarrayobjecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\vertexarrayobjecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\objects\\objecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\objecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\window\\controls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\controls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\window\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\textures\\tgareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:textures\\tgareader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\textures\\texture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:textures\\texture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\textures\\imageparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\textures\\imageparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:textures\\imageparser.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\desktop\\peters projekt\\opengl2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\objecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\objecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\figure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\figure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\window\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\primitivesvertexfigures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\primitivesvertexfigures.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\textures\\texture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:textures\\texture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\window\\controls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\controls.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\window\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\camera.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -62,28 +57,94 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\UI.cs",
-              "RelativeDocumentMoniker": "UI.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\UI.cs",
-              "RelativeToolTip": "UI.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAFoAAAAVAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "Vertex.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Vertex.cs",
+              "RelativeDocumentMoniker": "Objects\\Vertex.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Vertex.cs",
+              "RelativeToolTip": "Objects\\Vertex.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAEgAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-20T08:36:37.051Z",
+              "WhenOpened": "2025-10-24T12:56:39.954Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 0,
+              "Title": "OBJParserTest.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL2 testSuite\\OBJParserTest.cs",
+              "RelativeDocumentMoniker": "..\\OpenGL2 testSuite\\OBJParserTest.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL2 testSuite\\OBJParserTest.cs",
+              "RelativeToolTip": "..\\OpenGL2 testSuite\\OBJParserTest.cs",
+              "ViewState": "AgIAADYAAAAAAAAAAAAcwE4AAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-27T07:33:32.087Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Figure.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Figure.cs",
+              "RelativeDocumentMoniker": "Objects\\Figure.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Figure.cs",
+              "RelativeToolTip": "Objects\\Figure.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAIA5wGEAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T07:31:50.705Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "Window.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Window.cs",
+              "RelativeDocumentMoniker": "Window\\Window.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Window.cs",
+              "RelativeToolTip": "Window\\Window.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAUwEUAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-18T11:31:09.486Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "PrimitivesVertexFigures.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\PrimitivesVertexFigures.cs",
+              "RelativeDocumentMoniker": "Objects\\PrimitivesVertexFigures.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\PrimitivesVertexFigures.cs",
+              "RelativeToolTip": "Objects\\PrimitivesVertexFigures.cs",
+              "ViewState": "AgIAAM0AAAAAAAAAAAAnwOEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T07:49:58.497Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "OBJ parse.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\OBJ parse.cs",
+              "RelativeDocumentMoniker": "Objects\\OBJ parse.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\OBJ parse.cs",
+              "RelativeToolTip": "Objects\\OBJ parse.cs",
+              "ViewState": "AgIAAEgAAAAAAAAAAAAAADcAAAA7AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-21T06:55:05.32Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
               "Title": "Controls.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Window\\Controls.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Controls.cs",
               "RelativeDocumentMoniker": "Window\\Controls.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Window\\Controls.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Controls.cs",
               "RelativeToolTip": "Window\\Controls.cs",
               "ViewState": "AgIAAB4AAAAAAAAAAAAYwEQAAAANAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -91,11 +152,37 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
+              "Title": "ObjectHandler.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\ObjectHandler.cs",
+              "RelativeDocumentMoniker": "Objects\\ObjectHandler.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\ObjectHandler.cs",
+              "RelativeToolTip": "Objects\\ObjectHandler.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACEAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T07:49:56.624Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ImageParser.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Textures\\ImageParser.cs",
+              "RelativeDocumentMoniker": "Textures\\ImageParser.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Textures\\ImageParser.cs",
+              "RelativeToolTip": "Textures\\ImageParser.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-10-19T07:52:08.372Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
               "Title": "Camera.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Window\\Camera.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Camera.cs",
               "RelativeDocumentMoniker": "Window\\Camera.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Window\\Camera.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Camera.cs",
               "RelativeToolTip": "Window\\Camera.cs",
               "ViewState": "AgIAAGoAAAAAAAAAAAAtwJEAAAAxAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
@@ -104,127 +191,26 @@
             {
               "$type": "Document",
               "DocumentIndex": 9,
-              "Title": "TGAReader.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Textures\\TGAReader.cs",
-              "RelativeDocumentMoniker": "Textures\\TGAReader.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Textures\\TGAReader.cs",
-              "RelativeToolTip": "Textures\\TGAReader.cs",
-              "ViewState": "AgIAADcAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T07:52:18.105Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ImageParser.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Textures\\ImageParser.cs",
-              "RelativeDocumentMoniker": "Textures\\ImageParser.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Textures\\ImageParser.cs",
-              "RelativeToolTip": "Textures\\ImageParser.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T07:52:08.372Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "VertexArrayObjectHandler.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\VertexArrayObjectHandler.cs",
-              "RelativeDocumentMoniker": "Objects\\VertexArrayObjectHandler.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\VertexArrayObjectHandler.cs",
-              "RelativeToolTip": "Objects\\VertexArrayObjectHandler.cs",
-              "ViewState": "AgIAAA0AAAAAAAAAAAAzwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T07:51:55.264Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "PrimitivesVertexFigures.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\PrimitivesVertexFigures.cs",
-              "RelativeDocumentMoniker": "Objects\\PrimitivesVertexFigures.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\PrimitivesVertexFigures.cs",
-              "RelativeToolTip": "Objects\\PrimitivesVertexFigures.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAQwCsAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T07:49:58.497Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "ObjectHandler.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\ObjectHandler.cs",
-              "RelativeDocumentMoniker": "Objects\\ObjectHandler.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\ObjectHandler.cs",
-              "RelativeToolTip": "Objects\\ObjectHandler.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAQwCEAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T07:49:56.624Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Figure.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\Figure.cs",
-              "RelativeDocumentMoniker": "Objects\\Figure.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Objects\\Figure.cs",
-              "RelativeToolTip": "Objects\\Figure.cs",
-              "ViewState": "AgIAACIAAAAAAAAAAAAqwDYAAAAMAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-19T07:49:52.287Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "Shader.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Shaders\\Shader.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\Shader.cs",
               "RelativeDocumentMoniker": "Shaders\\Shader.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Shaders\\Shader.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\Shader.cs",
               "RelativeToolTip": "Shaders\\Shader.cs",
               "ViewState": "AgIAAA4AAAAAAAAAAAAAwAsAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T11:42:20.56Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-18T11:42:20.56Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 10,
+              "DocumentIndex": 8,
               "Title": "Texture.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Textures\\Texture.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Textures\\Texture.cs",
               "RelativeDocumentMoniker": "Textures\\Texture.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Textures\\Texture.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Textures\\Texture.cs",
               "RelativeToolTip": "Textures\\Texture.cs",
-              "ViewState": "AgIAANcAAAAAAAAAAAAAAGIAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAD8AAAAAAAAAAAAkwGIAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-18T11:35:23.748Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Window.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Window\\Window.cs",
-              "RelativeDocumentMoniker": "Window\\Window.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Window\\Window.cs",
-              "RelativeToolTip": "Window\\Window.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAUwFgAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T11:31:09.486Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABIAAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-18T09:35:08.752Z"
             }
           ]
         }

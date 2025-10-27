@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "/azmLyLER/A=",
+  "dgSpecHash": "bSk+NAmkTb4=",
   "success": true,
-  "projectFilePath": "C:\\Users\\p-hou\\Desktop\\Peters projekt\\openGL2\\openGL2.csproj",
+  "projectFilePath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\openGL2.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\p-hou\\.nuget\\packages\\clickabletransparentoverlay\\9.1.0\\clickabletransparentoverlay.9.1.0.nupkg.sha512",
     "C:\\Users\\p-hou\\.nuget\\packages\\imgui.net\\1.90.5.1\\imgui.net.1.90.5.1.nupkg.sha512",
