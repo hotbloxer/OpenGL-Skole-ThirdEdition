@@ -61,7 +61,7 @@ namespace openGL2.Objects
         {
             _shader = shader;
 
-            _vertexInformation = OBJParser.LoadOBJ(OBJPath).VertexInformation;
+            _vertexInformation = OBJParser.LoadOBJ(OBJPath);
             _vertices = _vertexInformation.Vertices;
 
             _VBOHandle = GenerateVBOHandle();

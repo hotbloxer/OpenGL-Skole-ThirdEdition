@@ -10,11 +10,13 @@ namespace openGL2.Objects
 {
     public static class OBJParser
     {
-        public static ObjectInformation LoadOBJ(string path)
+        public static VertexInformation LoadOBJ(string path)
         {
             StringBuilder sb = new StringBuilder();
             string file = File.ReadAllText(path);
             if (file == null || file.Length == 0) return null;
+
+            bool isTriangular = true;
 
             List<float> positionsInfoHolder = new List<float>();
             List<float> uvsInfoHolder = new List<float>();
@@ -44,18 +46,43 @@ namespace openGL2.Objects
 
                     case "f":
                         AddToFacesParser(facesInfoHolder ,parts);
+                        if (parts.Length > 4) isTriangular = false;
                         break;
                 }
             }
 
-            ObjectInformation objectInformation = new()
+            float[] faces;
+            if (isTriangular)
             {
-                Positions = positionsInfoHolder.ToArray(),
-                Uvs = uvsInfoHolder.ToArray(),
-                Normals = normalsInfoHolder.ToArray(),
-                FaceInformation = facesInfoHolder.ToArray()
-            };
-            return objectInformation;
+      
+
+                faces = CreateVerticesFromFaceInformation(
+                    facesInfoHolder.ToArray(),
+                    positionsInfoHolder.ToArray(),
+                    uvsInfoHolder.ToArray(),
+                    normalsInfoHolder.ToArray()
+                    ).TriToFaces(true).ToArray();
+
+            }
+
+            else
+            {
+
+                faces = CreateVerticesFromFaceInformation(
+                    facesInfoHolder.ToArray(),
+                    positionsInfoHolder.ToArray(),
+                    uvsInfoHolder.ToArray(),
+                    normalsInfoHolder.ToArray()
+                    ).QuadToFaces(true).ToArray();
+            }
+
+
+
+
+            VertexInformation vertexInformation = new(positionsInfoHolder.ToArray(), uvsInfoHolder.ToArray(), normalsInfoHolder.ToArray(), faces);
+        
+
+            return vertexInformation;
             
         }
 
@@ -79,36 +106,7 @@ namespace openGL2.Objects
                 }
             }
         }
-    }
 
-
-    public class ObjectInformation
-    {
-        public Face[] Faces { get => GetFacesFromFaceinformation(Vertices); }
-
-        public int[] FaceInformation;
-        public float[] Positions;
-        public float[] Uvs;
-        public float[] Normals;
-
-        public VertexInformation VertexInformation { get => MakeVertexInformation(Positions, Uvs, Normals, Faces); }
-
-        /// <summary>
-        /// returns the vertices from the faceInformation, as quads
-        /// </summary>
-        public Vertex[] Vertices
-        {
-            get
-            {
-                return CreateVerticesFromFaceInformation(FaceInformation, Positions, Uvs, Normals);
-            }
-        }
-
-
-        private static Face[] GetFacesFromFaceinformation(Vertex[] vertices)
-        {
-            return vertices.QuadToFaces(true);
-        }
 
         private static Vertex[] CreateVerticesFromFaceInformation(int[] faceInformation, float[] positions, float[] uvs, float[] normals)
         {
@@ -122,30 +120,25 @@ namespace openGL2.Objects
             {
                 Vertex vertex = new Vertex();
                 int faceIndex = i * 3;
-                                                                  //- 1 to convert from 1 based to 0 based indexing
-                int positionStart = (faceInformation[faceIndex    ] - 1) * 3;
-                int uvStart       = (faceInformation[faceIndex + 1] - 1) * 2;
-                int normalStart   = (faceInformation[faceIndex + 2] - 1) * 3;
+                //- 1 to convert from 1 based to 0 based indexing
+                int positionStart = (faceInformation[faceIndex] - 1) * 3;
+                int uvStart = (faceInformation[faceIndex + 1] - 1) * 2;
+                int normalStart = (faceInformation[faceIndex + 2] - 1) * 3;
 
-                vertex.PositionX = positions[positionStart ++];
-                vertex.PositionY = positions[positionStart ++];
-                vertex.PositionZ = positions[positionStart   ];
+                vertex.PositionX = positions[positionStart++];
+                vertex.PositionY = positions[positionStart++];
+                vertex.PositionZ = positions[positionStart];
 
-                vertex.UvX = uvs[uvStart ++];
-                vertex.UvY = uvs[uvStart   ];
+                vertex.UvX = uvs[uvStart++];
+                vertex.UvY = uvs[uvStart];
 
-                vertex.NormalX = normals[normalStart ++];
-                vertex.NormalY = normals[normalStart ++];
-                vertex.NormalZ = normals[normalStart   ];
+                vertex.NormalX = normals[normalStart++];
+                vertex.NormalY = normals[normalStart++];
+                vertex.NormalZ = normals[normalStart];
 
                 vertices[i] = vertex;
             }
             return vertices;
-        }
-
-        public static VertexInformation MakeVertexInformation(float[] positions, float[] uvs, float[] normals, Face[] faces)
-        {
-            return new VertexInformation(positions, uvs, normals, faces.ToArray());
         }
     }
 }

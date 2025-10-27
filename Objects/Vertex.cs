@@ -117,5 +117,29 @@ namespace openGL2.Objects
             }
             return faces;
         }
+
+
+        public static Face[] TriToFaces(this Vertex[] vertices, bool AddTangenAndBinormal = false)
+        {
+            if (vertices.Length % 3 != 0)
+            {
+                throw (new Exception("Error in vertex length, only 3 vertices can be transformed"));
+            }
+
+            Face[] faces = new Face[vertices.Length / 3];
+
+            for (int i = 0; i < faces.Length; i ++)
+            {
+                int verticesIndex = i * 3;
+                Face face1 = new Face(vertices[verticesIndex], vertices[verticesIndex + 1], vertices[verticesIndex + 2], AddTangenAndBinormal);
+  
+                faces[i] = face1;
+            }
+            return faces;
+
+
+
+        }
+
     }
 }
