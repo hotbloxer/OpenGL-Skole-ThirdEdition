@@ -1,74 +1,54 @@
-﻿using OpenTK.Graphics.OpenGL4;
-using OpenTK.Mathematics;
-using openGL2.Shaders;
+﻿using openGL2.Shaders;
 using openGL2.Textures;
-using openGL2.Window;
+using OpenTK.Graphics.OpenGL4;
+using OpenTK.Mathematics;
 
 namespace openGL2.Objects
 {
     public class Figure: IDisposable
     {
-        private float[] _vertices;
-        private int _VBOHandle;
-        private int _VAOHandle;
-        private string _name;
-        public string Name { get => _name;  }
-
-        private Shader _shader;
-
-        private VertexInformation _vertexInformation;
-
-        public int GetVBOHandle { get => _VBOHandle; }
-        public int GetVAOHandle { get => _VAOHandle; }
-
-        Matrix4 _modelSpace;
-
-        private bool _render = true;
-        public bool Render { get => _render; set => _render = value; }
-
-        public enum FigureType {QUAD, CUBE }
-        public enum VertexInfo {POSITION, UV}
-
-        private Texture _albedoTexture;
-        public Texture Albedo { get => _albedoTexture; set => _albedoTexture = value; }
-
-        private Texture _lightMap;
-        public Texture LightMap { get => _lightMap; set => _lightMap = value; }
-
-        private Texture _specularTexture;
-        public Texture SpecularMap { get => _specularTexture; set => _specularTexture = value; }
-
-        private Texture _normalTexture;
-        public Texture NormalTexture { get => _normalTexture; set => _normalTexture = value; }
-
-        public Figure (Shader shader, FigureType type = FigureType.QUAD,  bool withUV = true)
-        {
-            _shader = shader;
-
-            _vertexInformation = GetVertexInformation(type);
-            _vertices = _vertexInformation.Vertices;
-
-            _VBOHandle = GenerateVBOHandle();
-            _VAOHandle = VertexArrayObjectHandler.VAO;
         
-            _modelSpace = Matrix4.Identity;
-            _name = ObjectNamer();
+        public string Name { get; } = $"objekt {ObjectHandler.ObjectnameCounter}";
 
-            ObjectHandler.AddFigureToScene(this);
-        }
 
-        public Figure(Shader shader, string OBJPath, bool withUV = true)
+        // Rendering
+        private Shader _shader;        
+        private Matrix4 _modelSpace;
+        public bool Render { get; set; } = true;
+
+        // Material
+        public IMaterial Material;
+
+
+        //Geometry
+        private VertexInformation _vertexInformation;
+        public IGeometry Geometry { get; }
+
+
+        // Buffers
+        public int VBOHandle { get; } = -1;
+        public int VAOHandle { get; private set; } = -1;
+
+
+        
+
+
+        public Figure (Shader shader, IGeometry geometry, bool withUV = true)
         {
+            Geometry = geometry;
+
             _shader = shader;
 
-            _vertexInformation = OBJParser.LoadOBJ(OBJPath);
-            _vertices = _vertexInformation.Vertices;
+            _vertexInformation = geometry.GetVertexInformation();
 
-            _VBOHandle = GenerateVBOHandle();
-            _VAOHandle = VertexArrayObjectHandler.VAO;
+
+            GenerateVBOHandle();
+            VAOHandle = VertexArrayObjectHandler.VAO;
 
             _modelSpace = Matrix4.Identity;
-            _name = ObjectNamer();
+            Name = ObjectNamer();
+
+            Material = new Material();
 
             ObjectHandler.AddFigureToScene(this);
         }
@@ -77,24 +57,23 @@ namespace openGL2.Objects
 
         private string ObjectNamer ()
         {
-            return $"objekt "+ ObjectHandler.GetFigures.Count;
+            return $"objekt "+ ObjectHandler.ObjectnameCounter;
         }
 
 
-        private VertexInformation GetVertexInformation(FigureType type) 
-        {
-            switch (type)
-            {
-                case FigureType.QUAD:
-                    return PrimitivesVertexFigures.GetSquare();
 
-                case FigureType.CUBE:
-                    return PrimitivesVertexFigures.GetCube();
+        //REFA Denne er ikke nødvendig mere
 
-                default:
-                    return PrimitivesVertexFigures.GetSquare();
-            }
-        }
+        //public enum FigureType { QUAD, CUBE, TERRAIN }
+        //public enum VertexInfo { POSITION, UV }
+
+        //private VertexInformation GetVertexInformation(FigureType type) => type switch
+        //{
+        //    FigureType.QUAD => PrimitivesVertexFigures.GetSquare(),
+        //    FigureType.CUBE => PrimitivesVertexFigures.GetCube(),
+        //    FigureType.TERRAIN => PrimitivesVertexFigures.GetSquare(), // TODO fix 
+        //    _ => PrimitivesVertexFigures.GetSquare(),
+        //};
 
 
         public void UpdateModelsSpace ()
@@ -102,51 +81,46 @@ namespace openGL2.Objects
             Shader.UpdateModelSpace(_modelSpace);
         }
 
-     
-        public void MoveFigure ()
+        
+        public void TranslateFigure (Matrix4 translation)
         {
-            
-            _modelSpace *= Matrix4.CreateTranslation(1.1f, 0, 0);
+            _modelSpace *= translation;
         }
 
         public float[] GetVertices ()
         {
-            return _vertices;
+            return _vertexInformation.Vertices;
         }
 
-        private int GenerateVBOHandle()
+        protected void GenerateVBOHandle()
         {
-            int VBO = GL.GenBuffer();
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VBO);
-            GL.BufferData(BufferTarget.ArrayBuffer, _vertices.Length * sizeof(float), _vertices, BufferUsageHint.StaticDraw);
+            VAOHandle = GL.GenBuffer();
+            BindVBOAndData();
 
-            return VBO;
+        }
+
+        private void BindVBOAndData()
+        {
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VAOHandle);
+            GL.BufferData(BufferTarget.ArrayBuffer, _vertexInformation.Vertices.Length * sizeof(float), _vertexInformation.Vertices, BufferUsageHint.DynamicDraw);
         }
 
         public void Draw ()
         {
-            if (!_render) return;
+            if (!Render) return;
 
             _shader.Use();
 
-            GL.BindVertexArray(_VAOHandle);
+            GL.BindVertexArray(VAOHandle);
+            Material.ActivateMaterial(_shader);
 
-            GL.BindTextureUnit((int) Shader.TextureUnits.ALBEDO, _albedoTexture.ID);
-            _shader.SetTextureUniform(Shader.TextureUnits.ALBEDO);
+            if (Geometry.UpdatedGeometryThatAffectVBOLength()) 
+            {
+                _vertexInformation = Geometry.GetVertexInformation();
+                RebuildVBO();
 
-            GL.BindTextureUnit((int)Shader.TextureUnits.LIGHTMAP, _lightMap.ID);
-            _shader.SetTextureUniform(Shader.TextureUnits.LIGHTMAP);
-
-            GL.BindTextureUnit((int)Shader.TextureUnits.SPECULARMAP, _specularTexture.ID);
-            _shader.SetTextureUniform(Shader.TextureUnits.SPECULARMAP);
-
-            GL.BindTextureUnit((int)Shader.TextureUnits.NORMALMAP, _normalTexture.ID);
-            _shader.SetTextureUniform(Shader.TextureUnits.NORMALMAP);
-
-
-
-
-            // TODO spørg søren hvorfor den her skal sættes hvert eneste render loop for at virke??
+            }
+            
             _shader.SetUVTest(UI.displaUVTesting);
             _shader.SetUsingTexture(UI.useTexture);
             _shader.SetUsingBlinn(UI.UsingBlinnLight);
@@ -154,17 +128,60 @@ namespace openGL2.Objects
             _shader.UsingRimLight(UI.UsingRimLight);
             _shader.SetLightColor(UI.LightColorTK);
             _shader.SetObjectColor(UI.ObjectColorTK);
-
             _shader.UpdateUniformValuesForRender();
 
-            GL.DrawArrays(PrimitiveType.Triangles, 0, _vertices.Length);
+            GL.DrawArrays(PrimitiveType.Triangles, 0, _vertexInformation.Vertices.Length);
         }
 
+
+        /// <summary>
+        /// Only used to change exising VBO data, not anything that affect the length of the VBO
+        /// </summary>
+        public void UpdateVBO()
+        {
+
+            // code received from Søren
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VBOHandle);
+            IntPtr p = GL.MapBuffer(BufferTarget.ArrayBuffer, BufferAccess.ReadWrite);
+
+            unsafe
+            {
+                float* f = (float*)p;
+                for (int i = 0; i < _vertexInformation.Vertices.Length; i++)
+                {
+                    f[i] = _vertexInformation.Vertices[i];
+                }
+            }
+            GL.UnmapBuffer(BufferTarget.ArrayBuffer);
+
+            // code received from Søren
+        }
+
+        /// <summary>
+        /// this was an important thing to implement
+        /// when geometry is adding og removing vertices, then it cannot just be change, since the length has change
+        /// it resulted in an afterimage or errors. So instead the entire VBO is remade once more vertices are added.
+        /// </summary>
+        public void RebuildVBO ()
+        {
+            BindVBOAndData();
+        }
 
 
         public void Dispose()
         {
-            ObjectHandler.RemoveFigureFromScene(this);
+            GL.DeleteBuffer(VBOHandle);
+            GL.DeleteVertexArray(VAOHandle);
         }
     }
+
+    public interface IGeometry 
+    {
+        public void GetUI();
+        public bool UpdatedGeometryThatAffectVBOLength();
+
+        public VertexInformation GetVertexInformation();
+    }
+
+
 }

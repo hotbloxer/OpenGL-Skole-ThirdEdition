@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("openGL2")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+694aa03466d406445d9a833303f4ad4681e9d7ba")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f173dd8aabdc283c2f8fd482d81102f2769c1a8f")]
 [assembly: System.Reflection.AssemblyProductAttribute("openGL2")]
 [assembly: System.Reflection.AssemblyTitleAttribute("openGL2")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

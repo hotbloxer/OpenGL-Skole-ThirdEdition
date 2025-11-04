@@ -53,21 +53,17 @@ namespace openGL2.Objects
 
             float[] faces;
             if (isTriangular)
-            {
-      
-
+            { 
                 faces = CreateVerticesFromFaceInformation(
                     facesInfoHolder.ToArray(),
                     positionsInfoHolder.ToArray(),
                     uvsInfoHolder.ToArray(),
                     normalsInfoHolder.ToArray()
                     ).TriToFaces(true).ToArray();
-
             }
 
             else
             {
-
                 faces = CreateVerticesFromFaceInformation(
                     facesInfoHolder.ToArray(),
                     positionsInfoHolder.ToArray(),
@@ -76,11 +72,7 @@ namespace openGL2.Objects
                     ).QuadToFaces(true).ToArray();
             }
 
-
-
-
             VertexInformation vertexInformation = new(positionsInfoHolder.ToArray(), uvsInfoHolder.ToArray(), normalsInfoHolder.ToArray(), faces);
-        
 
             return vertexInformation;
             

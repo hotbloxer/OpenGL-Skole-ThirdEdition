@@ -45,6 +45,7 @@
            return TangentAndBiNormalLogic.MakeTangentsAndBiNormalsForTriangles(positions, uvs);
         }
 
+       
         public override bool Equals(object? obj)
         {
             if (obj is not Face) return false;

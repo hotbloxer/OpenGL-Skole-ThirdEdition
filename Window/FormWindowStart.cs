@@ -43,14 +43,14 @@ namespace openGL2.Window
         {
             controller.MakeCurrent();
             shader = new Shader();
-            square = new Figure(shader, Figure.FigureType.QUAD, false);
-            square2 = new Figure(shader, Figure.FigureType.CUBE, true);
-            square2.MoveFigure();
+            //square = new Figure(shader, Figure.FigureType.QUAD, false);
+            //square2 = new Figure(shader, Figure.FigureType.CUBE, true);
+            square2.TranslateFigure(Matrix4.Identity);
 
             GL.ClearColor(new Color4(0.3f, 0.4f, 0.7f, 1));
 
-            VBO = square.GetVBOHandle;
-            VAO = square.GetVAOHandle;
+            VBO = square.VBOHandle;
+            VAO = square.VAOHandle;
 
             GL.Enable(EnableCap.DepthTest);
             // texture new:

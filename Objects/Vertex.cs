@@ -27,6 +27,29 @@ namespace openGL2.Objects
         public float BiNormalY {get; private set;}
         public float BiNormalZ {get; private set;}
 
+        public Vertex(float[] positions, float[] uvs, float[] normals, bool hasTanAndBi = false)
+        {
+            PositionX = positions[0];
+            PositionY = positions[1];
+            PositionZ = positions[2];
+
+            UvX = uvs[0];
+            UvY = uvs[1];
+
+            NormalX = normals[0];
+            NormalY = normals[1];
+            NormalZ = normals[2];
+
+            if (hasTanAndBi)
+            {
+                float[] tanAndBis = TangentAndBiNormalLogic.MakeTangentsAndBiNormalsForTriangles(positions, uvs);
+                SetTanAndBi(new float[] { tanAndBis[0], tanAndBis[1], tanAndBis[2] }, new float[] { tanAndBis[3], tanAndBis[4], tanAndBis[5] });
+            }
+        }
+
+        public Vertex() { }
+
+
         public void SetTanAndBi(float[] tangents, float[] biNormals)
         {
             HasTanAndBiNormals = true;
@@ -38,6 +61,8 @@ namespace openGL2.Objects
             BiNormalZ = biNormals[2];
         }
  
+
+
     }
 
     public static class VertexExtensions

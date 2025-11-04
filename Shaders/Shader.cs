@@ -80,6 +80,8 @@ namespace openGL2.Shaders
             uniform mat4 projection;
             uniform mat4 projectionViewModel;
 
+            uniform sampler2D heightMap;
+
             uniform mat4 texProjection;
 
             out vec2 uv;
@@ -117,12 +119,21 @@ namespace openGL2.Shaders
                 mat4 test3 = projection;
 
 
+                vec4 texel;
+                vec3 newVertex = aPosition;
+                texel = texture(heightMap, uv);
+                newVertex.y += texel.z / 255 * 200;
+               
+
+
                 //gl_Position = projection * view  * model * vec4(aPosition, 1.0) ;
-                gl_Position = projectionViewModel * vec4(aPosition, 1.0) ;
+                gl_Position = projectionViewModel * vec4(newVertex, 1.0) ;
 
             }}";
 
         }
+
+        #region FRAGMENT SHADER
         private string SetDefaultFragmentShader()
         {
             return 
@@ -141,6 +152,7 @@ namespace openGL2.Shaders
             uniform sampler2D lightmapTexture;
             uniform sampler2D normalTexture;
             uniform sampler2D specularTexture;
+            
 
             uniform vec3 {cameraPosition};
             
@@ -182,6 +194,7 @@ namespace openGL2.Shaders
                 normal = vertexNormal;
             }}  
 
+            
 
 
             //base color
@@ -310,6 +323,8 @@ namespace openGL2.Shaders
             // afslutning
             }}";
         }
+
+        #endregion
 
         protected void SetUpShaderParts()
         {
@@ -465,7 +480,7 @@ namespace openGL2.Shaders
         }
 
 
-        public enum TextureUnits { ALBEDO, LIGHTMAP, SPECULARMAP, NORMALMAP }
+        public enum TextureUnits { ALBEDO, LIGHTMAP, SPECULARMAP, NORMALMAP, HEIGHTMAP }
 
         public void SetTextureUniform(TextureUnits textureUnit)
         {
@@ -486,6 +501,10 @@ namespace openGL2.Shaders
 
                 case TextureUnits.NORMALMAP:
                     uniformName = "normalTexture";
+                    break;
+
+                case TextureUnits.HEIGHTMAP:
+                    uniformName = "heightMap";
                     break;
             }
 

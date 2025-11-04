@@ -13,8 +13,9 @@ namespace openGL2.Objects
 
         public static Dictionary<string, Figure> GetFigures { get => _figures; }
 
+        private static int _objectNameCounter = 0;
+        public static int ObjectnameCounter { get => _objectNameCounter++; }
 
-        public static int CountFiguresInScene { get => _figures.Count; }
 
         public static void AddFigureToScene (Figure figure)
         {

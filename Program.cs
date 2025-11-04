@@ -16,9 +16,8 @@ namespace OpenGL
                 ClientSize = new OpenTK.Mathematics.Vector2i(1500, 800),
             };
 
-            using Window window = new(GameWindowSettings.Default, nativeWindowSettings);
-            using UI ui = new();
-            ui.Start();
+            Window window = new();
+            
             window.Run();
         }
     }

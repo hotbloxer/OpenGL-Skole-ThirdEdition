@@ -56,7 +56,7 @@
             },
             "ImGui.NET": {
               "target": "Package",
-              "version": "[1.90.5.1, )"
+              "version": "[1.91.6.1, )"
             },
             "OpenTK": {
               "target": "Package",
