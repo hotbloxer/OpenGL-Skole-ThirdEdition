@@ -39,16 +39,18 @@ namespace openGL2.Textures
 
             
 
-                // set vigtiste out info
-                imageInfo.alpha = tdaHeader.alpha;
-                imageInfo.width = tdaHeader.width;
-                imageInfo.height = tdaHeader.height;
+               
 
                 if (tdaHeader.alpha) 
                     pixels = SwitchRedAndBlueWithAlpha(bytes, (uint) tdaHeader.width * tdaHeader.height);
                 else 
                     pixels = SwitchRedAndBlueWithoutAlpha(bytes, (uint) tdaHeader.width * tdaHeader.height);
 
+                // set vigtiste out info
+                imageInfo.alpha = tdaHeader.alpha;
+                imageInfo.width = tdaHeader.width;
+                imageInfo.height = tdaHeader.height;
+                imageInfo.pixels = pixels;
             }
             return true;
         }
@@ -117,11 +119,27 @@ namespace openGL2.Textures
         public bool alpha;
     }
 
-    public struct ImageInformation
+    public class ImageInformation
     {
         public ushort width;
         public ushort height;
         public bool alpha;
+        public byte[] pixels;
+
+
+        public byte[] GetPixels(float u, float v)
+        {
+
+            byte[] pixel = new byte[3] ;
+            int x = (int)((width - 1) * (u > 0.0f ? (u < 1.0f ? u : 1.0f) : 0.0f));
+            int y = (int)((height - 1) * (v > 0.0f ? (v < 1.0f ? v : 1.0f) : 0.0f));
+
+            pixel[0] = pixels[(y * width + x) * 3 ] ;
+            pixel[1] = pixels[(y * width + x) * 3 +1];
+            pixel[2] = pixels[(y * width + x) * 3 +2];
+
+            return pixel;
+        }
     }
 
 

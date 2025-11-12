@@ -51,7 +51,7 @@ namespace openGL2.Objects
                 }
             }
 
-            float[] faces;
+            Face[] faces;
             if (isTriangular)
             { 
                 faces = CreateVerticesFromFaceInformation(
@@ -59,7 +59,7 @@ namespace openGL2.Objects
                     positionsInfoHolder.ToArray(),
                     uvsInfoHolder.ToArray(),
                     normalsInfoHolder.ToArray()
-                    ).TriToFaces(true).ToArray();
+                    ).TriToFaces(true);
             }
 
             else
@@ -69,10 +69,10 @@ namespace openGL2.Objects
                     positionsInfoHolder.ToArray(),
                     uvsInfoHolder.ToArray(),
                     normalsInfoHolder.ToArray()
-                    ).QuadToFaces(true).ToArray();
+                    ).QuadToFaces(true);
             }
 
-            VertexInformation vertexInformation = new(positionsInfoHolder.ToArray(), uvsInfoHolder.ToArray(), normalsInfoHolder.ToArray(), faces);
+            VertexInformation vertexInformation = new(faces);
 
             return vertexInformation;
             

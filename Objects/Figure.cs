@@ -19,27 +19,61 @@ namespace openGL2.Objects
         // Material
         public IMaterial Material;
 
-
         //Geometry
         private VertexInformation _vertexInformation;
         public IGeometry Geometry { get; }
 
+        public IHaveUI HaveUI { get; }
 
         // Buffers
-        public int VBOHandle { get; } = -1;
+        public int VBOHandle { get; private set; } = -1;
         public int VAOHandle { get; private set; } = -1;
 
-
-        
-
-
-        public Figure (Shader shader, IGeometry geometry, bool withUV = true)
+        public Figure (Shader shader, IGeometry geometry, IHaveUI ui)
         {
             Geometry = geometry;
+
+            HaveUI = ui;
 
             _shader = shader;
 
             _vertexInformation = geometry.GetVertexInformation();
+
+            GenerateVBOHandle();
+            VAOHandle = VertexArrayObjectHandler.VAO;
+
+            _modelSpace = Matrix4.Identity;
+            Name = ObjectNamer();
+
+            Material = new Material();
+
+            ObjectHandler.AddFigureToScene(this);
+        }
+
+        public Figure(Shader shader, IHaveVertices vertices)
+        {
+            _shader = shader;
+
+            _vertexInformation = vertices.GetVertexInformation();
+
+
+            GenerateVBOHandle();
+            VAOHandle = VertexArrayObjectHandler.VAO;
+
+            _modelSpace = Matrix4.Identity;
+            Name = ObjectNamer();
+
+            Material = new Material();
+
+            ObjectHandler.AddFigureToScene(this);
+        }
+
+
+        public Figure(Shader shader, VertexInformation imageInfo)
+        {
+            _shader = shader;
+
+            _vertexInformation = imageInfo;
 
 
             GenerateVBOHandle();
@@ -60,22 +94,6 @@ namespace openGL2.Objects
             return $"objekt "+ ObjectHandler.ObjectnameCounter;
         }
 
-
-
-        //REFA Denne er ikke nødvendig mere
-
-        //public enum FigureType { QUAD, CUBE, TERRAIN }
-        //public enum VertexInfo { POSITION, UV }
-
-        //private VertexInformation GetVertexInformation(FigureType type) => type switch
-        //{
-        //    FigureType.QUAD => PrimitivesVertexFigures.GetSquare(),
-        //    FigureType.CUBE => PrimitivesVertexFigures.GetCube(),
-        //    FigureType.TERRAIN => PrimitivesVertexFigures.GetSquare(), // TODO fix 
-        //    _ => PrimitivesVertexFigures.GetSquare(),
-        //};
-
-
         public void UpdateModelsSpace ()
         {
             Shader.UpdateModelSpace(_modelSpace);
@@ -87,21 +105,20 @@ namespace openGL2.Objects
             _modelSpace *= translation;
         }
 
-        public float[] GetVertices ()
+        public void SetModelSpace (Matrix4 modelSpace)
         {
-            return _vertexInformation.Vertices;
+            _modelSpace = modelSpace;
         }
 
         protected void GenerateVBOHandle()
         {
-            VAOHandle = GL.GenBuffer();
+            VBOHandle = GL.GenBuffer();
             BindVBOAndData();
-
         }
 
         private void BindVBOAndData()
         {
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VAOHandle);
+            GL.BindBuffer(BufferTarget.ArrayBuffer, VBOHandle);
             GL.BufferData(BufferTarget.ArrayBuffer, _vertexInformation.Vertices.Length * sizeof(float), _vertexInformation.Vertices, BufferUsageHint.DynamicDraw);
         }
 
@@ -113,22 +130,26 @@ namespace openGL2.Objects
 
             GL.BindVertexArray(VAOHandle);
             Material.ActivateMaterial(_shader);
-
-            if (Geometry.UpdatedGeometryThatAffectVBOLength()) 
+            
+            if (Geometry != null)
             {
-                _vertexInformation = Geometry.GetVertexInformation();
-                RebuildVBO();
+                if (Geometry.UpdatedGeometryThatAffectVBOLength())
+                {
+                    _vertexInformation = Geometry.GetVertexInformation();
+                    RebuildVBO();
 
+                }
             }
             
             _shader.SetUVTest(UI.displaUVTesting);
             _shader.SetUsingTexture(UI.useTexture);
             _shader.SetUsingBlinn(UI.UsingBlinnLight);
-            _shader.UsingCellShader(UI.UsingCellShading);
             _shader.UsingRimLight(UI.UsingRimLight);
             _shader.SetLightColor(UI.LightColorTK);
             _shader.SetObjectColor(UI.ObjectColorTK);
             _shader.UpdateUniformValuesForRender();
+
+            _shader.UpdateUniforms();
 
             GL.DrawArrays(PrimitiveType.Triangles, 0, _vertexInformation.Vertices.Length);
         }
@@ -175,13 +196,21 @@ namespace openGL2.Objects
         }
     }
 
-    public interface IGeometry 
+    public interface IHaveUI
     {
         public void GetUI();
-        public bool UpdatedGeometryThatAffectVBOLength();
+    }
 
+    public interface IGeometry 
+    {
+
+        public bool UpdatedGeometryThatAffectVBOLength();
         public VertexInformation GetVertexInformation();
     }
 
+    public interface IHaveVertices
+    {
+        public VertexInformation GetVertexInformation();
+    }
 
 }

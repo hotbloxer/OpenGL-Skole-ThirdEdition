@@ -18,16 +18,15 @@ namespace openGL2.Textures
         private Texture _normalTexture;
         public Texture NormalTexture { get => _normalTexture; set => _normalTexture = value; }
 
-        private Texture _heightMap;
-        public Texture HeightMap { get => _heightMap; set => _heightMap = value; }
+
 
         public Material ()
         {
-            _albedoTexture = Texture.GetWhite();
-            _lightMap = Texture.GetWhite();
-            _specularTexture = Texture.GetWhite();
-            _normalTexture = Texture.GetWhite();
-            _heightMap = Texture.GetWhite();
+            _albedoTexture = GeneratedTextures.GetGeneratedTexture(GeneratedTextures.GeneratedTexures.WHITE);
+            _lightMap = GeneratedTextures.GetGeneratedTexture(GeneratedTextures.GeneratedTexures.WHITE);
+            _specularTexture = GeneratedTextures.GetGeneratedTexture(GeneratedTextures.GeneratedTexures.WHITE);
+            _normalTexture = GeneratedTextures.GetGeneratedTexture(GeneratedTextures.GeneratedTexures.WHITE);
+
         }
 
 
@@ -39,7 +38,6 @@ namespace openGL2.Textures
             _lightMap = newMaterial.LightMap;
             _specularTexture = newMaterial.SpecularMap;
             _normalTexture = newMaterial.NormalTexture;
-            _heightMap = newMaterial.HeightMap;
         }
 
         public void ActivateMaterial(Shader shader)
@@ -56,8 +54,7 @@ namespace openGL2.Textures
             GL.BindTextureUnit((int)Shader.TextureUnits.NORMALMAP, _normalTexture.ID);
             shader.SetTextureUniform(Shader.TextureUnits.NORMALMAP);
 
-            GL.BindTextureUnit((int)Shader.TextureUnits.HEIGHTMAP, _heightMap.ID);
-            shader.SetTextureUniform(Shader.TextureUnits.HEIGHTMAP);
+            
         }
     }
 
@@ -68,7 +65,7 @@ namespace openGL2.Textures
         public Texture LightMap { get; set; }
         public Texture SpecularMap { get; set; }
         public Texture NormalTexture { get; set; }
-        public Texture HeightMap { get; set; }
+    
 
         public void ActivateMaterial(Shader shader);
 

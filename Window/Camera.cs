@@ -18,8 +18,8 @@ namespace openGL2.Window
 
         Vector2 _windowSize;
 
-        private Matrix4 _view;
-        private Matrix4 _projection;
+        public Matrix4 View { get; private set; }
+        public Matrix4 Projection { get; private set; }
 
         private Vector3 _position = new Vector3(0.0f, 0.0f, 0.0f);
         public Vector3 Position { get => _position; set => _position = value; }
@@ -61,9 +61,6 @@ namespace openGL2.Window
                 UpdateVectors();
             }
         }
-
-
-
 
         public Camera(Vector2 size)
         {
@@ -113,7 +110,7 @@ namespace openGL2.Window
 
         private void SetProjectionMatrix()
         {
-            _projection = 
+            Projection = 
                 Matrix4.
                     CreatePerspectiveFieldOfView(
                         MathHelper.DegreesToRadians(45.0f), // field of view
@@ -122,19 +119,12 @@ namespace openGL2.Window
                         1000.0f); // max clipping
 
 
-            //TODO hej søren, som set i video... WTF?
-            //_projection = Matrix4.
-            //    CreateOrthographicOffCenter(0, _windowSize.X, 0, _windowSize.Y, -1000f, 1000.0f);
-
-
-            //_projection = Matrix4.Identity;
-
-            Shader.UpdateProjection(_projection);
+            Shader.UpdateProjection(Projection);
         }
 
         private void SetViewMatrix()
         {
-            Shader.UpdateView(_view);
+            Shader.UpdateView(View);
        
         }
 
@@ -142,7 +132,7 @@ namespace openGL2.Window
         public void UpdateCamera (KeyboardState input, FrameEventArgs e, MouseState mouse)
         {
             _controls.UpdatePosition(input, e); // updates position
-            _view = Matrix4.LookAt(_position, _position + _front, _up);
+            View = Matrix4.LookAt(_position, _position + _front, _up);
             _controls.UpdateViewDirection(mouse);
 
         }

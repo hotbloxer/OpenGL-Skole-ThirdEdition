@@ -77,7 +77,7 @@
                 }
             }
 
-            return new VertexInformation(positions.ToArray(), uvs.ToArray(), normals.ToArray(), faces.ToArray());
+            return new VertexInformation(faces);
 
 
         }

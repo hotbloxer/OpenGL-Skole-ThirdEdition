@@ -1,20 +1,15 @@
 ﻿using ImGuiNET;
-using openGL2.Shaders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace openGL2.Objects
 {
-    public class Plane: IGeometry
+    public class Plane: IGeometry, IHaveUI
     {
         int _width = 1;
         int _height = 1;
-        int _subdivideWidth = 200;
-        int _subdivideHeight = 200;
+        int _subdivideWidth = 20;
+        int _subdivideHeight = 20;
 
         bool _updateGeometry = false;
 
@@ -38,46 +33,55 @@ namespace openGL2.Objects
 
             List<Face> faces = new();
             Vector3 startPos = new(-_width / 2f, 0f, -_height / 2f);
+            Vector2 uvLeft = new(0, 0);
+
+            float uvWidth = 1f / _subdivideWidth;
+            float uvHeight = 1f / _subdivideHeight;
 
             for (int h = 0; h < _subdivideHeight; h++)
             { 
                 for (int w = 0; w < _subdivideWidth; w++)
                 {
-                    startPos = new Vector3(startPos.X * w, startPos.Y, startPos.Z * h);
-                    Face[] facesArray = CreateQuad(new Vector3(widthSize * w, 0, heightSize * h), widthSize, heightSize);
+
+                    startPos = new Vector3(widthSize * w, 0, heightSize * h);
+
+
+                    uvLeft = new Vector2(uvWidth * w, uvHeight * h);
+
+                    Face[] facesArray = CreateQuad(startPos, widthSize, heightSize, uvLeft , uvWidth, uvHeight);
                     faces.AddRange(facesArray);
                 }
             }
-
             return faces.ToArray().ToVertexInformation();
         }
 
 
-        private static Face[] CreateQuad(Vector3 posLeftBottom, float width, float height)
+        private static Face[] CreateQuad(Vector3 posLeftBottom, float width, float height, Vector2 uvLeft, float uvWidth, float uvHeight)
         {
             float[] normal = { 0.0f, 1.0f, 0.0f };
 
+            Vertex leftBottom = new Vertex(
+                new float[] { posLeftBottom.X, posLeftBottom.Y, posLeftBottom.Z },
+                new float[] { uvLeft.X, uvLeft.Y },
+                normal
+            );
+
             Vertex rightBottom = new Vertex(
                  new float[] { posLeftBottom.X + width, posLeftBottom.Y, posLeftBottom.Z },
-                 new float[] { posLeftBottom.X + width, posLeftBottom.Z },
+                 new float[] { uvLeft.X + uvWidth, uvLeft.Y },
                  normal
             );
 
             Vertex rightTop = new Vertex(
                 new float[] { posLeftBottom.X + width, posLeftBottom.Y, posLeftBottom.Z + height},
-                new float[] { posLeftBottom.X + width, posLeftBottom.Z + height },
+                new float[] { uvLeft.X + uvWidth, uvLeft.Y + uvHeight },
                 normal
             );
 
-            Vertex leftBottom = new Vertex(
-                new float[] { posLeftBottom.X, posLeftBottom.Y, posLeftBottom.Z },
-                new float[] { posLeftBottom.X, posLeftBottom.Z },
-                normal
-            );
 
             Vertex leftTop = new Vertex(
                 new float[] { posLeftBottom.X , posLeftBottom.Y, posLeftBottom.Z + height },
-                new float[] { posLeftBottom.X, posLeftBottom.Z + height },
+                new float[] { uvLeft.X, uvLeft.Y + uvHeight },
                 normal
             );
 

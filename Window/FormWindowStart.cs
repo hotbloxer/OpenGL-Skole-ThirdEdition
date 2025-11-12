@@ -42,7 +42,7 @@ namespace openGL2.Window
         public void Load()
         {
             controller.MakeCurrent();
-            shader = new Shader();
+            
             //square = new Figure(shader, Figure.FigureType.QUAD, false);
             //square2 = new Figure(shader, Figure.FigureType.CUBE, true);
             square2.TranslateFigure(Matrix4.Identity);

@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Textures\TextureImages\" />
 	<PackageReference Include="OpenTK.GLControl" Version="4.0.2" />
   </ItemGroup>
 

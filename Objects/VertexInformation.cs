@@ -7,6 +7,7 @@
         float[] _uvs;
         float[] _vbo;
         Face[] _faces;
+        List<Vertex> _vertexes = new();
 
         public float[] Vertices { get; }
         
@@ -40,6 +41,32 @@
 
         }
 
+
+        public VertexInformation(VertexInformation[] objects)
+        {
+        
+            List<Face> faces = new List<Face>();
+
+            foreach (VertexInformation v in objects)
+            {
+                v.MakeFaces();
+                foreach (Face face in v.Faces)
+                {
+                    
+                    faces.Add(face);
+                }
+            }
+
+            this._faces = faces.ToArray();
+
+            _normals = faces.ToArray().ToNormals();
+            _positions = faces.ToArray().ToPositions();
+            _uvs = faces.ToArray().ToUvs();
+            Vertices = GetCombinedInfoForVertecis(this);
+
+        }
+
+
         public float[] Positions { get => _positions; }
         public float[] Normals { get => _normals; }
         public float[] Uvs { get => _uvs; }
@@ -47,7 +74,7 @@
         public float[] VBO { get => _vbo; }
 
 
-        private static float[] GetCombinedInfoForVertecis(VertexInformation vertexInfo)
+        private float[] GetCombinedInfoForVertecis(VertexInformation vertexInfo)
         {
 
             int positionLength = vertexInfo.Positions.Length;
@@ -77,22 +104,35 @@
 
             for (int i = 0; i < totalLength; i += dataLengthInVertex)
             {
+                
                 Vertex vertex = new Vertex();
+               
 
                 // add positions
                 combinedInfo[i] = vertexInfo.Positions[vertexCount++];
                 combinedInfo[i + 1] = vertexInfo.Positions[vertexCount++];
                 combinedInfo[i + 2] = vertexInfo.Positions[vertexCount++];
 
+                vertex.PositionX = combinedInfo[i];
+                vertex.PositionY = combinedInfo[i + 1];
+                vertex.PositionZ = combinedInfo[i + 2];
 
                 // add uvs
                 combinedInfo[i + 3] = vertexInfo.Uvs[uvCounter++];
                 combinedInfo[i + 4] = vertexInfo.Uvs[uvCounter++];
 
+                vertex.UvX = combinedInfo[i + 3];
+                vertex.UvY = combinedInfo[i + 4];
+            
+
                 // add normals
                 combinedInfo[i + 5] = vertexInfo.Normals[normalCounter++];
                 combinedInfo[i + 6] = vertexInfo.Normals[normalCounter++];
                 combinedInfo[i + 7] = vertexInfo.Normals[normalCounter++];
+
+                vertex.NormalX = combinedInfo[i + 5];
+                vertex.NormalY = combinedInfo[i + 6];
+                vertex.NormalZ = combinedInfo[i + 7];
 
                 // add binormal and tanget til hver trekant ved at sætte de samme 3 gange i træk
 
@@ -111,9 +151,25 @@
                 combinedInfo[i + 12] = tangetAndBinormals[binormalAndTangetCounter +4];
                 combinedInfo[i + 13] = tangetAndBinormals[binormalAndTangetCounter + 5];
 
+                _vertexes.Add(vertex);
 
             }
             return combinedInfo;
+        }
+
+
+        public Face[] MakeFaces ()
+        {
+            List<Face> faces = new List<Face>();
+            for (int i = 0; i < _vertexes.Count; i+=3)
+            {
+                faces.Add(new Face(_vertexes[i++], _vertexes[i ++], _vertexes[i ++]));
+
+
+
+            }
+
+            return faces.ToArray();
         }
     }
 

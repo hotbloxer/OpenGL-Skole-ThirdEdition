@@ -1,16 +1,23 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using ImGuiNET;
+using openGL2.Objects;
+using openGL2.Shaders.ShaderComAndElements;
+using openGL2.Textures;
+using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
+using System.Text;
+
 
 
 namespace openGL2.Shaders
 {
+
+
+
     public class Shader : IDisposable
     {
-        //REFA bør nok have en sparat manger til det her engang
-        public static List<Shader> shaders = new List<Shader>();
 
-        private string _vertexShaderSource;
-        private string _fragmentShaderSource;
+        public string FragmentShaderSource { get; private set; }
+        public string VertexShaderSource  { get; private set; }
 
         public int ShaderProgramHandle { get; private set; }
 
@@ -28,10 +35,21 @@ namespace openGL2.Shaders
         public Matrix4 ModelView { get => _modelView.Matrix; set => _modelView.Matrix = value; }
         public Matrix4 Projection { get => _projection.Matrix; private set => _projection.Matrix = value; }
 
-        public Shader() 
+        ShaderCombiner sc; 
+
+      
+        public Shader (ShaderElementBase[] shaderElements)
         {
-            _fragmentShaderSource = SetDefaultFragmentShader();
-            _vertexShaderSource = SetDefaultVertexShader();
+            sc = new ShaderCombiner(this);
+
+            foreach (ShaderElementBase element in shaderElements)
+            {
+                sc.elements.Add(element);
+            }
+
+
+            FragmentShaderSource = SetDefaultFragmentShader();
+            VertexShaderSource = SetDefaultVertexShader();
 
             ShaderProgramHandle = GL.CreateProgram();
 
@@ -43,8 +61,8 @@ namespace openGL2.Shaders
 
             // adds vertex and fragments to list, da der skal udføres de samme operationer
             // dette reducere dublikationer og der kan tilføjes flere slags shaders senere
-            parts.Add(new ShaderPart(ShaderType.VertexShader, _vertexShaderSource));
-            parts.Add(new ShaderPart(ShaderType.FragmentShader, _fragmentShaderSource));
+            parts.Add(new ShaderPart(ShaderType.VertexShader, VertexShaderSource));
+            parts.Add(new ShaderPart(ShaderType.FragmentShader, FragmentShaderSource));
 
             SetUpShaderParts();
 
@@ -59,16 +77,54 @@ namespace openGL2.Shaders
             }
             DetachAndDeleteShaderParts();
 
-            shaders.Add(this);
+            ShaderHandler.AddShader(this);
         }
 
 
-
-        private static string SetDefaultVertexShader ()
+        public void UseShader ()
         {
+
+          
+            foreach (ShaderPart part in parts)
+            {
+                if (part.type == ShaderType.FragmentShader)
+                {
+                    part.shaderSource = SetDefaultFragmentShader();
+                }
+                else if (part.type == ShaderType.VertexShader)
+                {
+                    part.shaderSource = SetDefaultVertexShader();
+                }
+            }
+
+
+            UpdateShaderParts();
+
+            
+
+            GL.LinkProgram(ShaderProgramHandle);
+        }
+
+        public void UpdateUniforms ()
+        {
+            sc.SetUniforms();
+        }
+        
+        public void UseShaderUI ()
+        {
+            sc.GetUI();
+        }
+
+        private string SetDefaultVertexShader ()
+        {
+            string layouts = sc.GetLayouts();
+            string uniforms = sc.GetShaderUniforms(ShaderType.VertexShader);
+            string code = sc.GetShaderCode(ShaderType.VertexShader);
+
+
             return
             @$"#version 330 core 
-            layout(location = 0) in vec3 aPosition;
+            {layouts}
             layout(location = 1) in vec2 aUV;
             layout(location = 2) in vec3 aNormal;
             layout(location = 3) in vec3 aTangent;  
@@ -80,7 +136,8 @@ namespace openGL2.Shaders
             uniform mat4 projection;
             uniform mat4 projectionViewModel;
 
-            uniform sampler2D heightMap;
+            {uniforms}
+            //uniform sampler2D heightMap;
 
             uniform mat4 texProjection;
 
@@ -89,18 +146,18 @@ namespace openGL2.Shaders
             out vec3 fragPosition;
             out mat3 tbn;
 
-            out vec4 viewPosition; 
+            out vec4 viewPosition;
 
             void main() 
             {{ 
-                fragPosition = vec3(model * vec4(aPosition, 1.0));
-                uv = aUV;
+                //fragPosition = vec3(model * vec4(aPosition, 1.0));
+                //uv = aUV;
 
-                viewPosition = projection * view * vec4(aPosition, 1.0);
+                //viewPosition = projection * view * vec4(aPosition, 1.0);
 
-                mat4 modelview2 =   view * model;
-                mat3 normalMatrix = transpose(inverse(mat3( modelview2)));
-                mat4 modelViewInstance = modelView;
+                //mat4 modelview2 =   view * model;
+                //mat3 normalMatrix = transpose(inverse(mat3( modelview2)));
+                //mat4 modelViewInstance = modelView;
 
 
                 tbn = mat3
@@ -112,30 +169,27 @@ namespace openGL2.Shaders
 
 
                 vertexNormal =  aNormal;
-                
 
-                mat4 test = view;
-                mat4 test2 = model;
-                mat4 test3 = projection;
-
-
-                vec4 texel;
-                vec3 newVertex = aPosition;
-                texel = texture(heightMap, uv);
-                newVertex.y += texel.z / 255 * 200;
-               
-
+     
+                {code}
+        
 
                 //gl_Position = projection * view  * model * vec4(aPosition, 1.0) ;
-                gl_Position = projectionViewModel * vec4(newVertex, 1.0) ;
+                gl_Position = projectionViewModel * vec4({PositionVertexShader.Position}, 1.0) ;
 
             }}";
 
         }
 
+
         #region FRAGMENT SHADER
         private string SetDefaultFragmentShader()
         {
+
+            string uniforms = "";
+            string code = sc.GetShaderCode(ShaderType.FragmentShader);
+
+
             return 
             @$"#version 330 core 
             out vec4 FragColor; 
@@ -143,6 +197,7 @@ namespace openGL2.Shaders
             in vec3 vertexNormal;
             in vec3 fragPosition;
             in mat3 tbn;
+            {uniforms}
 
 
             in vec4 viewPosition;
@@ -161,7 +216,6 @@ namespace openGL2.Shaders
             uniform bool {uvTesting};
             uniform bool {useTexture};
             uniform bool {useBlinn};
-            uniform bool {usingCellShading};  
             uniform bool {usingRimLight};
             
             uniform vec3 {lightColor};
@@ -282,7 +336,7 @@ namespace openGL2.Shaders
      
             
 
-        // decals / projected textures
+            // decals / projected textures
             //vec2 projectTexCoord; 
             //projectTexCoord.x= viewPosition.x/ viewPosition.w * 0.5 + 0.5;
             //projectTexCoord.y= viewPosition.y/ viewPosition.w * 0.5 + 0.5; 
@@ -294,25 +348,10 @@ namespace openGL2.Shaders
             //}}
 
 
+            {code}
 
 
-            if ({usingCellShading})
-            {{
-                normal = vertexNormal;
-                vec4 color;
-                float intensity = dot(lightDir, normal);
-                if (intensity > 0.95)
-                color = vec4(1.0,0.5,0.5,1.0);
-                else if (intensity > 0.5)
-                color = vec4(0.6,0.3,0.3,1.0);
-                else
-                if (intensity > 0.25)
-                color = vec4(0.4,0.2,0.2,1.0);
-                else
-                color = vec4(0.2,0.1,0.1,1.0);
-                FragColor = color;
-                
-            }}
+
 
             // from below here is testing area
                 
@@ -330,18 +369,34 @@ namespace openGL2.Shaders
         {
             foreach (ShaderPart part in parts)
             {
-                int shaderToSetUp = GL.CreateShader(part.type);
-                GL.ShaderSource(shaderToSetUp, part.shaderSource);
+                part.shaderPartHandle = GL.CreateShader(part.type);
 
-                GL.CompileShader(shaderToSetUp);
-                GL.GetShader(shaderToSetUp, ShaderParameter.CompileStatus, out var code);
+                GL.ShaderSource(part.shaderPartHandle, part.shaderSource);
+
+                GL.CompileShader(part.shaderPartHandle);
+                GL.GetShader(part.shaderPartHandle, ShaderParameter.CompileStatus, out var code);
                 if (code != 1)
                 {
-                    var infoLog = GL.GetShaderInfoLog(shaderToSetUp);
-                    throw new Exception($"Fejl i shader ({shaderToSetUp}).\n\n{infoLog}");
+                    var infoLog = GL.GetShaderInfoLog(part.shaderPartHandle);
+                    throw new Exception($"Fejl i shader ({part.shaderPartHandle}).\n\n{infoLog}");
                 }
-                GL.AttachShader(ShaderProgramHandle, shaderToSetUp);
+                GL.AttachShader(ShaderProgramHandle, part.shaderPartHandle);
             }
+        }
+
+        private void UpdateShaderParts()
+        {
+            foreach (ShaderPart part in parts)
+            {
+                
+                
+                GL.DetachShader(ShaderProgramHandle, part.shaderPartHandle);
+                GL.DeleteShader(part.shaderPartHandle);
+
+                
+            }
+            SetUpShaderParts();
+
         }
 
         // UI inputs
@@ -369,12 +424,6 @@ namespace openGL2.Shaders
             SetUniformVector3(cameraPosition, position);
         }
 
-        readonly string usingCellShading = "toonShaderOn";
-        public void UsingCellShader(bool state)
-        {
-            SetUniformBool(usingCellShading, state);
-        }
-
         readonly string usingRimLight = "usingRimLight";
         public void UsingRimLight(bool state)
         {
@@ -395,7 +444,7 @@ namespace openGL2.Shaders
 
         public void Dispose()
         {
-            shaders.Remove(this);
+            ShaderHandler.RemoveShader(this);
         }
 
         public void UpdateUniformValuesForRender()
@@ -411,7 +460,7 @@ namespace openGL2.Shaders
         /// 
         public static void UpdateView(Matrix4 view)
         {
-            foreach (Shader shader in shaders)
+            foreach (Shader shader in ShaderHandler.GetShaders().Values)
             {
                 shader.View = view;
             }
@@ -419,7 +468,7 @@ namespace openGL2.Shaders
 
         public static void UpdateCameraPosition(Vector3 cameraPosition)
         {
-            foreach (Shader shader in shaders)
+            foreach (Shader shader in ShaderHandler.GetShaders().Values)
             {
                 shader.SetCameraPosition(cameraPosition);
             }
@@ -457,7 +506,7 @@ namespace openGL2.Shaders
 
         public static void UpdateProjection(Matrix4 projection)
         {
-            foreach (Shader shader in shaders)
+            foreach (Shader shader in ShaderHandler.GetShaders().Values)
             {
                 shader.Projection = projection;
             }
@@ -465,7 +514,7 @@ namespace openGL2.Shaders
 
         public static void UpdateModelSpace(Matrix4 modelSpace)
         {
-            foreach (Shader shader in shaders)
+            foreach (Shader shader in ShaderHandler.GetShaders().Values)
             {
                 shader.Model = modelSpace;
 
@@ -480,9 +529,9 @@ namespace openGL2.Shaders
         }
 
 
-        public enum TextureUnits { ALBEDO, LIGHTMAP, SPECULARMAP, NORMALMAP, HEIGHTMAP }
+        public enum TextureUnits { ALBEDO, LIGHTMAP, SPECULARMAP, NORMALMAP }
 
-        public void SetTextureUniform(TextureUnits textureUnit)
+        public void SetTextureUniform(TextureUnits textureUnit) 
         {
             string uniformName = string.Empty;
             switch (textureUnit)
@@ -501,10 +550,6 @@ namespace openGL2.Shaders
 
                 case TextureUnits.NORMALMAP:
                     uniformName = "normalTexture";
-                    break;
-
-                case TextureUnits.HEIGHTMAP:
-                    uniformName = "heightMap";
                     break;
             }
 
@@ -531,10 +576,67 @@ namespace openGL2.Shaders
         }
     }
 
-    public struct ShaderPart(ShaderType type, string shaderSource)
+    public class ShaderPart
     {
-        public ShaderType type = type;
-        public int shaderPartHandle;
-        public string shaderSource = shaderSource;
+        public ShaderType type;
+        public int shaderPartHandle = -1;
+        public string shaderSource;
+
+        public ShaderPart(ShaderType type, string shaderSource)
+        {
+            this.type = type;
+            this.shaderSource = shaderSource;
+        }
     }
+
+
+    public abstract class UniformElement 
+    {
+        public readonly string Name;
+        public readonly string UniformType;
+
+
+        public UniformElement (string name, string uniformType)
+        {
+            Name = name;
+            UniformType = uniformType;
+        }
+
+        public abstract void SetUniform(int ShaderProgramHandle);
+
+    }
+
+    public abstract class LayoutBase
+    {
+        public readonly string Name;
+        protected readonly string LaoutType;
+        protected readonly int location;
+
+
+        protected LayoutBase(string name, string laoutType, int location)
+        {
+            Name = name;
+            LaoutType = laoutType;
+            this.location = location;
+        }
+
+        public string GetLayoutString()
+        {
+            return $"layout(location = {location}) in {LaoutType} {Name}; \n";
+        }
+
+    }
+
+
+
+
+    
+
+
+
+
+
+
 }
+
+

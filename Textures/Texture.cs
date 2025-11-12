@@ -27,7 +27,11 @@ namespace openGL2.Textures
         private TextureFilterTypes _filterType;
         public TextureFilterTypes FilterType { get => _filterType; set => SetFilterFromEnum(value); }
 
-        private static string _checkeredKey = "Checkered";
+  
+
+        public ImageInformation ImageInfo { get; private set; }
+
+        public float MapIntensity { get; set; } = 1f;
 
         /// <summary>
         /// denne bruges til at loade TGA texturer med
@@ -42,82 +46,37 @@ namespace openGL2.Textures
             AllTextures.Add(_textureName, this);
         }
 
+
         /// <summary>
         /// use this to instantiate raw bytes
         /// </summary>
         /// <param name=""></param>
-        public Texture(ImageInformation imageInfo, byte[] pixels, string name)
+        public Texture(ImageInformation imageInfo, string name)
         {
             _textureName = name;
-            _textureID = LoadTextureToGPU(imageInfo, pixels);
+            _textureID = LoadTextureToGPU(imageInfo);
+            if (AllTextures.ContainsKey(name)) return;
+            
             AllTextures.Add(_textureName, this);
-        }
-
-        enum GeneratedTexures { CHECKERED, WHITE}
-
-        /// <summary>
-        /// blank test texture
-        /// </summary>
-        /// <param name="imageInfo"></param>
-        /// <param name="pixels"></param>
-        /// <param name="name"></param>
-        private Texture(GeneratedTexures texture)
-        {
-            ImageInformation i = new();
-            byte[] p = [];
-            
-
-            switch (texture)
-            {
-                case GeneratedTexures.CHECKERED:
-                    GenerateChekceredTexture(out i, out  p);
-                    _textureName = _checkeredKey;
-                    break;
-
-                case GeneratedTexures.WHITE:
-                    GenerateWhiteTexture(out i, out  p);
-                    _textureName = _whiteKey;
-                    break;
-            }
-            
-             
-            _textureID = LoadTextureToGPU(i, p);
-            AllTextures.Add(_textureName, this);
-            
-
-
-        }
-
-        public static Texture GetCheckered ()
-        {
-            
-            if (AllTextures.ContainsKey(_checkeredKey)) return AllTextures[_checkeredKey];
-
-            return new Texture(GeneratedTexures.CHECKERED);
-        }
-
-        static string _whiteKey = "white";
-        public static Texture GetWhite ()
-        {
-            if (AllTextures.ContainsKey(_whiteKey)) return AllTextures[_whiteKey];
-
-            return new Texture(GeneratedTexures.WHITE);
+            ImageInfo = imageInfo;
         }
 
 
-
-        private static int Create(string filePath)
+        protected virtual int Create(string filePath)
         {
             if (!ImageParser.ParseImage(filePath, ImageParser.ImageType.TGA, out ImageInformation imageInfo, out byte[] pixels))
             {
                 throw new Exception("check this texture");
             }
+
+            this.ImageInfo = imageInfo;
+
             // der bindes ikke til nogen texture unit her, det skal gøres i shaderen pr object
-            return LoadTextureToGPU(imageInfo, pixels);
+            return LoadTextureToGPU(imageInfo);
         }
 
 
-        private static int LoadTextureToGPU (ImageInformation imageInfo, byte[] pixels, bool repeatTiling = true)
+        protected virtual int LoadTextureToGPU (ImageInformation imageInfo, bool repeatTiling = true)
         {
             GL.GenTextures(1, out int _textureID);
             GL.BindTexture(TextureTarget.Texture2D, _textureID);
@@ -125,60 +84,23 @@ namespace openGL2.Textures
             SetTiling(_textureID);
             SetFilter(_textureID);
 
-                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, imageInfo.width, imageInfo.height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, pixels);
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, imageInfo.width, imageInfo.height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, imageInfo.pixels);
 
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             return _textureID;
         }
 
-        private static void GenerateChekceredTexture(out ImageInformation imageInformation, out byte[] pixels)
-        {
-            imageInformation = new ImageInformation();
-            imageInformation.height = 8;
-            imageInformation.width = 8;
-            imageInformation.alpha = false;
-
-            byte O = 0;
-            byte I = 255;
-
-            pixels =
-                [
-                O,O,O,O,O,O,O,O,O,O,O,O,I,I,I,I,I,I,I,I,I,I,I,I,
-                O,O,O,O,O,O,O,O,O,O,O,O,I,I,I,I,I,I,I,I,I,I,I,I,
-                O,O,O,O,O,O,O,O,O,O,O,O,I,I,I,I,I,I,I,I,I,I,I,I,
-                O,O,O,O,O,O,O,O,O,O,O,O,I,I,I,I,I,I,I,I,I,I,I,I,
-                I,I,I,I,I,I,I,I,I,I,I,I,O,O,O,O,O,O,O,O,O,O,O,O,
-                I,I,I,I,I,I,I,I,I,I,I,I,O,O,O,O,O,O,O,O,O,O,O,O,
-                I,I,I,I,I,I,I,I,I,I,I,I,O,O,O,O,O,O,O,O,O,O,O,O,
-                I,I,I,I,I,I,I,I,I,I,I,I,O,O,O,O,O,O,O,O,O,O,O,O,
-                ];
-        }
-
-        private static void GenerateWhiteTexture(out ImageInformation imageInformation, out byte[] pixels)
-        {
-            imageInformation = new ImageInformation();
-            imageInformation.height = 4;
-            imageInformation.width = 4;
-            imageInformation.alpha = false;
-
-            pixels =
-                [
-                255,255,255,255,255,255,255,255,255,255,255,255,
-                255,255,255,255,255,255,255,255,255,255,255,255,
-                255,255,255,255,255,255,255,255,255,255,255,255,
-                255,255,255,255,255,255,255,255,255,255,255,255,
-                ];
-        }
 
 
-        private static void SetTiling(int textureId, TextureWrapMode wrapMode = TextureWrapMode.Repeat)
+
+        protected virtual  void SetTiling(int textureId, TextureWrapMode wrapMode = TextureWrapMode.Repeat)
         {
             GL.BindTexture(TextureTarget.Texture2D, textureId);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)wrapMode);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)wrapMode);
         }
 
-        private static void SetFilter(int textureId, TextureMinFilter minFilter = TextureMinFilter.Linear, TextureMagFilter magFilter = TextureMagFilter.Linear)
+        protected virtual  void SetFilter(int textureId, TextureMinFilter minFilter = TextureMinFilter.Linear, TextureMagFilter magFilter = TextureMagFilter.Linear)
         {
             GL.BindTexture(TextureTarget.Texture2D, textureId);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)minFilter);
@@ -186,7 +108,7 @@ namespace openGL2.Textures
         }
 
         public enum TextureFilterTypes { NEAREST, LINEAR, BILINEAR, TRILINEAR}
-        private void SetFilterFromEnum (TextureFilterTypes filterType)
+        protected virtual void SetFilterFromEnum (TextureFilterTypes filterType)
         {
             switch (filterType)
             {
@@ -211,7 +133,7 @@ namespace openGL2.Textures
 
         }
 
-        public void SetAnisotropic (bool anisotropic)
+        public virtual void SetAnisotropic (bool anisotropic)
         {
             GL.BindTexture(TextureTarget.Texture2D, _textureID);
 
