@@ -137,7 +137,6 @@ namespace openGL2.Shaders
             uniform mat4 projectionViewModel;
 
             {uniforms}
-            //uniform sampler2D heightMap;
 
             uniform mat4 texProjection;
 
@@ -254,11 +253,16 @@ namespace openGL2.Shaders
             //base color
             vec4 pixel = vec4({objectColor},1);
 
-            vec4 tempPixel = vec4(texture(albedoTexture, uv).rgb, 1.0);
+            //vec4 tempPixel = vec4(texture(albedoTexture, uv));
+           //if (tempPixel.w == 0) discard;
+
+            //vec4 tempPixel = vec4(texture(albedoTexture, uv).rgb, 1.0);
 
             
             if ({useTexture}) 
-            {{pixel = vec4 (texture(albedoTexture, uv).rgb, 1);}}
+            {{pixel = vec4 (texture(albedoTexture, uv).rgba);
+                if (pixel.w < 0.1) discard;
+            }}
             
 
             // ambient light

@@ -102,7 +102,6 @@ namespace openGL2
 
             ImGui.PushStyleColor(ImGuiCol.WindowBg, new Vector4(0.0f, 0.0f, 0.0f, 1.0f)); // Back to theme color.. ish
             ImGui.SetNextWindowSize(new Sys.Vector2(400, 800));
-            //ImGui.Begin("OpenTK View");
 
             ImGui.Begin("Properties");
 

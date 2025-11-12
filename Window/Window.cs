@@ -19,6 +19,10 @@ namespace openGL2.Window
     public class Window : GameWindow
     {
         private  Figure mainFigure;
+        private Figure tree;
+        private Figure leaves;
+
+
         private Plane plane;
 
         private Shader shader;
@@ -87,9 +91,11 @@ namespace openGL2.Window
             plane = new Plane();
             Cube kasse = new Cube();
 
+            
+
             mainFigure = new(shader, plane, plane);
             //cube = new(shader, kasse);
-            mainFigure.Render = true;
+            mainFigure.Render = false;
 
             ImGui.StyleColorsDark();
 
@@ -130,8 +136,6 @@ namespace openGL2.Window
             _normalMap =   new Texture(@"..\..\..\Textures\TextureImages\mountain_normalmap.tga", "normalMountain");
             
 
-
-
             mainFigure.Material.Albedo = _albedo;
             mainFigure.Material.LightMap = _lightMap;
             mainFigure.Material.SpecularMap = _specularMap;
@@ -164,13 +168,37 @@ namespace openGL2.Window
             //two.TranslateFigure(Matrix4.CreateTranslation(new Vector3(uvPlacements[2], 0, uvPlacements[3])));
 
 
-            //Texture barkAlbedo = new Texture(@"../../../Textures/TextureImages/M_Bark.001_baseColor", "bark color");
-            //Texture barkNormal = new Texture(@"../../../Textures/TextureImages/M_Bark.001_normal", "bark normal");
+           
+
+            
+
+
+            VertexInformation treeVi = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_trunk.obj");
+            VertexInformation leafsVi = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_branches.obj");
+
+            bool renderTree = true;
+            tree = new Figure(noHeightMap, treeVi);
+            leaves = new Figure(noHeightMap, leafsVi);
+
+            tree.Render = renderTree;
+            leaves.Render = renderTree;
+
+            Texture barkAlbedo = new Texture(@"../../../Textures/TextureImages/M_Bark.001_baseColor.tga", "bark color");
+            Texture barkNormal = new Texture(@"../../../Textures/TextureImages/M_Bark.001_normal.tga", "bark normal");
+            Texture leavsAlbedo = new Texture(@"../../../Textures/TextureImages/M_Branch.001_baseColor.tga", "leavs color");
+            Texture bleavesNormal = new Texture(@"../../../Textures/TextureImages/M_Branch.001_normal.tga", "leaves normal");
+
+            tree.Material.Albedo = barkAlbedo;
+            tree.Material.NormalTexture = barkNormal;
+            leaves.Material.Albedo = leavsAlbedo;
+           // leaves.Material.NormalTexture = bleavesNormal;
 
 
 
-            VertexInformation tree = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_trunk.obj");
-            VertexInformation leafs = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_branches.obj");
+
+
+
+
 
             //VertexInformation combinedTree = new VertexInformation([tree, leafs]);
             heightMover = new((HeightMapVertexShader)heightMat);
@@ -193,8 +221,8 @@ namespace openGL2.Window
                         newUvs[uvIndex] = i * uvSpread;
                         newUvs[uvIndex + 1] = j * uvSpread;
 
-                        newtrees[Index] = new Figure(noHeightMap, tree);
-                        newBranches[Index] = new Figure(noHeightMap, leafs);
+                        newtrees[Index] = new Figure(noHeightMap, treeVi);
+                        newBranches[Index] = new Figure(noHeightMap, leafsVi);
                         newtrees[Index].TranslateFigure(Matrix4.CreateScale(0.005f));
                         newtrees[Index].TranslateFigure(Matrix4.CreateTranslation(new Vector3(newUvs[uvIndex], 0, newUvs[uvIndex + 1])));
 

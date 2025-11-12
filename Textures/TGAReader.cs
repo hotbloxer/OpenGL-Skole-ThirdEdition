@@ -37,14 +37,17 @@ namespace openGL2.Textures
                 pixels = new byte[tdaHeader.height * tdaHeader.width * colorChannels];
 
 
-            
 
-               
 
+
+                int offset = 18 + tdaHeader.identSize;
                 if (tdaHeader.alpha) 
-                    pixels = SwitchRedAndBlueWithAlpha(bytes, (uint) tdaHeader.width * tdaHeader.height);
+                {
+                    pixels = SwitchRedAndBlueWithAlpha(bytes, (uint) tdaHeader.width * tdaHeader.height, offset);
+                   
+                }
                 else 
-                    pixels = SwitchRedAndBlueWithoutAlpha(bytes, (uint) tdaHeader.width * tdaHeader.height);
+                    pixels = SwitchRedAndBlueWithoutAlpha(bytes, (uint) tdaHeader.width * tdaHeader.height, offset);
 
                 // set vigtiste out info
                 imageInfo.alpha = tdaHeader.alpha;
@@ -56,31 +59,36 @@ namespace openGL2.Textures
         }
 
 
-        public byte[] SwitchRedAndBlueWithoutAlpha(byte[] tgaFormattedArray, uint sizeOfPixelArray)
+        public byte[] SwitchRedAndBlueWithoutAlpha(byte[] tgaFormattedArray, uint sizeOfPixelArray, int offset)
         {
-            byte[] pixels = new byte[tgaFormattedArray.Length];
+            byte[] pixels = new byte[sizeOfPixelArray * 3];
 
             int pixelCount = 0;
             for (uint i = 0; i < sizeOfPixelArray *3; i += 3)
             {
-                pixels[pixelCount++]= tgaFormattedArray[18 + i + 2];
-                pixels[pixelCount++] = tgaFormattedArray[18 + i + 1];
-                pixels[pixelCount++] = tgaFormattedArray[18 + i];
+                pixels[pixelCount++]= tgaFormattedArray[offset + i + 2];
+                pixels[pixelCount++] = tgaFormattedArray[offset + i + 1];
+                pixels[pixelCount++] = tgaFormattedArray[offset + i];
             }
+
+
+
             return pixels;
         }
 
-        public byte[] SwitchRedAndBlueWithAlpha(byte[] tgaFormattedArray, uint sizeOfPixelArray)
+        public byte[] SwitchRedAndBlueWithAlpha(byte[] tgaFormattedArray, uint sizeOfPixelArray, int offset)
         {
-            byte[] pixels = new byte[tgaFormattedArray.Length];
+            byte[] pixels = new byte[sizeOfPixelArray * 4];
             int pixelCount = 0;
-            for (uint i = 0;  i < sizeOfPixelArray *4; i += 4)
+            for (uint i = 0;  i < sizeOfPixelArray * 4; i += 4)
             {
-                pixels[pixelCount++] = tgaFormattedArray[18+ i + 2];
-                pixels[pixelCount++] = tgaFormattedArray[18 + i+ 1];
-                pixels[pixelCount++] = tgaFormattedArray[18 + i + 1];
-                pixels[pixelCount++] = tgaFormattedArray[18 + i + 3];
+                pixels[pixelCount++] = tgaFormattedArray[offset + i + 2];
+                pixels[pixelCount++] = tgaFormattedArray[offset + i + 1];
+                pixels[pixelCount++] = tgaFormattedArray[offset + i];
+                pixels[pixelCount++] = tgaFormattedArray[offset + i + 3];
             }
+
+
             return pixels;
         }
 
@@ -98,8 +106,8 @@ namespace openGL2.Textures
 
     public interface IChangeTGAColorToRGB
     {
-        byte[] SwitchRedAndBlueWithoutAlpha(byte[] tgaFormattedArray, uint sizeOfHeader);
-        public byte[] SwitchRedAndBlueWithAlpha(byte[] tgaFormattedArray, uint sizeOfPixelArray);
+        byte[] SwitchRedAndBlueWithoutAlpha(byte[] tgaFormattedArray, uint sizeOfHeader, int offset);
+        public byte[] SwitchRedAndBlueWithAlpha(byte[] tgaFormattedArray, uint sizeOfPixelArray, int offset);
     }
 
     public struct TDAHeader

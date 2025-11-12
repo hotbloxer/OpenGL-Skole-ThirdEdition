@@ -84,7 +84,15 @@ namespace openGL2.Textures
             SetTiling(_textureID);
             SetFilter(_textureID);
 
+            if (imageInfo.alpha)
+            {
+                GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgba, imageInfo.width, imageInfo.height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, imageInfo.pixels);
+
+            }
+            else
+            {
                 GL.TexImage2D(TextureTarget.Texture2D, 0, PixelInternalFormat.Rgb, imageInfo.width, imageInfo.height, 0, PixelFormat.Rgb, PixelType.UnsignedByte, imageInfo.pixels);
+            }
 
             GL.GenerateMipmap(GenerateMipmapTarget.Texture2D);
             return _textureID;
