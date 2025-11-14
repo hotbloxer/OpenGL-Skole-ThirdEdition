@@ -53,8 +53,6 @@ namespace openGL2.Textures
 
             GL.BindTextureUnit((int)Shader.TextureUnits.NORMALMAP, _normalTexture.ID);
             shader.SetTextureUniform(Shader.TextureUnits.NORMALMAP);
-
-            
         }
     }
 

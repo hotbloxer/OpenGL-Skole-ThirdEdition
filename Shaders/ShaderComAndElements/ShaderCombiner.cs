@@ -1,14 +1,17 @@
 ﻿using openGL2.Objects;
+using OpenTK.Graphics.OpenGL4;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Vortice.Direct3D;
 
 namespace openGL2.Shaders.ShaderComAndElements
 {
     public class ShaderCombiner
     {
+
         public List<ShaderElementBase> elements = new List<ShaderElementBase>();
         private Shader _shader;
 
@@ -17,11 +20,23 @@ namespace openGL2.Shaders.ShaderComAndElements
             _shader = shader;
         }
 
-        public void SetUniforms()
+
+        public bool OverrideFragmentShader ()
+        {
+            foreach (ShaderElementBase element in elements)
+            {
+                if (element is FragmentShaderOverrider) return true;
+            }
+            return false;
+        }
+
+        public void SetUniforms(bool includeGeometryShader)
         {
             foreach (ShaderElementBase element in elements)
             {
                 if (!element.Apply) continue;
+                if (element.ShaderType == ShaderType.GeometryShader && !includeGeometryShader) continue;
+
                 element.SetUniforms(_shader.ShaderProgramHandle);
             }
         }
@@ -52,12 +67,12 @@ namespace openGL2.Shaders.ShaderComAndElements
             return sb.ToString();
         }
 
-        public string GetLayouts ()
+        public string GetLayouts (ShaderType type)
         {
             StringBuilder sb = new StringBuilder();
             foreach (ShaderElementBase element in elements)
             {
-                if (!element.Apply) continue;
+                if (!element.Apply || element.ShaderType != type) continue;
                 sb.Append(element.Layouts);
             }
             return sb.ToString();
@@ -73,6 +88,29 @@ namespace openGL2.Shaders.ShaderComAndElements
                     ui.GetUI();
                 }
             }
+        }
+
+        
+
+        public string GetFunctions ()
+        {
+
+            StringBuilder sb = new StringBuilder();
+            foreach (ShaderElementBase element in elements)
+            {
+                if (!element.Apply) continue;
+                if (element.functions.Count > 0)
+                {
+                    foreach (string function in element.functions)
+                    {
+                        sb.Append(function);
+                    }
+                    
+                }
+                
+            }
+            return sb.ToString();
+
         }
 
     }

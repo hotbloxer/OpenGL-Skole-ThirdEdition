@@ -2,7 +2,9 @@
 using ImGuiNET;
 using openGL2.Objects;
 using openGL2.Shaders;
+using openGL2.Shaders.ShaderComAndElements;
 using openGL2.Textures;
+using OpenTK.Graphics.OpenGL4;
 using System.Numerics;
 using System.Windows.Forms;
 using static openGL2.Textures.Texture;
@@ -69,14 +71,15 @@ namespace openGL2
         int localPlanesubdivideWidth = 5;
         int localPlanesubdivideHeight = 5;
 
+        ShaderElementBase _selectedGeometryShader;
 
 
 
-
-        // de fleste texturer og andre ting afhænger af hvilken figur der er aktiveret
+        // de fleste texturer og andre ting afshænger af hvilken figur der er aktiveret
         int _selectedFigureIndex = 0;
         int _selectedShaderIndex = 0;
-
+        uint _selectedGeoShaderIndex = 0;
+ 
         Figure _selectedFigure;
         Shader _selectedShader;
 
@@ -127,13 +130,8 @@ namespace openGL2
                         _selectedShader.SetUsingBlinn(UsingBlinnLight);
                     }
 
-                    _selectedShader.UseShaderUI();
+               
 
-                    // activate simple cell shading : Check box
-                    //if (ImGui.Checkbox("Use Cell Shading", ref UsingCellShading))
-                    //{
-                    //    SelectedShader.UsingCellShader(UsingCellShading);
-                    //}
 
                     // rim light : Check box
                     if (ImGui.Checkbox("Use Rim Light", ref UsingRimLight))
@@ -427,7 +425,6 @@ namespace openGL2
 
                 if (ImGui.BeginTabItem("Shaders"))
                 {
-                    
                     string[] shaderNames = ShaderHandler.GetShaders().Keys.ToArray();
                     if (ImGui.BeginCombo("Shader", shaderNames[_selectedShaderIndex]))
                     {
@@ -445,9 +442,7 @@ namespace openGL2
                                 ImGui.SetItemDefaultFocus();
 
                         }
-                        ImGui.EndCombo();
-
-                        
+                        ImGui.EndCombo(); 
                     }
 
                     ImGui.BeginTabBar("ShaderTabs");
@@ -460,13 +455,77 @@ namespace openGL2
 
                     if (ImGui.BeginTabItem("Fragment Shader"))
                     {
+                        foreach (ShaderElementBase element in _selectedShader.ShaderScripts.Values)
+                        {
+                            if (element.ShaderType == ShaderType.FragmentShader && element is IHaveUI fragmentShaderUI)
+                            {
+                                fragmentShaderUI.GetUI();
+                            }
+                        }
+                       
+
                         ImGui.Text(_selectedShader.FragmentShaderSource);
                         ImGui.EndTabItem();
                     }
 
+                    if (ImGui.BeginTabItem("Geometry Shader"))
+                    {
+                        
+                        ImGui.Checkbox("Use Geometry shader", ref _selectedShader.UsesGeometryShader);
 
-              
+                        
+                        if (_selectedShader.GetGeometryShaders().Count > 0)
+                        {
+                        uint[] geometryShaderNames = _selectedShader.GetGeometryShaders().Keys.ToArray();
+                            if (_selectedGeoShaderIndex > _selectedShader.GetGeometryShaders().Count() -1)
+                            {
+                                _selectedGeoShaderIndex = (uint) 0;
+                            }
+                            _selectedGeometryShader = _selectedShader.GetGeometryShaders()[geometryShaderNames[_selectedGeoShaderIndex]];
+                            if (ImGui.BeginCombo("Geometry shader", $"{geometryShaderNames[_selectedGeoShaderIndex]}"))
+                            {
+                                for (int n = 0; n < geometryShaderNames.Length; n++)
+                                {
+                                    bool is_selected = _selectedGeoShaderIndex == n;
+                                    if (ImGui.Selectable($"{geometryShaderNames[n]}", is_selected))
+                                    {
+                                        _selectedGeoShaderIndex = (uint)n;
+                                        _selectedGeometryShader = _selectedShader.GetGeometryShaders()[geometryShaderNames[n]];
 
+
+                                        _selectedShader.SetActiveGeometryShader(geometryShaderNames[n]);
+
+                                    }
+
+
+
+
+                                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                                    if (is_selected)
+                                        ImGui.SetItemDefaultFocus();
+
+                                }
+                                ImGui.EndCombo();
+
+                            }
+                        }
+
+        
+         
+
+                        if (_selectedGeometryShader is IHaveUI geoShaderSettings)
+                        {
+                            geoShaderSettings.GetUI();
+                        }
+           
+                        ImGui.Text(_selectedShader.GeometryShaderSource);
+
+
+
+
+
+                        ImGui.EndTabItem();
+                    }
 
 
 

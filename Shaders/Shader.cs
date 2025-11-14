@@ -5,6 +5,7 @@ using openGL2.Textures;
 using OpenTK.Graphics.OpenGL4;
 using OpenTK.Mathematics;
 using System.Text;
+using System.Xml.Linq;
 
 
 
@@ -18,6 +19,8 @@ namespace openGL2.Shaders
 
         public string FragmentShaderSource { get; private set; }
         public string VertexShaderSource  { get; private set; }
+
+        public string GeometryShaderSource { get; private set; }
 
         public int ShaderProgramHandle { get; private set; }
 
@@ -35,21 +38,46 @@ namespace openGL2.Shaders
         public Matrix4 ModelView { get => _modelView.Matrix; set => _modelView.Matrix = value; }
         public Matrix4 Projection { get => _projection.Matrix; private set => _projection.Matrix = value; }
 
-        ShaderCombiner sc; 
 
-      
+        ShaderCombiner sc;
+
+        public Dictionary<uint, ShaderElementBase> ShaderScripts = new();
+
+        public Dictionary<uint, ShaderElementBase> geometryShaders = new();
+
+        public bool UsesGeometryShader = false;
+
         public Shader (ShaderElementBase[] shaderElements)
         {
             sc = new ShaderCombiner(this);
 
             foreach (ShaderElementBase element in shaderElements)
             {
+                ShaderScripts.Add(element.id, element);
                 sc.elements.Add(element);
+
+                if (element.ShaderType == ShaderType.GeometryShader)
+                {
+                    geometryShaders.Add(element.id, element);
+       
+                }
+
+
+
+            }
+       
+            if (geometryShaders.Count > 0)
+            {
+
+            SetActiveGeometryShader(geometryShaders.FirstOrDefault().Key);
             }
 
 
             FragmentShaderSource = SetDefaultFragmentShader();
             VertexShaderSource = SetDefaultVertexShader();
+            GeometryShaderSource = SetDefaultGeometryShader();
+
+
 
             ShaderProgramHandle = GL.CreateProgram();
 
@@ -63,8 +91,12 @@ namespace openGL2.Shaders
             // dette reducere dublikationer og der kan tilføjes flere slags shaders senere
             parts.Add(new ShaderPart(ShaderType.VertexShader, VertexShaderSource));
             parts.Add(new ShaderPart(ShaderType.FragmentShader, FragmentShaderSource));
+            parts.Add(new ShaderPart(ShaderType.GeometryShader, GeometryShaderSource));
 
-            SetUpShaderParts();
+
+
+            UseShader();
+            //SetUpShaderParts();
 
             GL.LinkProgram(ShaderProgramHandle);
 
@@ -83,41 +115,81 @@ namespace openGL2.Shaders
 
         public void UseShader ()
         {
-
-          
             foreach (ShaderPart part in parts)
             {
                 if (part.type == ShaderType.FragmentShader)
                 {
-                    part.shaderSource = SetDefaultFragmentShader();
+                    FragmentShaderSource = SetDefaultFragmentShader();
+                    part.shaderSource = FragmentShaderSource;
                 }
                 else if (part.type == ShaderType.VertexShader)
                 {
-                    part.shaderSource = SetDefaultVertexShader();
+                    VertexShaderSource = SetDefaultVertexShader();
+                    part.shaderSource = VertexShaderSource;
+                }
+                else if (part.type == ShaderType.GeometryShader)
+                {
+                    GeometryShaderSource = SetDefaultGeometryShader();
+                    part.shaderSource = GeometryShaderSource;
                 }
             }
 
 
             UpdateShaderParts();
 
-            
-
             GL.LinkProgram(ShaderProgramHandle);
         }
 
+        public Dictionary<uint, ShaderElementBase> GetGeometryShaders ()
+        {
+            return geometryShaders;
+        }
         public void UpdateUniforms ()
         {
-            sc.SetUniforms();
+            sc.SetUniforms(UsesGeometryShader);
         }
         
-        public void UseShaderUI ()
+
+
+        private string SetDefaultGeometryShader ()
         {
-            sc.GetUI();
+            string layout = sc.GetLayouts(ShaderType.GeometryShader);
+            string code = sc.GetShaderCode(ShaderType.GeometryShader);
+            string functions = sc.GetFunctions();
+            string uniforms = sc.GetShaderUniforms(ShaderType.GeometryShader);
+
+            
+
+            if (layout.Length == 0)
+            {
+                layout = @"
+                layout(triangles) in;
+                layout(line_strip, max_vertices = 5) out;";
+            }
+
+            
+
+            return $@"
+                #version 330 core
+
+                {layout}
+
+                {uniforms}
+                
+                {functions}
+
+                void main()
+                {{
+                
+                    {code}
+
+                }}
+            ";
         }
 
         private string SetDefaultVertexShader ()
         {
-            string layouts = sc.GetLayouts();
+            string layouts = sc.GetLayouts(ShaderType.VertexShader);
             string uniforms = sc.GetShaderUniforms(ShaderType.VertexShader);
             string code = sc.GetShaderCode(ShaderType.VertexShader);
 
@@ -125,68 +197,60 @@ namespace openGL2.Shaders
             return
             @$"#version 330 core 
             {layouts}
-            layout(location = 1) in vec2 aUV;
-            layout(location = 2) in vec3 aNormal;
-            layout(location = 3) in vec3 aTangent;  
-            layout(location = 4) in vec3 aBiNormal;
-
-            uniform mat4 modelView;
-            uniform mat4 model;
-            uniform mat4 view;
-            uniform mat4 projection;
-            uniform mat4 projectionViewModel;
-
             {uniforms}
-
-            uniform mat4 texProjection;
-
-            out vec2 uv;
-            out vec3 vertexNormal;
-            out vec3 fragPosition;
-            out mat3 tbn;
-
-            out vec4 viewPosition;
 
             void main() 
             {{ 
-                //fragPosition = vec3(model * vec4(aPosition, 1.0));
-                //uv = aUV;
 
-                //viewPosition = projection * view * vec4(aPosition, 1.0);
-
-                //mat4 modelview2 =   view * model;
-                //mat3 normalMatrix = transpose(inverse(mat3( modelview2)));
-                //mat4 modelViewInstance = modelView;
-
-
-                tbn = mat3
-                  (
-                     normalize(vec3(model * vec4(aTangent , 0))),
-                     normalize(vec3(model * vec4(aBiNormal, 0))),
-                     normalize(vec3(model * vec4(aNormal  , 0)))
-                  );
-
-
-                vertexNormal =  aNormal;
 
      
                 {code}
         
 
-                //gl_Position = projection * view  * model * vec4(aPosition, 1.0) ;
-                gl_Position = projectionViewModel * vec4({PositionVertexShader.Position}, 1.0) ;
 
             }}";
 
         }
 
+        private bool isUsingDefaultFragmentShader = true;
 
         #region FRAGMENT SHADER
         private string SetDefaultFragmentShader()
         {
-
+            string layouts = "";
             string uniforms = "";
-            string code = sc.GetShaderCode(ShaderType.FragmentShader);
+            string code = "";
+
+
+
+            if (sc.OverrideFragmentShader())
+            {
+
+                isUsingDefaultFragmentShader = false;
+                layouts = sc.GetLayouts(ShaderType.FragmentShader); ;
+                uniforms = sc.GetShaderUniforms(ShaderType.FragmentShader);
+                code = sc.GetShaderCode(ShaderType.FragmentShader);
+
+
+                return @$"#version 330 core
+
+                {uniforms}
+                {layouts}
+
+                void main()
+                {{ 
+                    
+                {code}
+                
+                }}
+                "
+                ;
+
+            }
+            
+         
+            uniforms = "";
+            code = sc.GetShaderCode(ShaderType.FragmentShader);
 
 
             return 
@@ -369,10 +433,17 @@ namespace openGL2.Shaders
 
         #endregion
 
+        
+
         protected void SetUpShaderParts()
         {
             foreach (ShaderPart part in parts)
             {
+                if (!UsesGeometryShader && part.type == ShaderType.GeometryShader)
+                {
+                    continue;
+                }
+
                 part.shaderPartHandle = GL.CreateShader(part.type);
 
                 GL.ShaderSource(part.shaderPartHandle, part.shaderSource);
@@ -381,8 +452,10 @@ namespace openGL2.Shaders
                 GL.GetShader(part.shaderPartHandle, ShaderParameter.CompileStatus, out var code);
                 if (code != 1)
                 {
+
+
                     var infoLog = GL.GetShaderInfoLog(part.shaderPartHandle);
-                    throw new Exception($"Fejl i shader ({part.shaderPartHandle}).\n\n{infoLog}");
+                throw new Exception($"Fejl i shader ({part.shaderPartHandle}).\n\n{infoLog}");
                 }
                 GL.AttachShader(ShaderProgramHandle, part.shaderPartHandle);
             }
@@ -392,16 +465,26 @@ namespace openGL2.Shaders
         {
             foreach (ShaderPart part in parts)
             {
-                
-                
                 GL.DetachShader(ShaderProgramHandle, part.shaderPartHandle);
                 GL.DeleteShader(part.shaderPartHandle);
-
-                
             }
             SetUpShaderParts();
 
         }
+
+
+        public ShaderElementBase SetActiveGeometryShader(uint id) 
+        { 
+            foreach (ShaderElementBase geoShader in geometryShaders.Values)
+            {
+                geoShader.Apply = false;
+            }
+
+            geometryShaders[id].Apply = true;
+            return geometryShaders[id];
+
+        }
+
 
         // UI inputs
         readonly string uvTesting = "uvTesting";
@@ -480,6 +563,8 @@ namespace openGL2.Shaders
 
         protected void SetUniformBool(string uniformName, bool boolStatus)
         {
+            if (!isUsingDefaultFragmentShader) return;
+
             Use();
             int location = GL.GetUniformLocation(ShaderProgramHandle, uniformName);
             if (location == -1)
@@ -490,6 +575,7 @@ namespace openGL2.Shaders
 
         protected void SetUniformVector3(string uniformName, Vector3 vector)
         {
+            if (!isUsingDefaultFragmentShader) return;
             Use();
             int location = GL.GetUniformLocation(ShaderProgramHandle, uniformName);
             if (location == -1)
@@ -612,24 +698,21 @@ namespace openGL2.Shaders
 
     public abstract class LayoutBase
     {
-        public readonly string Name;
-        protected readonly string LaoutType;
-        protected readonly int location;
+        
 
 
-        protected LayoutBase(string name, string laoutType, int location)
+        protected LayoutBase()
         {
-            Name = name;
-            LaoutType = laoutType;
-            this.location = location;
+            
         }
 
-        public string GetLayoutString()
+        public virtual string GetLayoutString()
         {
-            return $"layout(location = {location}) in {LaoutType} {Name}; \n";
+            return "";
         }
 
-    }
+
+}
 
 
 

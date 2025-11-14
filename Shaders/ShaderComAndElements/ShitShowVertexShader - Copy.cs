@@ -11,7 +11,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace openGL2.Shaders.ShaderComAndElements
 {
-    public class ShitShowVertexShader : ShaderElementBase
+    public class ShitShowVertexShaderCopy : ShaderElementBase
     {
         /// <summary>
         /// The value used to call position in script
@@ -19,7 +19,7 @@ namespace openGL2.Shaders.ShaderComAndElements
         /// </summary>
    
      
-        public ShitShowVertexShader() : base(ShaderType.VertexShader)
+        public ShitShowVertexShaderCopy() : base(ShaderType.VertexShader)
         {
             Apply = true;
 
@@ -43,8 +43,7 @@ namespace openGL2.Shaders.ShaderComAndElements
 
                 out vec2 uv;
                 out vec3 vertexNormal;
-                out vec3 fragPosition;
-                out mat3 tbn;
+    
 
                 out vec4 viewPosition;
 
@@ -53,22 +52,13 @@ namespace openGL2.Shaders.ShaderComAndElements
 
 
             ShaderCode = @$"       
-                fragPosition = vec3(model * vec4({PositionVertexShader.Position}, 1.0));
-                uv = aUV;
-
+     
                 viewPosition = projection * view * vec4({PositionVertexShader.Position}, 1.0);
 
-                mat4 modelview2 =   view * model;
-                mat3 normalMatrix = transpose(inverse(mat3( modelview2)));
-                mat4 modelViewInstance = modelView;
+               
+                mat4 defaultUniformIssues = modelView;
 
 
-                tbn = mat3
-                  (
-                     normalize(vec3(model * vec4(aTangent , 0))),
-                     normalize(vec3(model * vec4(aBiNormal, 0))),
-                     normalize(vec3(model * vec4(aNormal  , 0)))
-                  );
 
 
                 vertexNormal =  aNormal;

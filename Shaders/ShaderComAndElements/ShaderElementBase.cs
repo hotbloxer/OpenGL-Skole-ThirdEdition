@@ -10,16 +10,20 @@ namespace openGL2.Shaders.ShaderComAndElements
 {
     public abstract class ShaderElementBase
     {
-        public Dictionary<string, LayoutBase> layouts = new(); 
+        public List<LayoutBase> layouts = new(); 
         public Dictionary<string, UniformElement> uniforms = new();
+        public List<string> functions = new();
         public string Uniforms { get => UniformToString(uniforms); }
         public string Layouts { get => LayoutToString(layouts); }
         public string ShaderCode = "";
         public readonly ShaderType ShaderType;
         public bool Apply;
+        public readonly uint id;
+        private static uint idCounter = 0;
 
         public ShaderElementBase(ShaderType shaderType)
         {
+            id = idCounter++;
             ShaderType = shaderType;
         }
 
@@ -30,7 +34,7 @@ namespace openGL2.Shaders.ShaderComAndElements
 
         public void AddLayout (LayoutBase layout)
         {
-            layouts.Add(layout.Name, layout);
+            layouts.Add(layout);
         }
 
 
@@ -38,7 +42,12 @@ namespace openGL2.Shaders.ShaderComAndElements
         {
             foreach (UniformElement element in uniforms.Values)
             {
-                element.SetUniform(shaderHandle);
+                if (Apply)
+                {
+                    element.SetUniform(shaderHandle);
+
+                }
+                
             }
         }
 
@@ -56,12 +65,12 @@ namespace openGL2.Shaders.ShaderComAndElements
             return sb.ToString();
         }
 
-        private string LayoutToString(Dictionary<string, LayoutBase> layoutDic)
+        private string LayoutToString(List<LayoutBase> layoutList)
         {
-            if (layoutDic.Count < 1) return "";
+            if (layoutList.Count < 1) return "";
 
             StringBuilder sb = new StringBuilder();
-            foreach (LayoutBase layout in layoutDic.Values)
+            foreach (LayoutBase layout in layoutList)
             {
                 sb.Append(layout.GetLayoutString());
           

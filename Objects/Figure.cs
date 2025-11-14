@@ -29,7 +29,9 @@ namespace openGL2.Objects
         public int VBOHandle { get; private set; } = -1;
         public int VAOHandle { get; private set; } = -1;
 
-        public Figure (Shader shader, IGeometry geometry, IHaveUI ui)
+        private bool haveMaterial = true;
+
+        public Figure (Shader shader, IGeometry geometry, IHaveUI ui, bool haveMaterial = true)
         {
             Geometry = geometry;
 
@@ -45,12 +47,17 @@ namespace openGL2.Objects
             _modelSpace = Matrix4.Identity;
             Name = ObjectNamer();
 
-            Material = new Material();
+
+            if (haveMaterial )
+            {
+                Material = new Material();
+            }
+            
 
             ObjectHandler.AddFigureToScene(this);
         }
 
-        public Figure(Shader shader, IHaveVertices vertices)
+        public Figure(Shader shader, IHaveVertices vertices, bool haveMaterial = true)
         {
             _shader = shader;
 
@@ -63,7 +70,11 @@ namespace openGL2.Objects
             _modelSpace = Matrix4.Identity;
             Name = ObjectNamer();
 
-            Material = new Material();
+
+            if (haveMaterial)
+            {
+                Material = new Material();
+            }
 
             ObjectHandler.AddFigureToScene(this);
         }
@@ -129,7 +140,12 @@ namespace openGL2.Objects
             _shader.Use();
 
             GL.BindVertexArray(VAOHandle);
-            Material.ActivateMaterial(_shader);
+
+            if (Material != null)
+            {
+                Material.ActivateMaterial(_shader);
+            }
+            
             
             if (Geometry != null)
             {
@@ -141,8 +157,12 @@ namespace openGL2.Objects
                 }
             }
             
+            if (haveMaterial)  
+            {
+
+            }
             _shader.SetUVTest(UI.displaUVTesting);
-            _shader.SetUsingTexture(UI.useTexture);
+            
             _shader.SetUsingBlinn(UI.UsingBlinnLight);
             _shader.UsingRimLight(UI.UsingRimLight);
             _shader.SetLightColor(UI.LightColorTK);
@@ -150,6 +170,8 @@ namespace openGL2.Objects
             _shader.UpdateUniformValuesForRender();
 
             _shader.UpdateUniforms();
+
+            
 
             GL.DrawArrays(PrimitiveType.Triangles, 0, _vertexInformation.Vertices.Length);
         }
@@ -194,6 +216,15 @@ namespace openGL2.Objects
             GL.DeleteBuffer(VBOHandle);
             GL.DeleteVertexArray(VAOHandle);
         }
+
+        public Figure GetDublicate ()
+        {
+            Figure newFigure = new Figure(_shader, _vertexInformation);
+            newFigure.Material = this.Material;
+            newFigure.SetModelSpace(this._modelSpace);
+            return newFigure;
+        }
+
     }
 
     public interface IHaveUI

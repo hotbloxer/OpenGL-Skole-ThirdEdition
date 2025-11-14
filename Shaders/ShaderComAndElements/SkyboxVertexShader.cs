@@ -41,7 +41,7 @@ namespace openGL2.Shaders.ShaderComAndElements
 
        
                     TexCoords = {PositionVertexShader.Position}
-                    gl_Position = projection * view * vec4(aPos, 1.0);
+                    gl_Position = projection * view * vec4({PositionVertexShader.Position}, 1.0);
             ";
         }
     }
