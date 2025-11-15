@@ -58,12 +58,14 @@ namespace openGL2.Shaders.ShaderComAndElements
 
         }
 
-        public void GetUI()
+        public bool GetUI()
         {
             if (ImGui.SliderFloat("Normal size", ref normSize, 0, 5) )
             {
                 value.Value = normSize;
+                return true;
             }
+            return false;
    
         }
     }

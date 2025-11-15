@@ -32,7 +32,7 @@ namespace openGL2.Shaders.ShaderComAndElements
 
         }
 
-        public void GetUI()
+        public bool GetUI()
         {
             if (ImGui.ColorPicker4("Frag color", ref fragColor))
             {
@@ -45,8 +45,9 @@ namespace openGL2.Shaders.ShaderComAndElements
                 );
                 ";
 
-
+                return true;
             }
+            return false;
         }
     }
 }

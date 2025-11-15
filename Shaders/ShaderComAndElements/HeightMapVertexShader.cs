@@ -34,16 +34,20 @@ namespace openGL2.Shaders.ShaderComAndElements
             
         }
 
-        public void GetUI()
+        public bool GetUI()
         {
+            bool madeChange = false;
             if (ImGui.Checkbox("Use Height Map", ref Apply)) {}
             if (Apply)
             {
                 if (ImGui.SliderFloat("Height", ref _heightOfMap, 0, 200))
                 {
                     ShaderCode = GetCode();
+                    madeChange = true;
                 }
             }
+
+            return madeChange;
         }
 
         private string GetCode ()

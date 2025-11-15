@@ -92,6 +92,7 @@ namespace openGL2.Window
 
             ShaderElementBase usingTexture = new FragmentShaderElementUsingMaterial();
 
+            ShaderElementBase grassFrag = new ShaderElementFragmentGrassMaker();  
             ShaderElementBase GrassShader = new GeometryShaderTerrainGrassShader();
 
 
@@ -99,7 +100,7 @@ namespace openGL2.Window
 
             //porkipineShader = new Shader([position, shitShow, heightMat, overrideFragmentShader, simpleColor, vertexForVectorGeo, geometryHedgeHog,  endVertex, GrassShader]);
             
-            Shader grassShader = new Shader([position, /*overrideFragmentShader, simpleColor,*/ usingTexture, shitShow, heightMat,  vertexForVectorGeo,  endVertex, GrassShader, geometryHedgeHog]);
+            Shader grassShader = new Shader([position, overrideFragmentShader, grassFrag, shitShow, heightMat,  vertexForVectorGeo,  endVertex, GrassShader, geometryHedgeHog]);
 
 
 

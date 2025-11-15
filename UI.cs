@@ -128,6 +128,7 @@ namespace openGL2
                     if (ImGui.Checkbox("Use Blinn lighting", ref UsingBlinnLight))
                     {
                         _selectedShader.SetUsingBlinn(UsingBlinnLight);
+                        ShaderHandler.UpdateShaderScripts();
                     }
 
                
@@ -137,6 +138,7 @@ namespace openGL2
                     if (ImGui.Checkbox("Use Rim Light", ref UsingRimLight))
                     {
                         _selectedShader.UsingRimLight(UsingRimLight);
+                        ShaderHandler.UpdateShaderScripts();
                     }
 
                     ImGui.EndTabItem();
@@ -151,13 +153,19 @@ namespace openGL2
                     {
                         _displayLightColorPicker = true;
                     }
-                    if (_displayLightColorPicker) SetColor(
+                    if (_displayLightColorPicker) 
+                        
+                       {
+                        SetColor(
                         "Set light color",
                         _selectedShader.SetLightColor,
                         ref _displayLightColorPicker,
                         ref _lightColor,
                         ref LightColorTK
                         );
+                        ShaderHandler.UpdateShaderScripts();
+                    }
+                        
 
                     ImGui.EndTabItem();
                 }
@@ -181,7 +189,7 @@ namespace openGL2
                             {
                                 _selectedFigureIndex = n;
                                 _selectedFigure = ObjectHandler.GetFigures[figureNames[n]];
-
+                                ShaderHandler.UpdateShaderScripts();
 
                             }
 
@@ -439,11 +447,14 @@ namespace openGL2
                             {
                                 _selectedShaderIndex = n;
                                 _selectedShader = ShaderHandler.GetShaders()[shaderNames[n]];
+                                ShaderHandler.UpdateShaderScripts();
                             }
 
                             // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
                             if (is_selected)
+                            {
                                 ImGui.SetItemDefaultFocus();
+                            }
 
                         }
                         ImGui.EndCombo(); 
@@ -458,7 +469,7 @@ namespace openGL2
                         {
                             if (element.ShaderType == ShaderType.VertexShader && element is IHaveUI fragmentShaderUI)
                             {
-                                fragmentShaderUI.GetUI();
+                                if (fragmentShaderUI.GetUI()) ShaderHandler.UpdateShaderScripts(); ;
                             }
                         }
 
@@ -470,7 +481,10 @@ namespace openGL2
                     if (ImGui.BeginTabItem("Geometry Shader"))
                     {
                         
-                        ImGui.Checkbox("Use Geometry shader", ref _selectedShader.UsesGeometryShader);
+                       if ( ImGui.Checkbox("Use Geometry shader", ref _selectedShader.UsesGeometryShader)) 
+                            {
+                            ShaderHandler.UpdateShaderScripts();
+                            }
 
                         
                         if (_selectedShader.GetGeometryShaders().Count > 0)
@@ -493,6 +507,7 @@ namespace openGL2
 
 
                                         _selectedShader.SetActiveGeometryShader(geometryShaderNames[n]);
+                                        ShaderHandler.UpdateShaderScripts();
 
                                     }
 
@@ -532,7 +547,7 @@ namespace openGL2
                         {
                             if (element.ShaderType == ShaderType.FragmentShader && element is IHaveUI fragmentShaderUI)
                             {
-                                fragmentShaderUI.GetUI();
+                                if (fragmentShaderUI.GetUI()) ShaderHandler.UpdateShaderScripts();
                             }
                         }
 

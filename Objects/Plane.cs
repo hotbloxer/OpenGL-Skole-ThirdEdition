@@ -110,7 +110,7 @@ namespace openGL2.Objects
 
 
 
-        public void GetUI()
+        public bool GetUI()
         {
 
             if (ImGui.InputInt("width", ref _width))
@@ -132,6 +132,7 @@ namespace openGL2.Objects
             {
                 _updateGeometry = true;
             }
+            return true;
         }
     }
 }

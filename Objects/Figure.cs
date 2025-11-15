@@ -245,7 +245,7 @@ namespace openGL2.Objects
 
     public interface IHaveUI
     {
-        public void GetUI();
+        public bool GetUI();
     }
 
     public interface IGeometry 

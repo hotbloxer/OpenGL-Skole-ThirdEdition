@@ -31,9 +31,10 @@ namespace openGL2.Shaders.ShaderComAndElements
                 FragColor = color;";
         }
 
-        public void GetUI()
+        public bool GetUI()
         {
-            if (ImGui.Checkbox("Use Cell Shading", ref Apply)) { }
+            if (ImGui.Checkbox("Use Cell Shading", ref Apply)) { return true; }
+            return false;
 
         }
     }

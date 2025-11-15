@@ -6,6 +6,16 @@ namespace openGL2.Shaders
     {
         private static Dictionary<string, Shader> _shaders = new ();
         private static int runningNo = 0;
+     
+
+        public static void UpdateShaderScripts()
+        {
+            foreach (Shader shader in _shaders.Values)
+            {
+                shader.IsUpToDate = false;
+            }
+        }
+
         public static void AddShader (Shader shader, string name = "")
         {
             runningNo ++;

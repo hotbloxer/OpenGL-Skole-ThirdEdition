@@ -99,8 +99,8 @@ namespace openGL2.Shaders
 
 
 
-            UseShader();
-            //SetUpShaderParts();
+            UseShaderSetup();
+           
 
             GL.LinkProgram(ShaderProgramHandle);
 
@@ -116,8 +116,23 @@ namespace openGL2.Shaders
             ShaderHandler.AddShader(this);
         }
 
-
+        
+        public bool IsUpToDate = false;
         public void UseShader ()
+        {
+            if (!IsUpToDate)
+            {
+                UseShaderSetup();
+                IsUpToDate = true;
+            }
+
+            else
+            {
+                GL.UseProgram(ShaderProgramHandle);
+            }
+        }
+
+        public void UseShaderSetup ()
         {
             foreach (ShaderPart part in parts)
             {
@@ -336,12 +351,7 @@ namespace openGL2.Shaders
             //base color
             vec4 pixel = vec4({objectColor},1);
 
-            //vec4 tempPixel = vec4(texture(albedoTexture, uv));
-           //if (tempPixel.w == 0) discard;
 
-            //vec4 tempPixel = vec4(texture(albedoTexture, uv).rgb, 1.0);
-
-            
             if ({useTexture}) 
             {{pixel = vec4 (texture(albedoTexture, uv).rgba);
                 if (pixel.w < 0.1) discard;
@@ -481,14 +491,19 @@ namespace openGL2.Shaders
             }
         }
 
+        public bool ChangeShaderScript = true;
+
         private void UpdateShaderParts()
         {
+            if (!ChangeShaderScript) return;
+
             foreach (ShaderPart part in parts)
             {
                 GL.DetachShader(ShaderProgramHandle, part.shaderPartHandle);
                 GL.DeleteShader(part.shaderPartHandle);
             }
             SetUpShaderParts();
+            //ChangeShaderScript = false;
 
         }
 
