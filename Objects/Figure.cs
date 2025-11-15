@@ -12,7 +12,7 @@ namespace openGL2.Objects
 
 
         // Rendering
-        private Shader _shader;        
+        private Shader [] _shader;        
         private Matrix4 _modelSpace;
         public bool Render { get; set; } = true;
 
@@ -31,7 +31,7 @@ namespace openGL2.Objects
 
         private bool haveMaterial = true;
 
-        public Figure (Shader shader, IGeometry geometry, IHaveUI ui, bool haveMaterial = true)
+        public Figure (Shader[] shader, IGeometry geometry, IHaveUI ui, bool haveMaterial = true)
         {
             Geometry = geometry;
 
@@ -57,7 +57,7 @@ namespace openGL2.Objects
             ObjectHandler.AddFigureToScene(this);
         }
 
-        public Figure(Shader shader, IHaveVertices vertices, bool haveMaterial = true)
+        public Figure(Shader[] shader, IHaveVertices vertices, bool haveMaterial = true)
         {
             _shader = shader;
 
@@ -80,7 +80,7 @@ namespace openGL2.Objects
         }
 
 
-        public Figure(Shader shader, VertexInformation imageInfo)
+        public Figure(Shader[] shader, VertexInformation imageInfo)
         {
             _shader = shader;
 
@@ -137,13 +137,44 @@ namespace openGL2.Objects
         {
             if (!Render) return;
 
-            _shader.Use();
+            UpdateModelsSpace();
+
+            foreach (Shader shader in _shader)
+            {
+                shader.Use();
+
+
+
+                if (haveMaterial)
+                {
+                    shader.SetUsingTexture(UI.useTexture);
+                    if (Material.NormalTexture.MapIntensity <0.1f)
+                    {
+                        shader.SetUsingNormalMap(true);
+                    }
+                    else
+                    {
+                        shader.SetUsingNormalMap(false);
+                    }
+                }
+                shader.SetUVTest(UI.displaUVTesting);
+
+                shader.SetUsingBlinn(UI.UsingBlinnLight);
+                shader.UsingRimLight(UI.UsingRimLight);
+                shader.SetLightColor(UI.LightColorTK);
+                shader.SetObjectColor(UI.ObjectColorTK);
+                shader.UpdateUniformValuesForRender();
+
+                shader.UpdateUniforms();
+            
+            
 
             GL.BindVertexArray(VAOHandle);
 
-            if (Material != null)
+            if (Material != null && shader.usesMaterial)
             {
-                Material.ActivateMaterial(_shader);
+                Material.ActivateMaterial(shader);
+                
             }
             
             
@@ -153,27 +184,12 @@ namespace openGL2.Objects
                 {
                     _vertexInformation = Geometry.GetVertexInformation();
                     RebuildVBO();
-
                 }
             }
             
-            if (haveMaterial)  
-            {
-
-            }
-            _shader.SetUVTest(UI.displaUVTesting);
-            
-            _shader.SetUsingBlinn(UI.UsingBlinnLight);
-            _shader.UsingRimLight(UI.UsingRimLight);
-            _shader.SetLightColor(UI.LightColorTK);
-            _shader.SetObjectColor(UI.ObjectColorTK);
-            _shader.UpdateUniformValuesForRender();
-
-            _shader.UpdateUniforms();
-
-            
 
             GL.DrawArrays(PrimitiveType.Triangles, 0, _vertexInformation.Vertices.Length);
+            }
         }
 
 

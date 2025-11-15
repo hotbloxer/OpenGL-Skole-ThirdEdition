@@ -11,6 +11,7 @@ using OpenTK.Mathematics;
 using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Windowing.GraphicsLibraryFramework;
+using System.Diagnostics.Contracts;
 using System.Runtime.InteropServices;
 
 
@@ -26,7 +27,7 @@ namespace openGL2.Window
         private Plane plane;
 
         private Shader shader;
-        private Shader shaderVectors;
+        private Shader porkipineShader;
         private readonly Camera camera;
 
         Texture _albedo;
@@ -89,30 +90,25 @@ namespace openGL2.Window
 
             ShaderElementBase overrideFragmentShader = new FragmentShaderOverrider();
 
-            ShaderElementBase shitVertexTest = new ShitShowVertexShaderCopy();
+            ShaderElementBase usingTexture = new FragmentShaderElementUsingMaterial();
+
+            ShaderElementBase GrassShader = new GeometryShaderTerrainGrassShader();
 
 
-            //shaderVectors = new Shader([position, shitShow, cellShader, heightMat, vertexForVectorGeo, overrideFragmentShader, simpleColor, wire, subdivide, geometryHedgeHog, endVertex]);
-            //shader = new Shader([position, shitShow, heightMat, endVertex]);
-            shader = new Shader([position, shitShow, cellShader, heightMat, wire, subdivide, endVertex]);
+            shader = new Shader([position, shitShow, usingTexture, cellShader, heightMat, wire, subdivide, endVertex]);
 
+            //porkipineShader = new Shader([position, shitShow, heightMat, overrideFragmentShader, simpleColor, vertexForVectorGeo, geometryHedgeHog,  endVertex, GrassShader]);
+            
+            Shader grassShader = new Shader([position, /*overrideFragmentShader, simpleColor,*/ usingTexture, shitShow, heightMat,  vertexForVectorGeo,  endVertex, GrassShader, geometryHedgeHog]);
 
-
-            shaderVectors = new Shader([position, heightMat, endVertex, overrideFragmentShader, simpleColor, shitVertexTest, geometryHedgeHog]);
 
 
             plane = new Plane();
             Cube kasse = new Cube();
 
 
-
-            mainFigure = new(shader, plane, plane);
+            mainFigure = new([shader, grassShader], plane, plane);
           
-
-            Figure vectorFig = new Figure(shaderVectors, plane, plane);
-
-
-       
             mainFigure.Render = true;
 
             ImGui.StyleColorsDark();
@@ -163,12 +159,7 @@ namespace openGL2.Window
             skyBoxShader = new();
 
 
-            ShaderElementBase[] shaderElements = [
-                new PositionVertexShader(),
-                new ShitShowVertexShader(),
-                new CellShaderFragmentShader(),
             
-            ];
             
 
 
@@ -201,14 +192,20 @@ namespace openGL2.Window
             heightMover = new((HeightMapVertexShader)heightMat);
             if (false)
             {
+                ShaderElementBase[] shaderElements = [
+                new PositionVertexShader(),
+                new ShitShowVertexShader(),
+                new FragmentShaderElementUsingMaterial(),
+                new VertexShaderEnd()
 
+            ];
                 Shader noHeightMap = new Shader(shaderElements);
                 VertexInformation treeVi = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_trunk.obj");
                 VertexInformation leafsVi = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_branches.obj");
 
                 bool renderTree = true;
-                tree = new Figure(noHeightMap, treeVi);
-                leaves = new Figure(noHeightMap, leafsVi);
+                tree = new Figure([noHeightMap], treeVi);
+                leaves = new Figure([noHeightMap], leafsVi);
 
                 tree.Render = renderTree;
                 leaves.Render = renderTree;

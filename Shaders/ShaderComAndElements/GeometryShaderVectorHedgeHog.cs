@@ -1,4 +1,6 @@
-﻿using OpenTK.Graphics.OpenGL4;
+﻿using ImGuiNET;
+using openGL2.Objects;
+using OpenTK.Graphics.OpenGL4;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +9,15 @@ using System.Threading.Tasks;
 
 namespace openGL2.Shaders.ShaderComAndElements
 {
-    public class GeometryShaderVectorHedgeHog : ShaderElementBase
+    public class GeometryShaderVectorHedgeHog : ShaderElementBase, IHaveUI
     {
+
+        UniformFloatElement value;
+        float normSize = 0.3f;
         public GeometryShaderVectorHedgeHog() : base(ShaderType.GeometryShader)
         {
+
+
             Apply = true;
             layouts.Add(new LayoutTrianglesIn());
             layouts.Add(new LayoutTrianglesOut(LayoutTrianglesOut.GeometryShaderOutput.LINE_STRIP, 6));
@@ -18,13 +25,13 @@ namespace openGL2.Shaders.ShaderComAndElements
             layouts.Add(
                 new CustomLayout(
                     @" 
-                        //uniform float normSize;
-
                         in vec3 normal[]; 
                         out vec3 geoNormal;"
                     ));
 
-            uniforms.Add("normSize", new UniformFloatElement("normSize", 1f));
+            value = new UniformFloatElement("normSize", normSize);
+
+            uniforms.Add("normSize", value);
 
             functions.Add(
                 @$"
@@ -49,6 +56,15 @@ namespace openGL2.Shaders.ShaderComAndElements
             ";
 
 
+        }
+
+        public void GetUI()
+        {
+            if (ImGui.SliderFloat("Normal size", ref normSize, 0, 5) )
+            {
+                value.Value = normSize;
+            }
+   
         }
     }
 }

@@ -32,7 +32,7 @@ namespace openGL2.Objects
         {
             foreach (Figure figure in _figures.Values)
             {
-                figure.UpdateModelsSpace ();
+                
                 
                 figure.Draw();
             }

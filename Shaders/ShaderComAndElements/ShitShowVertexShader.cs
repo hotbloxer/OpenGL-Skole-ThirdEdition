@@ -45,6 +45,7 @@ namespace openGL2.Shaders.ShaderComAndElements
                 out vec3 vertexNormal;
                 out vec3 fragPosition;
                 out mat3 tbn;
+                out mat4 pvm;
 
                 out vec4 viewPosition;
 
@@ -56,12 +57,14 @@ namespace openGL2.Shaders.ShaderComAndElements
                 fragPosition = vec3(model * vec4({PositionVertexShader.Position}, 1.0));
                 uv = aUV;
 
+
                 viewPosition = projection * view * vec4({PositionVertexShader.Position}, 1.0);
 
                 mat4 modelview2 =   view * model;
                 mat3 normalMatrix = transpose(inverse(mat3( modelview2)));
                 mat4 modelViewInstance = modelView;
 
+                pvm = projectionViewModel;
 
                 tbn = mat3
                   (

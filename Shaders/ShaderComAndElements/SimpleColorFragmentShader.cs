@@ -22,6 +22,8 @@ namespace openGL2.Shaders.ShaderComAndElements
             layouts.Add(new CustomLayout("in vec3 geoNormal; \n"));
             layouts.Add(new CustomLayout("out vec4 FragColor; \n"));
 
+            
+
 
             ShaderCode = $@"
                 FragColor = vec4({fragColor.X},{fragColor.Y},{fragColor.Z},{fragColor.W} ); 

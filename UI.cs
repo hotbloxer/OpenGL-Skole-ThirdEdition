@@ -83,7 +83,7 @@ namespace openGL2
         Figure _selectedFigure;
         Shader _selectedShader;
 
-
+        float normalStrength = 0;
 
         public void RenderView ()
         {
@@ -392,7 +392,11 @@ namespace openGL2
                         ImGui.EndCombo();
                     }
 
-
+                    
+                    if (ImGui.SliderFloat("Texture intensity", ref normalStrength, 0, 1)) 
+                    {
+                        _selectedFigure.Material.NormalTexture.MapIntensity = normalStrength;
+                    }
 
                     if (ImGui.BeginCombo("Normal Filter", _selectedFigure.Material.NormalTexture.FilterType.ToString()))
                     {
@@ -449,24 +453,19 @@ namespace openGL2
 
                     if (ImGui.BeginTabItem("Vertex Shader"))
                     {
-                        ImGui.Text(_selectedShader.VertexShaderSource);
-                        ImGui.EndTabItem();
-                    }
 
-                    if (ImGui.BeginTabItem("Fragment Shader"))
-                    {
                         foreach (ShaderElementBase element in _selectedShader.ShaderScripts.Values)
                         {
-                            if (element.ShaderType == ShaderType.FragmentShader && element is IHaveUI fragmentShaderUI)
+                            if (element.ShaderType == ShaderType.VertexShader && element is IHaveUI fragmentShaderUI)
                             {
                                 fragmentShaderUI.GetUI();
                             }
                         }
-                       
 
-                        ImGui.Text(_selectedShader.FragmentShaderSource);
+                        ImGui.Text(_selectedShader.VertexShaderSource);
                         ImGui.EndTabItem();
                     }
+
 
                     if (ImGui.BeginTabItem("Geometry Shader"))
                     {
@@ -527,7 +526,20 @@ namespace openGL2
                         ImGui.EndTabItem();
                     }
 
+                    if (ImGui.BeginTabItem("Fragment Shader"))
+                    {
+                        foreach (ShaderElementBase element in _selectedShader.ShaderScripts.Values)
+                        {
+                            if (element.ShaderType == ShaderType.FragmentShader && element is IHaveUI fragmentShaderUI)
+                            {
+                                fragmentShaderUI.GetUI();
+                            }
+                        }
 
+
+                        ImGui.Text(_selectedShader.FragmentShaderSource);
+                        ImGui.EndTabItem();
+                    }
 
                     ImGui.EndTabItem();
 

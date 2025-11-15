@@ -46,6 +46,7 @@ namespace openGL2.Shaders
         public Dictionary<uint, ShaderElementBase> geometryShaders = new();
 
         public bool UsesGeometryShader = false;
+        public bool usesMaterial = false;
 
         public Shader (ShaderElementBase[] shaderElements)
         {
@@ -61,9 +62,12 @@ namespace openGL2.Shaders
                     geometryShaders.Add(element.id, element);
        
                 }
-
-
-
+                 
+                if (element is IUseMaterial)
+                {
+                    usesMaterial = true;
+                }
+      
             }
        
             if (geometryShaders.Count > 0)
@@ -146,6 +150,7 @@ namespace openGL2.Shaders
         }
         public void UpdateUniforms ()
         {
+            
             sc.SetUniforms(UsesGeometryShader);
         }
         
@@ -280,6 +285,7 @@ namespace openGL2.Shaders
             uniform bool {useTexture};
             uniform bool {useBlinn};
             uniform bool {usingRimLight};
+            uniform bool {useNormalMap};
             
             uniform vec3 {lightColor};
             uniform vec3 {objectColor};
@@ -299,12 +305,25 @@ namespace openGL2.Shaders
             if ({useTexture}) 
 
             {{
-            //hent normal i range 0 - 1
-            normal = texture(normalTexture, uv).rgb;
-            // lav den til -1 til 1
-            normal = normalize(normal * 2.0 - 1.0); 
 
-             normal =  normalize (tbn * normal);
+
+                if ({useNormalMap}) 
+                {{
+                    normal = vertexNormal;
+                }}
+
+                else 
+                {{
+                    //hent normal i range 0 - 1            
+                    normal = texture(normalTexture, uv).rgb;
+                    // lav den til -1 til 1
+                    normal = normalize(normal * 2.0 - 1.0); 
+
+                     normal =  normalize (tbn * normal);
+
+                }}
+            
+
             }} 
             else 
             {{
@@ -444,6 +463,7 @@ namespace openGL2.Shaders
                     continue;
                 }
 
+
                 part.shaderPartHandle = GL.CreateShader(part.type);
 
                 GL.ShaderSource(part.shaderPartHandle, part.shaderSource);
@@ -497,6 +517,12 @@ namespace openGL2.Shaders
         public void SetUsingTexture(bool state)
         {
             SetUniformBool(useTexture, state);
+        }
+
+        readonly string useNormalMap = "useNormalMap";
+        public void SetUsingNormalMap (bool state)
+        {
+            SetUniformBool(useNormalMap, state);
         }
 
         readonly string useBlinn = "useBlinn";
@@ -663,6 +689,19 @@ namespace openGL2.Shaders
                 GL.DetachShader(ShaderProgramHandle, part.shaderPartHandle);
                 GL.DeleteShader(part.shaderPartHandle);
             }
+        }
+
+        public Shader Dublicate()
+        {
+            ShaderElementBase[] elements = new ShaderElementBase[ShaderScripts.Count];
+            int i = 0;
+            foreach (ShaderElementBase element in ShaderScripts.Values)
+            {
+                elements[i] = element;
+                i++;
+            }
+            Shader newShader = new Shader(elements);
+            return newShader;
         }
     }
 
