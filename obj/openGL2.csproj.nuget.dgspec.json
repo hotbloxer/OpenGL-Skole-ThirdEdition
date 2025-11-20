@@ -66,6 +66,10 @@
               "target": "Package",
               "version": "[4.0.2, )"
             },
+            "PlantUml.Net": {
+              "target": "Package",
+              "version": "[1.4.80, )"
+            },
             "xunit.extensibility.core": {
               "target": "Package",
               "version": "[2.5.3, )"

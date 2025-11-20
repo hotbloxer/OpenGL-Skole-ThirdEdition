@@ -15,13 +15,15 @@ namespace openGL2.Shaders.ShaderComAndElements
         {
             Apply = true;
 
-            layouts.Add(new CustomLayout("out vec3 normal; \n"));
+            layouts.Clear();
+
+            layouts.Add(new CustomLayout("out vec3 normalForGeoDir; \n"));
 
             //TODO spørg søren om hvad den her skal gøre?
             ShaderCode = $@"   
                 //mat3 nMat = mat3(transpose(inverse(projection * modelView)));
                 //normal = normalize(vec3(vec4(nMat * aNormal, 0.0)));
-                  normal =  aNormal;
+                  normalForGeoDir =  aNormal;
                 ";
 
 

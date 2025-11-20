@@ -306,7 +306,7 @@ namespace openGL2.Shaders
             uniform vec3 {objectColor};
 
         
-            vec3 lightPosition = vec3 (0, 3, 1);
+            vec3 lightPosition = vec3 (0, 10, 10);
             vec3 rimColor = vec3 (1, 1, 1);
           
             float ambientStrength = 0.1f;
@@ -491,11 +491,11 @@ namespace openGL2.Shaders
             }
         }
 
-        public bool ChangeShaderScript = true;
+     
 
         private void UpdateShaderParts()
         {
-            if (!ChangeShaderScript) return;
+         
 
             foreach (ShaderPart part in parts)
             {
@@ -503,7 +503,7 @@ namespace openGL2.Shaders
                 GL.DeleteShader(part.shaderPartHandle);
             }
             SetUpShaderParts();
-            //ChangeShaderScript = false;
+         
 
         }
 

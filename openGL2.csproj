@@ -12,6 +12,7 @@
     <PackageReference Include="ClickableTransparentOverlay" Version="9.1.0" />
     <PackageReference Include="ImGui.NET" Version="1.91.6.1" />
     <PackageReference Include="OpenTK" Version="4.9.4" />
+    <PackageReference Include="PlantUml.Net" Version="1.4.80" />
     <PackageReference Include="xunit.extensibility.core" Version="2.5.3" />
   </ItemGroup>
 

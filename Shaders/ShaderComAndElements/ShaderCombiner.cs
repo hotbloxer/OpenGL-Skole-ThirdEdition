@@ -15,6 +15,7 @@ namespace openGL2.Shaders.ShaderComAndElements
         public List<ShaderElementBase> elements = new List<ShaderElementBase>();
         private Shader _shader;
 
+
         public ShaderCombiner(Shader shader)
         {
             _shader = shader;

@@ -13,7 +13,7 @@ namespace openGL2.Shaders.ShaderComAndElements
         public ShaderElementFragmentGrassMaker() : base(ShaderType.FragmentShader)
         {
             Apply = true;
-            Texture t = new Texture(@"..\..\..\Textures\TextureImages\M_Branch.001_baseColor.tga", "grasss");
+            Texture t = new Texture(@"..\..\..\Textures\TextureImages\grass (1).tga", "grasss");
             uniforms.Add("grasUni", new Uniform2DSamplerElement("grass", 0, t));
 
             layouts.Add(new CustomLayout(

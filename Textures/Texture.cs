@@ -18,6 +18,7 @@ namespace openGL2.Textures
     {
         public static Dictionary<string, Texture> AllTextures = [];
 
+
         int _textureID; 
         public int ID { get => _textureID;}
 
@@ -61,7 +62,13 @@ namespace openGL2.Textures
             ImageInfo = imageInfo;
         }
 
-
+        public static void RemoveAllTextures ()
+        {
+            foreach (Texture tex in AllTextures.Values)
+            {
+                tex.Dispose();
+            }
+        }
         protected virtual int Create(string filePath)
         {
             if (!ImageParser.ParseImage(filePath, ImageParser.ImageType.TGA, out ImageInformation imageInfo, out byte[] pixels))

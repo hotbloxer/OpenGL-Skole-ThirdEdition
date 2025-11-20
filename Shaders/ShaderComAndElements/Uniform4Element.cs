@@ -4,18 +4,18 @@ using OpenTK.Mathematics;
 
 namespace openGL2.Shaders.ShaderComAndElements
 {
-    public class Uniform4Element : UniformElement
+    public class Uniform3Element : UniformElement
     {
       
-        private Matrix4 _value;
-        public Matrix4 Value {get => _value; set => UpdateValue(value); }
-        public Uniform4Element(string name, Matrix4 value) : base(name, "mat4")
+        private Vector3 _value;
+        public Vector3 Value {get => _value; set => UpdateValue(value); }
+        public Uniform3Element(string name, Vector3 value) : base(name, "vec3")
         {
             Value = value;
 
         }
 
-        private void UpdateValue(Matrix4 value)
+        public void UpdateValue(Vector3 value)
         {
             _value = value;
         }
@@ -27,7 +27,7 @@ namespace openGL2.Shaders.ShaderComAndElements
             if (location == -1)
                 throw new Exception($"Uniform '{Name}' not found.");
 
-            GL.UniformMatrix4(location, false, ref _value);
+            GL.Uniform3(location, ref _value);
         }
     }
 
@@ -44,7 +44,7 @@ namespace openGL2.Shaders.ShaderComAndElements
 
         }
 
-        private void UpdateValue(float value)
+        public void UpdateValue(float value)
         {
             _value = value;
         }

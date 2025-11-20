@@ -68,13 +68,6 @@ namespace openGL2.Objects.Terrain
                 previousHeight = rawHeight;
                 UpdatePositions(difference);
             }
-            
-
-
-            
-       
-
-
         }
 
         private void UpdatePositions (float difference)
@@ -91,11 +84,7 @@ namespace openGL2.Objects.Terrain
                 Matrix4 translation = Matrix4.CreateTranslation(new(0.0f, height, 0.0f));
 
                 f.TranslateFigure(translation);
-
-
             }
         }
-
-
     }
 }

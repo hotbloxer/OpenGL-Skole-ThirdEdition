@@ -52,5 +52,14 @@ namespace openGL2.Shaders
                 shader.UseShader();
             }
         }
+
+
+        public static void RemoveAllShaders()
+        {
+            foreach (Shader shader in _shaders.Values)
+            {
+                RemoveShader(shader);
+            }
+        }
     }
 }

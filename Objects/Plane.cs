@@ -108,8 +108,6 @@ namespace openGL2.Objects
 
 
 
-
-
         public bool GetUI()
         {
 

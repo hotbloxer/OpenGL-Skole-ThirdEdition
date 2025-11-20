@@ -2,6 +2,7 @@
 using Dear_ImGui_Sample.Backends;
 using ImGuiNET;
 using openGL2.Objects;
+using openGL2.Objects.Scenes;
 using openGL2.Objects.Terrain;
 using openGL2.Shaders;
 using openGL2.Shaders.ShaderComAndElements;
@@ -17,47 +18,28 @@ using System.Runtime.InteropServices;
 
 namespace openGL2.Window
 {
-    public class Window : GameWindow
+    public class Window : GameWindow, IHaveUI
     {
-        private  Figure mainFigure;
-        private Figure tree;
-        private Figure leaves;
-
-
-        private Plane plane;
 
         private Shader shader;
-        private Shader porkipineShader;
-        private readonly Camera camera;
-
-        Texture _albedo;
-        Texture _lightMap;
-        Texture _normalMap;
-        Texture _specularMap;
+        private Shader backgroundShader;
+        private Camera camera;
 
         UI ui;
 
         SkyBoxShader skyBoxShader;
-        MoveHeightToHeightMap heightMover;
 
-
-        ShaderElementBase position;
-        ShaderElementBase shitShow; 
-        ShaderElementBase cellShader;        
-        ShaderElementBase heightMat;
-
-        ShaderElementBase simpleColor;
-
-
+        Scene _defaultScene;
+        Scene _grassScene;
+        public enum Scenes { DEFAULT, GRASS }
+        Scene CurrentScene;
 
         // der er en dedikeret VAO til de forskellige VAO man får brug for
 
         public Window() :
             base(GameWindowSettings.Default, new NativeWindowSettings() { ClientSize = new Vector2i(1600, 900), APIVersion = new Version(3, 3) })
         {
-
-            camera = new Camera(this);
-            camera.Position = new Vector3(0.0f, 1.0f, 1.0f);
+  
         }
 
 
@@ -65,6 +47,13 @@ namespace openGL2.Window
         {
             base.OnLoad();
 
+            GL.DepthMask(true);
+
+            camera = new(this)
+            {
+                Position = new(0.0f, 1.0f, 0.0f)
+            };
+            
             ImGui.CreateContext();
             ImGuiIOPtr io = ImGui.GetIO();
             io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard;
@@ -72,200 +61,23 @@ namespace openGL2.Window
             io.ConfigFlags |= ImGuiConfigFlags.DockingEnable;
             io.ConfigFlags |= ImGuiConfigFlags.ViewportsEnable;
 
-
-            position = new PositionVertexShader(); 
-            shitShow = new ShitShowVertexShader();
-            cellShader = new CellShaderFragmentShader();
-            heightMat = new HeightMapVertexShader();
-            simpleColor = new SimpleColorFragmentShader();
-
-            ShaderElementBase wire = new GeometryShaderWire();
-            ShaderElementBase subdivide = new GeometryShaderSubdivide();
-
-
-            ShaderElementBase vertexForVectorGeo = new VertexShaderForGeometryVectorDirection();
-            ShaderElementBase geometryHedgeHog = new GeometryShaderVectorHedgeHog();
-
-            ShaderElementBase endVertex = new VertexShaderEnd();
-
-            ShaderElementBase overrideFragmentShader = new FragmentShaderOverrider();
-
-            ShaderElementBase usingTexture = new FragmentShaderElementUsingMaterial();
-
-            ShaderElementBase grassFrag = new ShaderElementFragmentGrassMaker();  
-            ShaderElementBase GrassShader = new GeometryShaderTerrainGrassShader();
-
-
-            shader = new Shader([position, shitShow, usingTexture, cellShader, heightMat, wire, subdivide, endVertex]);
-
-            //porkipineShader = new Shader([position, shitShow, heightMat, overrideFragmentShader, simpleColor, vertexForVectorGeo, geometryHedgeHog,  endVertex, GrassShader]);
-            
-            Shader grassShader = new Shader([position, overrideFragmentShader, grassFrag, shitShow, heightMat,  vertexForVectorGeo,  endVertex, GrassShader, geometryHedgeHog]);
-
-
-
-            plane = new Plane();
-            Cube kasse = new Cube();
-
-
-            mainFigure = new([shader, grassShader], plane, plane);
-          
-            mainFigure.Render = true;
-
-            ImGui.StyleColorsDark();
-
-            ImGuiStylePtr style = ImGui.GetStyle();
-            if ((io.ConfigFlags & ImGuiConfigFlags.ViewportsEnable) != 0)
-            {
-                style.WindowRounding = 0.0f;
-                style.Colors[(int)ImGuiCol.WindowBg].W = 1.0f;
-            }
-
-
-            GL.ClearColor(new Color4(0.3f, 0.4f, 0.2f, 1));
-
-            
-
-            //REFA de her skal ligge på objecktet i stedet for her
-      
-
-            GL.Enable(EnableCap.DepthTest);
-
-            // load all default textures
-            new Texture(@"..\..\..\Textures\TextureImages\rock.tga", "rock");
-            new Texture(@"..\..\..\Textures\TextureImages\Rainbow.tga", "rain");
-        
-            Texture Chekered = GeneratedTextures.GetGeneratedTexture(GeneratedTextures.GeneratedTexures.CHECKERED);
-            new Texture(@"..\..\..\Textures\TextureImages\bulletNormal.tga", "bullet");
-            new Texture(@"..\..\..\Textures\TextureImages\testTex.tga", "testTex");
-            new Texture(@"..\..\..\Textures\TextureImages\brickNormal.tga", "normalBrick");
-            new Texture(@"..\..\..\Textures\TextureImages\brickAlbedo.tga", "albedo");
-            new Texture(@"..\..\..\Textures\TextureImages\LightmapTest.tga", "lightMap");
-            new Texture(@"..\..\..\Textures\TextureImages\brickLight.tga", "specular");
-            new Texture(@"..\..\..\Textures\TextureImages\teapot_normalmap.tga", "normal");
-            Texture HeightMap= new Texture(@"..\..\..\Textures\TextureImages\teapot_displacementmap.tga", "heightMap");
-
-            _albedo =      new Texture(@"..\..\..\Textures\TextureImages\mountain_albedomap.tga", "albedomountain");
-            _lightMap =    new Texture(@"..\..\..\Textures\TextureImages\LightmapTest.tga", "lightMap2");
-            _specularMap = new Texture(@"..\..\..\Textures\TextureImages\brickLight.tga", "specular2");
-            _normalMap =   new Texture(@"..\..\..\Textures\TextureImages\mountain_normalmap.tga", "normalMountain");
-
-
-            mainFigure.Material.Albedo = _albedo;
-            mainFigure.Material.LightMap = _lightMap;
-            mainFigure.Material.SpecularMap = _specularMap;
-            mainFigure.Material.NormalTexture = _normalMap;
-
-
+            // use skybox
             skyBoxShader = new();
+            UI.UseEnvironment = true;
 
+            _defaultScene = new DefaultScene();
+            _grassScene = new GrassScene();
 
-            
-            
-
-
-
-
-            kasse = new Cube();
-            //Figure one = new Figure(noHeightMap, kasse);
-            //Figure two = new Figure(noHeightMap, kasse);
-
-            //float[] uvPlacements = [0.5f,0.5f, 0.75f, 0.75f];
-            //one.TranslateFigure(Matrix4.CreateScale(0.01f));
-            //one.TranslateFigure(Matrix4.CreateTranslation(new Vector3(uvPlacements[0], 0, uvPlacements[1])));
-
-            //two.TranslateFigure(Matrix4.CreateScale(0.01f));
-            //two.TranslateFigure(Matrix4.CreateTranslation(new Vector3(uvPlacements[2], 0, uvPlacements[3])));
-
-
-
-
-
-
+            CurrentScene = _grassScene;
+            CurrentScene.Load();
 
             
-
-
-
-
-
-            //VertexInformation combinedTree = new VertexInformation([tree, leafs]);
-            heightMover = new((HeightMapVertexShader)heightMat);
-            if (false)
-            {
-                ShaderElementBase[] shaderElements = [
-                new PositionVertexShader(),
-                new ShitShowVertexShader(),
-                new FragmentShaderElementUsingMaterial(),
-                new VertexShaderEnd()
-
-            ];
-                Shader noHeightMap = new Shader(shaderElements);
-                VertexInformation treeVi = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_trunk.obj");
-                VertexInformation leafsVi = OBJParser.LoadOBJ("../../../Objects/OBJfiler/spruce_tree_branches.obj");
-
-                bool renderTree = true;
-                tree = new Figure([noHeightMap], treeVi);
-                leaves = new Figure([noHeightMap], leafsVi);
-
-                tree.Render = renderTree;
-                leaves.Render = renderTree;
-
-                Texture barkAlbedo = new Texture(@"../../../Textures/TextureImages/M_Bark.001_baseColor.tga", "bark color");
-                Texture barkNormal = new Texture(@"../../../Textures/TextureImages/M_Bark.001_normal.tga", "bark normal");
-                Texture leavsAlbedo = new Texture(@"../../../Textures/TextureImages/M_Branch.001_baseColor.tga", "leavs color");
-                Texture bleavesNormal = new Texture(@"../../../Textures/TextureImages/M_Branch.001_normal.tga", "leaves normal");
-
-                tree.Material.Albedo = barkAlbedo;
-                tree.Material.NormalTexture = barkNormal;
-                leaves.Material.Albedo = leavsAlbedo;
-                // leaves.Material.NormalTexture = bleavesNormal;
-
-                tree.Render = false;
-                leaves.Render = false;
-
-
-                int repeats = 10;
-                Figure[] newtrees = new Figure[repeats * repeats];
-                Figure[] newBranches = new Figure[repeats * repeats];
-
-
-
-                float[] newUvs = new float[repeats * repeats * 2];
-
-                float uvSpread = (float)1 / repeats;
-                for (int i = 0; i < repeats; i++)
-                {
-                    for (int j = 0; j < repeats; j++)
-                    {
-                        int Index = i * repeats + j;
-                        int uvIndex = Index * 2;
-
-                        newUvs[uvIndex] = i * uvSpread;
-                        newUvs[uvIndex + 1] = j * uvSpread;
-
-                        newtrees[Index] = tree.GetDublicate();
-                        newBranches[Index] = leaves.GetDublicate();
-                        newtrees[Index].Render = true;
-                        newBranches[Index].Render = true;
-
-                        newtrees[Index].TranslateFigure(Matrix4.CreateScale(0.005f));
-                        newtrees[Index].TranslateFigure(Matrix4.CreateTranslation(new Vector3(newUvs[uvIndex], 0, newUvs[uvIndex + 1])));
-
-                        newBranches[Index].TranslateFigure(Matrix4.CreateScale(0.005f));
-                        newBranches[Index].TranslateFigure(Matrix4.CreateTranslation(new Vector3(newUvs[uvIndex], 0, newUvs[uvIndex + 1])));
-                       
-                    }
-                }
-
-                heightMover.AddFiguresAndUVs(newtrees, newUvs);
-                heightMover.AddFiguresAndUVs(newBranches, newUvs);
-            }
-
-
 
             camera.UpdateView();
+
             ui = new();
+            ui.windowUI = this;
+
             ImguiImplOpenTK4.Init(this);
             ImguiImplOpenGL3.Init();
 
@@ -273,6 +85,7 @@ namespace openGL2.Window
             // alle winduer sættes til at være transparente og herefter sat til deres farve i UI
             // dette er fordi alt er fucked! og jeg ikke kan få render rækkefølgen til at passe ordentligt!
             ImGui.GetStyle().Colors[(int)ImGuiCol.WindowBg] = (System.Numerics.Vector4)new Vector4(0, 0, 0, 0);
+
         }
 
         protected override void OnRenderFrame(FrameEventArgs args)
@@ -294,7 +107,7 @@ namespace openGL2.Window
             ObjectHandler.DrawAllFiguresInScene();
 
 
-            heightMover.MoveFiguresToHeight();
+            CurrentScene.OnRenderFrame();
 
             ImguiImplOpenGL3.NewFrame();
             ImguiImplOpenTK4.NewFrame();
@@ -364,11 +177,45 @@ namespace openGL2.Window
             //GL.DeleteVertexArray(VAO);
 
             // TODO delete ALL SHADERS
-            GL.DeleteProgram(shader.ShaderProgramHandle);
+            //GL.DeleteProgram(shader.ShaderProgramHandle);
 
             base.OnUnload();
         }
 
+        
+        public void ChangeSceneTo (Scenes scene)
+        {
+            CurrentScene.CloseScene();
+            switch (scene)
+            {
+                case Scenes.DEFAULT:
+                    CurrentScene = _defaultScene;
+                    break;
+
+                case Scenes.GRASS:
+                    CurrentScene = _grassScene;
+                    break;
+            }
+
+            CurrentScene.OpenScene();
+
+        }
+
+        public bool GetUI()
+        {
+            if (ImGui.Button("Default Scene")) 
+            {
+                ChangeSceneTo(Scenes.DEFAULT);
+            }
+
+
+            if (ImGui.Button("Grass Scene"))
+            {
+                ChangeSceneTo(Scenes.GRASS);
+            }
+
+            return true;
+        }
 
 
         public readonly static DebugProc DebugProcCallback = Window_DebugProc;
@@ -419,6 +266,7 @@ namespace openGL2.Window
                 }
             }
         }
+
 
     }
 }

@@ -12,7 +12,7 @@ namespace openGL2.Objects
 
 
         // Rendering
-        private Shader [] _shader;        
+        public Shader [] Shaders;        
         private Matrix4 _modelSpace;
         public bool Render { get; set; } = true;
 
@@ -37,7 +37,7 @@ namespace openGL2.Objects
 
             HaveUI = ui;
 
-            _shader = shader;
+            Shaders = shader;
 
             _vertexInformation = geometry.GetVertexInformation();
 
@@ -59,7 +59,7 @@ namespace openGL2.Objects
 
         public Figure(Shader[] shader, IHaveVertices vertices, bool haveMaterial = true)
         {
-            _shader = shader;
+            Shaders = shader;
 
             _vertexInformation = vertices.GetVertexInformation();
 
@@ -80,9 +80,11 @@ namespace openGL2.Objects
         }
 
 
-        public Figure(Shader[] shader, VertexInformation imageInfo)
+        public Figure(Shader[] shader, VertexInformation imageInfo, bool haveMaterial = true)
         {
-            _shader = shader;
+            this.haveMaterial = haveMaterial;
+
+            Shaders = shader;
 
             _vertexInformation = imageInfo;
 
@@ -93,7 +95,11 @@ namespace openGL2.Objects
             _modelSpace = Matrix4.Identity;
             Name = ObjectNamer();
 
-            Material = new Material();
+            if (haveMaterial)
+            {
+                Material = new Material();
+            }
+            
 
             ObjectHandler.AddFigureToScene(this);
         }
@@ -139,7 +145,7 @@ namespace openGL2.Objects
 
             UpdateModelsSpace();
 
-            foreach (Shader shader in _shader)
+            foreach (Shader shader in Shaders)
             {
                 shader.Use();
 
@@ -235,7 +241,7 @@ namespace openGL2.Objects
 
         public Figure GetDublicate ()
         {
-            Figure newFigure = new Figure(_shader, _vertexInformation);
+            Figure newFigure = new Figure(Shaders, _vertexInformation);
             newFigure.Material = this.Material;
             newFigure.SetModelSpace(this._modelSpace);
             return newFigure;

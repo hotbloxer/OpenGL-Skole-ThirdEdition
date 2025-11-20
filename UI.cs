@@ -43,6 +43,7 @@ namespace openGL2
         // texture sampling
         string[] _filterTypes = Enum.GetNames(typeof(TextureFilterTypes));
 
+        public IHaveUI windowUI { get; set; }
 
         //REFA
         // disse styrer texturene og deres filtre
@@ -100,6 +101,10 @@ namespace openGL2
         public void Ui()
         {
 
+            ImGui.ShowDemoWindow();
+
+
+
             string[] _selectableTextures = Texture.AllTextures.Keys.ToArray();
 
 
@@ -109,16 +114,45 @@ namespace openGL2
             ImGui.Begin("Properties");
 
 
+            #region Select figure and geometry settings
+
+            _selectedShader ??= ShaderHandler.GetShaders().FirstOrDefault().Value;
+
+            string[] figureNames = ObjectHandler.GetFigures.Keys.ToArray();
+            if (ImGui.BeginCombo("Shader", figureNames[_selectedFigureIndex]))
+            {
+                for (int n = 0; n < figureNames.Length; n++)
+                {
+                    bool is_selected = _selectedFigureIndex == n;
+                    if (ImGui.Selectable(figureNames[n], is_selected))
+                    {
+                        _selectedFigureIndex = n;
+                        _selectedFigure = ObjectHandler.GetFigures[figureNames[n]];
+
+                        ShaderHandler.UpdateShaderScripts();
+                    }
+
+                    // Set the initial focus when opening the combo (scrolling + keyboard navigation focus)
+                    if (is_selected)
+                    {
+                        ImGui.SetItemDefaultFocus();
+                    }
+
+                }
+                ImGui.EndCombo();
+            }
+
+
+
+
             _selectedFigure ??= ObjectHandler.GetFigures.FirstOrDefault().Value;
 
-            if (_selectedFigure.HaveUI != null)
+            if (_selectedFigure?.HaveUI != null)
             {
                 _selectedFigure.HaveUI.GetUI();
             }
 
-            _selectedShader ??= ShaderHandler.GetShaders().FirstOrDefault().Value;
-
-
+            #endregion
 
             if (ImGui.BeginTabBar("Tabs"))
             {
@@ -165,7 +199,15 @@ namespace openGL2
                         );
                         ShaderHandler.UpdateShaderScripts();
                     }
-                        
+
+
+                    if (windowUI != null)
+                    {
+                        windowUI.GetUI();
+                    }
+
+               
+
 
                     ImGui.EndTabItem();
                 }
@@ -179,7 +221,7 @@ namespace openGL2
                     // selectable textuers tildeles også hvis den ikke allerede er sat
                     if (_selectedFigure == null) _selectedFigure = ObjectHandler.GetFigures.FirstOrDefault().Value;
 
-                    string[] figureNames = ObjectHandler.GetFigures.Keys.ToArray();
+                    figureNames = ObjectHandler.GetFigures.Keys.ToArray();
                     if (ImGui.BeginCombo("Figur", figureNames[_selectedFigureIndex]))
                     {
                         for (int n = 0; n < figureNames.Length; n++)
@@ -437,7 +479,16 @@ namespace openGL2
 
                 if (ImGui.BeginTabItem("Shaders"))
                 {
-                    string[] shaderNames = ShaderHandler.GetShaders().Keys.ToArray();
+                    Shader[] shadersInFigure = _selectedFigure.Shaders;
+                    string[] shaderNames = new string[shadersInFigure.Length];
+                    int nameInt = 0;
+                    foreach (Shader shad in shadersInFigure)
+                    {
+                        shaderNames[nameInt] = $"{nameInt++}";
+                    }
+
+                    if (_selectedShaderIndex > shadersInFigure.Length) _selectedShaderIndex = 0;
+
                     if (ImGui.BeginCombo("Shader", shaderNames[_selectedShaderIndex]))
                     {
                         for (int n = 0; n < shaderNames.Length; n++)
@@ -446,7 +497,7 @@ namespace openGL2
                             if (ImGui.Selectable(shaderNames[n], is_selected))
                             {
                                 _selectedShaderIndex = n;
-                                _selectedShader = ShaderHandler.GetShaders()[shaderNames[n]];
+                                _selectedShader = shadersInFigure[n];
                                 ShaderHandler.UpdateShaderScripts();
                             }
 
@@ -457,13 +508,17 @@ namespace openGL2
                             }
 
                         }
-                        ImGui.EndCombo(); 
+                        ImGui.EndCombo();
                     }
+
 
                     ImGui.BeginTabBar("ShaderTabs");
 
                     if (ImGui.BeginTabItem("Vertex Shader"))
                     {
+
+
+
 
                         foreach (ShaderElementBase element in _selectedShader.ShaderScripts.Values)
                         {

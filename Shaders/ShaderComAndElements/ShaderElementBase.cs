@@ -17,7 +17,7 @@ namespace openGL2.Shaders.ShaderComAndElements
         public string Layouts { get => LayoutToString(layouts); }
         public string ShaderCode = "";
         public readonly ShaderType ShaderType;
-        public bool Apply;
+        public bool Apply = true;
         public readonly uint id;
         private static uint idCounter = 0;
 

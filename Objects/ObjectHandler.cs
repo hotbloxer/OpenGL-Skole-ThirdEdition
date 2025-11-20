@@ -16,7 +16,13 @@ namespace openGL2.Objects
         private static int _objectNameCounter = 0;
         public static int ObjectnameCounter { get => _objectNameCounter++; }
 
-
+        public static void RemoveAllObjects()
+        {
+            foreach (Figure fig in _figures.Values)
+            {
+                RemoveFigureFromScene(fig);
+            }
+        }
         public static void AddFigureToScene (Figure figure)
         {
             _figures.Add (figure.Name, figure);

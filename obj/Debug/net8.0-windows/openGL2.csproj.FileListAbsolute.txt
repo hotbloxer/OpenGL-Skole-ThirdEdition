@@ -196,3 +196,4 @@ C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-w
 C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-windows\openGL2.pdb
 C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-windows\openGL2.genruntimeconfig.cache
 C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-windows\ref\openGL2.dll
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\bin\Debug\net8.0-windows\PlantUml.Net.dll

@@ -25,8 +25,8 @@ namespace openGL2.Shaders.ShaderComAndElements
             layouts.Add(
                 new CustomLayout(
                     @" 
-                        in vec3 normal[]; 
-                        out vec3 geoNormal;"
+                        in vec3 normalForGeoDir[]; 
+                       "
                     ));
 
             value = new UniformFloatElement("normSize", normSize);
@@ -38,11 +38,11 @@ namespace openGL2.Shaders.ShaderComAndElements
                 void GenerateLine(int i)
                 {{  
                     gl_Position = gl_in[i].gl_Position; 
-                    geoNormal = normal[i];
+                    
                     EmitVertex();
 
-                    gl_Position = (gl_in[i].gl_Position + vec4(normal[i], 0.0) * normSize); 
-                    geoNormal = normal[i];
+                    gl_Position = (gl_in[i].gl_Position + vec4(normalForGeoDir[i], 0.0) * normSize); 
+                   
                     EmitVertex();
 
                     EndPrimitive(); }}
