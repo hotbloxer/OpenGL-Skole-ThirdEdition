@@ -3,24 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\animatedgrass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\animatedgrass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\scenes\\editverticesscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\scenes\\editverticesscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\uniform4element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\uniform4element.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\shaderelementfragmentgrassmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\shaderelementfragmentgrassmaker.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:ui.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\scenes\\grassscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\scenes\\grassscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\tools\\vetexselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:tools\\vetexselector.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\figure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
@@ -31,56 +19,32 @@
       "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:window\\window.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\skyboxshader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\skyboxshader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\fragmentalbedo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\fragmentalbedo.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\scenes\\defaultscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\scenes\\defaultscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\vertexinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\vertexinformation.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\shaderelementbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\shaderelementbase.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\colorrendervertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\colorrendervertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\shadercombiner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\shadercombiner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\colorrenderfrag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\colorrenderfrag.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\uniform2dsamplerelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\uniform2dsamplerelement.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\vertexarrayobjecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\vertexarrayobjecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\shitshowvertexshader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\shitshowvertexshader.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\scenes\\grassscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\scenes\\grassscene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\textures\\texture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:textures\\texture.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\scenes\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\scenes\\scene.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shaderhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shaderhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\objecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\objecthandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\shaders\\shadercomandelements\\geometryshadervectorhedgehog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:shaders\\shadercomandelements\\geometryshadervectorhedgehog.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|c:\\users\\p-hou\\source\\repos\\opengl2\\opengl-skole-thirdedition\\objects\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34B16882-1C92-4C2F-9F57-F6108763F3A4}|openGL2.csproj|solutionrelative:objects\\vertex.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -90,17 +54,17 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 3,
               "Title": "Window.cs",
               "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Window.cs",
               "RelativeDocumentMoniker": "Window\\Window.cs",
               "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Window\\Window.cs",
               "RelativeToolTip": "Window\\Window.cs",
-              "ViewState": "AgIAADQAAAAAAAAAAAAkwEcAAAAMAAAAAAAAAA==",
+              "ViewState": "AgIAADYAAAAAAAAAAAAtwEwAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-18T11:31:09.486Z",
               "IsPinned": true,
@@ -108,240 +72,134 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "GrassScene.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\GrassScene.cs",
-              "RelativeDocumentMoniker": "Objects\\Scenes\\GrassScene.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\GrassScene.cs",
-              "RelativeToolTip": "Objects\\Scenes\\GrassScene.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAAwDMAAAANAAAAAAAAAA==",
+              "DocumentIndex": 0,
+              "Title": "EditVerticesScene.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\EditVerticesScene.cs",
+              "RelativeDocumentMoniker": "Objects\\Scenes\\EditVerticesScene.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\EditVerticesScene.cs",
+              "RelativeToolTip": "Objects\\Scenes\\EditVerticesScene.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAADwv2IAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T12:18:58.798Z",
+              "WhenOpened": "2025-11-24T10:35:13.329Z",
               "IsPinned": true,
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Figure.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Figure.cs",
-              "RelativeDocumentMoniker": "Objects\\Figure.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Figure.cs",
-              "RelativeToolTip": "Objects\\Figure.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAwAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T21:14:21.324Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{dcc4ea97-1c0c-482b-b205-e541c0df9728}"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "SkyBoxShader.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\SkyBoxShader.cs",
-              "RelativeDocumentMoniker": "Shaders\\SkyBoxShader.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\SkyBoxShader.cs",
-              "RelativeToolTip": "Shaders\\SkyBoxShader.cs",
-              "ViewState": "AgIAAIMAAAAAAAAAAAAuwJ0AAAAYAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T21:04:21.799Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ShaderElementFragmentGrassMaker.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShaderElementFragmentGrassMaker.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\ShaderElementFragmentGrassMaker.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShaderElementFragmentGrassMaker.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\ShaderElementFragmentGrassMaker.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T20:37:29.413Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "FragmentAlbedo.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\FragmentAlbedo.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\FragmentAlbedo.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\FragmentAlbedo.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\FragmentAlbedo.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T20:27:53.322Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
+              "DocumentIndex": 4,
               "Title": "Shader.cs",
               "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\Shader.cs",
               "RelativeDocumentMoniker": "Shaders\\Shader.cs",
               "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\Shader.cs",
               "RelativeToolTip": "Shaders\\Shader.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAAwBAAAAARAAAAAAAAAA==",
+              "ViewState": "AgIAAL0BAAAAAAAAAADwv08CAABPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T19:42:47.475Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "ShaderElementBase.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShaderElementBase.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\ShaderElementBase.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShaderElementBase.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\ShaderElementBase.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAABMAAAAgAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T20:11:03.213Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "AnimatedGrass.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\AnimatedGrass.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\AnimatedGrass.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\AnimatedGrass.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\AnimatedGrass.cs",
-              "ViewState": "AgIAADwAAAAAAAAAAAAYwFIAAABGAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T19:41:42.54Z",
+              "WhenOpened": "2025-11-24T13:09:52.683Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "Uniform4Element.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\Uniform4Element.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\Uniform4Element.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\Uniform4Element.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\Uniform4Element.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAsAAAAdAAAAAAAAAA==",
+              "Title": "VetexSelector.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Tools\\VetexSelector.cs",
+              "RelativeDocumentMoniker": "Tools\\VetexSelector.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Tools\\VetexSelector.cs",
+              "RelativeToolTip": "Tools\\VetexSelector.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAACgAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T20:02:08.573Z",
+              "WhenOpened": "2025-11-24T13:03:55.602Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "Uniform2DSamplerElement.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\Uniform2DSamplerElement.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\Uniform2DSamplerElement.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\Uniform2DSamplerElement.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\Uniform2DSamplerElement.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "Figure.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Figure.cs",
+              "RelativeDocumentMoniker": "Objects\\Figure.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Figure.cs",
+              "RelativeToolTip": "Objects\\Figure.cs",
+              "ViewState": "AgIAABIAAAAAAAAAAAAuwCEAAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T20:01:42.553Z"
+              "WhenOpened": "2025-11-24T12:41:40.136Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "ShitShowVertexShader.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShitShowVertexShader.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\ShitShowVertexShader.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShitShowVertexShader.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\ShitShowVertexShader.cs",
-              "ViewState": "AgIAABcAAAAAAAAAAAAAwBUAAAAPAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "ColorRenderVertex.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ColorRenderVertex.cs",
+              "RelativeDocumentMoniker": "Shaders\\ColorRenderVertex.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ColorRenderVertex.cs",
+              "RelativeToolTip": "Shaders\\ColorRenderVertex.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T19:44:39.803Z"
+              "WhenOpened": "2025-11-24T12:21:46.573Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 15,
-              "Title": "Texture.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Textures\\Texture.cs",
-              "RelativeDocumentMoniker": "Textures\\Texture.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Textures\\Texture.cs",
-              "RelativeToolTip": "Textures\\Texture.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAAAEQAAAAeAAAAAAAAAA==",
+              "DocumentIndex": 7,
+              "Title": "ColorRenderFrag.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ColorRenderFrag.cs",
+              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\ColorRenderFrag.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ColorRenderFrag.cs",
+              "RelativeToolTip": "Shaders\\ShaderComAndElements\\ColorRenderFrag.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABcAAAAdAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T19:37:45.11Z"
+              "WhenOpened": "2025-11-24T12:16:09.355Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 18,
-              "Title": "ObjectHandler.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\ObjectHandler.cs",
-              "RelativeDocumentMoniker": "Objects\\ObjectHandler.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\ObjectHandler.cs",
-              "RelativeToolTip": "Objects\\ObjectHandler.cs",
-              "ViewState": "AgIAAAMAAAAAAAAAAAAAABMAAAAJAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "GrassScene.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\GrassScene.cs",
+              "RelativeDocumentMoniker": "Objects\\Scenes\\GrassScene.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\GrassScene.cs",
+              "RelativeToolTip": "Objects\\Scenes\\GrassScene.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAjwBkAAABHAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T13:59:57.345Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 17,
-              "Title": "ShaderHandler.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderHandler.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderHandler.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderHandler.cs",
-              "RelativeToolTip": "Shaders\\ShaderHandler.cs",
-              "ViewState": "AgIAACAAAAAAAAAAAAAgwDwAAAAlAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T13:57:47.906Z"
+              "WhenOpened": "2025-11-19T12:18:58.798Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "DefaultScene.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\DefaultScene.cs",
-              "RelativeDocumentMoniker": "Objects\\Scenes\\DefaultScene.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\DefaultScene.cs",
-              "RelativeToolTip": "Objects\\Scenes\\DefaultScene.cs",
-              "ViewState": "AgIAADMAAAAAAAAAAADgv0kAAABNAAAAAAAAAA==",
+              "Title": "Vertex.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Vertex.cs",
+              "RelativeDocumentMoniker": "Objects\\Vertex.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Vertex.cs",
+              "RelativeToolTip": "Objects\\Vertex.cs",
+              "ViewState": "AgIAACcAAAAAAAAAAAAswFAAAAApAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T12:10:23.134Z"
+              "WhenOpened": "2025-11-24T12:11:29.142Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 16,
-              "Title": "Scene.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\Scene.cs",
-              "RelativeDocumentMoniker": "Objects\\Scenes\\Scene.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\Scenes\\Scene.cs",
-              "RelativeToolTip": "Objects\\Scenes\\Scene.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAAAABsAAAAoAAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "VertexInformation.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\VertexInformation.cs",
+              "RelativeDocumentMoniker": "Objects\\VertexInformation.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\VertexInformation.cs",
+              "RelativeToolTip": "Objects\\VertexInformation.cs",
+              "ViewState": "AgIAAJ4AAAAAAAAAAAAtwLQAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-19T10:11:52.722Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "UI.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\UI.cs",
-              "RelativeDocumentMoniker": "UI.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\UI.cs",
-              "RelativeToolTip": "UI.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAAAYwGcAAAAjAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T18:05:22.571Z",
+              "WhenOpened": "2025-11-24T12:10:50.529Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "ShaderCombiner.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShaderCombiner.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\ShaderCombiner.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\ShaderCombiner.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\ShaderCombiner.cs",
-              "ViewState": "AgIAACYAAAAAAAAAAAAgwDIAAAAkAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "VertexArrayObjectHandler.cs",
+              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\VertexArrayObjectHandler.cs",
+              "RelativeDocumentMoniker": "Objects\\VertexArrayObjectHandler.cs",
+              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Objects\\VertexArrayObjectHandler.cs",
+              "RelativeToolTip": "Objects\\VertexArrayObjectHandler.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAQwA8AAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T17:47:56.683Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 19,
-              "Title": "GeometryShaderVectorHedgeHog.cs",
-              "DocumentMoniker": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\GeometryShaderVectorHedgeHog.cs",
-              "RelativeDocumentMoniker": "Shaders\\ShaderComAndElements\\GeometryShaderVectorHedgeHog.cs",
-              "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\Shaders\\ShaderComAndElements\\GeometryShaderVectorHedgeHog.cs",
-              "RelativeToolTip": "Shaders\\ShaderComAndElements\\GeometryShaderVectorHedgeHog.cs",
-              "ViewState": "AgIAACkAAAAAAAAAAAAAwD0AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-16T17:45:15.66Z"
+              "WhenOpened": "2025-11-24T12:09:25.049Z"
             }
           ]
         }

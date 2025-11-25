@@ -13,7 +13,7 @@ namespace openGL2.Objects
         public static int VAO { get => GetPositionAndUvVao(); }
         private static int GetPositionAndUvVao ()
         {
-            int stride = 14;
+            int stride = 17;
             int offset = 0;
 
             int VAO = GL.GenVertexArray();
@@ -46,6 +46,11 @@ namespace openGL2.Objects
             int biNormalLength = 3;
             GL.VertexAttribPointer(4, biNormalLength, VertexAttribPointerType.Float, false, stride * sizeof(float), offset * sizeof(float));
             GL.EnableVertexAttribArray(4);
+            offset += biNormalLength;
+
+            int colorLength = 3;
+            GL.VertexAttribPointer(5, colorLength, VertexAttribPointerType.Float, false, stride * sizeof(float), offset * sizeof(float));
+            GL.EnableVertexAttribArray(5);
             offset += biNormalLength;
 
 

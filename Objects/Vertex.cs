@@ -27,6 +27,10 @@ namespace openGL2.Objects
         public float BiNormalY {get; private set;}
         public float BiNormalZ {get; private set;}
 
+        public float colorR = 100;
+        public float colorG = 100;
+        public float colorB = 100;
+
         public Vertex(float[] positions, float[] uvs, float[] normals, bool hasTanAndBi = false)
         {
             PositionX = positions[0];
@@ -45,9 +49,16 @@ namespace openGL2.Objects
                 float[] tanAndBis = TangentAndBiNormalLogic.MakeTangentsAndBiNormalsForTriangles(positions, uvs);
                 SetTanAndBi(new float[] { tanAndBis[0], tanAndBis[1], tanAndBis[2] }, new float[] { tanAndBis[3], tanAndBis[4], tanAndBis[5] });
             }
+
+     
+
         }
 
-        public Vertex() { }
+        public Vertex() 
+        {
+ 
+
+        }
 
 
         public void SetTanAndBi(float[] tangents, float[] biNormals)

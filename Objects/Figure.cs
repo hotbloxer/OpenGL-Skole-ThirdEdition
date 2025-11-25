@@ -13,14 +13,14 @@ namespace openGL2.Objects
 
         // Rendering
         public Shader [] Shaders;        
-        private Matrix4 _modelSpace;
+        public Matrix4 ModelSpace;
         public bool Render { get; set; } = true;
 
         // Material
         public IMaterial Material;
 
         //Geometry
-        private VertexInformation _vertexInformation;
+        public VertexInformation _vertexInformation;
         public IGeometry Geometry { get; }
 
         public IHaveUI HaveUI { get; }
@@ -44,7 +44,7 @@ namespace openGL2.Objects
             GenerateVBOHandle();
             VAOHandle = VertexArrayObjectHandler.VAO;
 
-            _modelSpace = Matrix4.Identity;
+            ModelSpace = Matrix4.Identity;
             Name = ObjectNamer();
 
 
@@ -67,7 +67,7 @@ namespace openGL2.Objects
             GenerateVBOHandle();
             VAOHandle = VertexArrayObjectHandler.VAO;
 
-            _modelSpace = Matrix4.Identity;
+            ModelSpace = Matrix4.Identity;
             Name = ObjectNamer();
 
 
@@ -92,7 +92,7 @@ namespace openGL2.Objects
             GenerateVBOHandle();
             VAOHandle = VertexArrayObjectHandler.VAO;
 
-            _modelSpace = Matrix4.Identity;
+            ModelSpace = Matrix4.Identity;
             Name = ObjectNamer();
 
             if (haveMaterial)
@@ -113,18 +113,18 @@ namespace openGL2.Objects
 
         public void UpdateModelsSpace ()
         {
-            Shader.UpdateModelSpace(_modelSpace);
+            Shader.UpdateModelSpace(ModelSpace);
         }
 
         
         public void TranslateFigure (Matrix4 translation)
         {
-            _modelSpace *= translation;
+            ModelSpace *= translation;
         }
 
         public void SetModelSpace (Matrix4 modelSpace)
         {
-            _modelSpace = modelSpace;
+            ModelSpace = modelSpace;
         }
 
         protected void GenerateVBOHandle()
@@ -204,20 +204,20 @@ namespace openGL2.Objects
         /// </summary>
         public void UpdateVBO()
         {
-
+            RebuildVBO();
             // code received from Søren
-            GL.BindBuffer(BufferTarget.ArrayBuffer, VBOHandle);
-            IntPtr p = GL.MapBuffer(BufferTarget.ArrayBuffer, BufferAccess.ReadWrite);
+            //GL.BindBuffer(BufferTarget.ArrayBuffer, VBOHandle);
+            //IntPtr p = GL.MapBuffer(BufferTarget.ArrayBuffer, BufferAccess.ReadWrite);
 
-            unsafe
-            {
-                float* f = (float*)p;
-                for (int i = 0; i < _vertexInformation.Vertices.Length; i++)
-                {
-                    f[i] = _vertexInformation.Vertices[i];
-                }
-            }
-            GL.UnmapBuffer(BufferTarget.ArrayBuffer);
+            //unsafe
+            //{
+            //    float* f = (float*)p;
+            //    for (int i = 0; i < _vertexInformation.Vertices.Length; i++)
+            //    {
+            //        f[i] = _vertexInformation.Vertices[i];
+            //    }
+            //}
+            //GL.UnmapBuffer(BufferTarget.ArrayBuffer);
 
             // code received from Søren
         }
@@ -229,6 +229,7 @@ namespace openGL2.Objects
         /// </summary>
         public void RebuildVBO ()
         {
+
             BindVBOAndData();
         }
 
@@ -243,7 +244,7 @@ namespace openGL2.Objects
         {
             Figure newFigure = new Figure(Shaders, _vertexInformation);
             newFigure.Material = this.Material;
-            newFigure.SetModelSpace(this._modelSpace);
+            newFigure.SetModelSpace(this.ModelSpace);
             return newFigure;
         }
 

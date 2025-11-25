@@ -101,7 +101,7 @@ namespace openGL2
         public void Ui()
         {
 
-            ImGui.ShowDemoWindow();
+            //ImGui.ShowDemoWindow();
 
 
 
@@ -113,12 +113,19 @@ namespace openGL2
 
             ImGui.Begin("Properties");
 
+            
 
             #region Select figure and geometry settings
 
             _selectedShader ??= ShaderHandler.GetShaders().FirstOrDefault().Value;
 
             string[] figureNames = ObjectHandler.GetFigures.Keys.ToArray();
+
+            if (figureNames.Length >0)
+            {
+
+            }
+
             if (ImGui.BeginCombo("Shader", figureNames[_selectedFigureIndex]))
             {
                 for (int n = 0; n < figureNames.Length; n++)
@@ -149,7 +156,7 @@ namespace openGL2
 
             if (_selectedFigure?.HaveUI != null)
             {
-                _selectedFigure.HaveUI.GetUI();
+                if (_selectedFigure.HaveUI.GetUI());
             }
 
             #endregion
@@ -207,6 +214,18 @@ namespace openGL2
                     }
 
                
+
+
+                    ImGui.EndTabItem();
+                }
+
+
+                if (ImGui.BeginTabItem("Tolls"))
+                {
+                    if (ImGui.Button("Select vertices"))
+                    {
+                        
+                    }
 
 
                     ImGui.EndTabItem();
@@ -621,7 +640,9 @@ namespace openGL2
                 if (ImGui.BeginTabItem("Environment"))
                 {
                     ImGui.Checkbox("use Environment map",ref UseEnvironment);
-                 
+
+                Sun.Instance.GetUI();
+
                     ImGui.EndTabItem();
                 }
 

@@ -14,6 +14,7 @@ namespace openGL2.Shaders.ShaderComAndElements
         {
             Apply = true;
             Texture t = new Texture(@"..\..\..\Textures\TextureImages\grass (1).tga", "grasss");
+            t.SetFilter(t.ID, TextureMinFilter.Nearest, TextureMagFilter.Nearest);
             uniforms.Add("grasUni", new Uniform2DSamplerElement("grass", 0, t));
 
             layouts.Add(new CustomLayout(

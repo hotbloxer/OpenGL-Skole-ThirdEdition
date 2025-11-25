@@ -26,12 +26,18 @@ namespace openGL2.Window
         private Camera camera;
 
         UI ui;
+        Sun sun = new Sun();
 
         SkyBoxShader skyBoxShader;
 
         Scene _defaultScene;
         Scene _grassScene;
-        public enum Scenes { DEFAULT, GRASS }
+        Scene _sunDisplayScene;
+        Scene _vertexSelectorShader;
+        KeyboardState input;
+        public static MouseState mouse;
+
+        public enum Scenes { DEFAULT, GRASS, SUNANIMATION, VERTEXSELECTOR}
         Scene CurrentScene;
 
         // der er en dedikeret VAO til de forskellige VAO man får brug for
@@ -47,7 +53,7 @@ namespace openGL2.Window
         {
             base.OnLoad();
 
-            GL.DepthMask(true);
+            GL.Enable(EnableCap.DepthTest);
 
             camera = new(this)
             {
@@ -67,8 +73,10 @@ namespace openGL2.Window
 
             _defaultScene = new DefaultScene();
             _grassScene = new GrassScene();
+            _sunDisplayScene = new SunDisplayScene();
+            _vertexSelectorShader = new EditVerticesScene(camera);
 
-            CurrentScene = _grassScene;
+            CurrentScene = _vertexSelectorShader;
             CurrentScene.Load();
 
             
@@ -86,8 +94,11 @@ namespace openGL2.Window
             // dette er fordi alt er fucked! og jeg ikke kan få render rækkefølgen til at passe ordentligt!
             ImGui.GetStyle().Colors[(int)ImGuiCol.WindowBg] = (System.Numerics.Vector4)new Vector4(0, 0, 0, 0);
 
-        }
 
+
+
+        }
+       
         protected override void OnRenderFrame(FrameEventArgs args)
         {
             base.OnRenderFrame(args);
@@ -117,8 +128,8 @@ namespace openGL2.Window
 
             ui.Ui(); // ui elements
             ui.RenderView(); // view of render. actually just a regular window... but transparanet
-       
 
+            Sun.Instance.UpdateSunAnimation();
             ImGui.Render();
             GL.Viewport(0, 0, FramebufferSize.X, FramebufferSize.Y);
         
@@ -132,16 +143,20 @@ namespace openGL2.Window
                 Context.MakeCurrent();
             }
 
-           
-            KeyboardState input;
-            MouseState mouse;
+
             if (IsFocused)
             {
                 //disse er kun nødvendige hvis winduet faktisk er i fokus
                 input = KeyboardState;
                 mouse = MouseState;
                 camera.UpdateCamera(input, args, mouse);
+
             }
+
+
+
+
+
 
 
             GL.BindFramebuffer(FramebufferTarget.Framebuffer, 0);
@@ -152,8 +167,6 @@ namespace openGL2.Window
                 Close();
             }
             this.Context.SwapBuffers();
-
-
         }
 
         protected override void OnResize(ResizeEventArgs e)
@@ -162,7 +175,7 @@ namespace openGL2.Window
             GL.Viewport(0, 0, Size.X, Size.Y);
         }
 
-
+        
         protected override void OnUnload()
         {
 
@@ -195,6 +208,15 @@ namespace openGL2.Window
                 case Scenes.GRASS:
                     CurrentScene = _grassScene;
                     break;
+
+                case Scenes.SUNANIMATION:
+                    CurrentScene = _sunDisplayScene;
+                    break;
+
+                case Scenes.VERTEXSELECTOR:
+                    CurrentScene = _vertexSelectorShader;
+                    break;
+
             }
 
             CurrentScene.OpenScene();
@@ -208,11 +230,21 @@ namespace openGL2.Window
                 ChangeSceneTo(Scenes.DEFAULT);
             }
 
-
             if (ImGui.Button("Grass Scene"))
             {
                 ChangeSceneTo(Scenes.GRASS);
             }
+
+            if (ImGui.Button("Sun Scene"))
+            {
+                ChangeSceneTo(Scenes.SUNANIMATION);
+            }
+
+            if (ImGui.Button("Vertex selector Scene"))
+            {
+                ChangeSceneTo(Scenes.VERTEXSELECTOR);
+            }
+
 
             return true;
         }

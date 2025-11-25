@@ -48,6 +48,8 @@ namespace openGL2.Shaders
         public bool UsesGeometryShader = false;
         public bool usesMaterial = false;
 
+        ShaderElementBase sunFrag = new FragmentShaderSun();
+
         public Shader (ShaderElementBase[] shaderElements)
         {
             sc = new ShaderCombiner(this);
@@ -273,6 +275,12 @@ namespace openGL2.Shaders
             code = sc.GetShaderCode(ShaderType.FragmentShader);
 
 
+            if (!sc.elements.Contains(sunFrag))
+                sc.elements.Add(sunFrag);
+            uniforms = sc.GetShaderUniforms(ShaderType.FragmentShader);
+
+
+
             return 
             @$"#version 330 core 
             out vec4 FragColor; 
@@ -305,8 +313,9 @@ namespace openGL2.Shaders
             uniform vec3 {lightColor};
             uniform vec3 {objectColor};
 
-        
-            vec3 lightPosition = vec3 (0, 10, 10);
+                    
+            
+            vec3 lightPosition = lightPositionIn;
             vec3 rimColor = vec3 (1, 1, 1);
           
             float ambientStrength = 0.1f;
@@ -314,6 +323,8 @@ namespace openGL2.Shaders
             void main() 
             {{
       
+            vec3 oldLight = lightColor;
+            vec3 lightcolNew = sunLight ;
 
             vec3 normal;
 
@@ -365,12 +376,12 @@ namespace openGL2.Shaders
            
             if ({useTexture}) 
             {{
-                ambient  = vec4((ambientStrength * lightColor), 1) * LightTexPixel;    
+                ambient  = vec4((ambientStrength * lightcolNew), 1) * LightTexPixel;    
             }}
            
             else 
             {{
-               ambient = vec4(ambientStrength * lightColor, 1);
+               ambient = vec4(ambientStrength * lightcolNew, 1);
             }}
   
             
@@ -380,7 +391,7 @@ namespace openGL2.Shaders
             vec3 normalizedNormal = normalize(normal);
             vec3 lightDir = normalize(lightPosition - fragPosition); 
             float diff = max(dot(normalizedNormal, lightDir), 0.0);
-            vec4 diffuse = vec4(diff * lightColor, 1);
+            vec4 diffuse = vec4(diff * lightcolNew, 1);
             
 
 
@@ -411,12 +422,12 @@ namespace openGL2.Shaders
             if ({useTexture}) 
             {{
                 
-                specular = vec4 ((specularStrength * specValue * lightColor) * specularTexPixel, 1)   ;  
+                specular = vec4 ((specularStrength * specValue * lightcolNew) * specularTexPixel, 1)   ;  
             }}
            
             else 
             {{
-                specular = vec4 (specularStrength * specValue * lightColor , 1); 
+                specular = vec4 (specularStrength * specValue * lightcolNew , 1); 
             }}
             
 

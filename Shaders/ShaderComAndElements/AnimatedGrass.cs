@@ -19,7 +19,7 @@ namespace openGL2.Shaders.ShaderComAndElements
 
         UniformFloatElement timer = new UniformFloatElement("time", 0);
         UniformFloatElement factorUniform;
-        Uniform3Element windDirUniform;
+        UniformVec3Element windDirUniform;
 
 
         public AnimatedGrass() : base(ShaderType.VertexShader)
@@ -30,7 +30,7 @@ namespace openGL2.Shaders.ShaderComAndElements
             
 
             factorUniform = new UniformFloatElement("factor", sizeFactor);
-            windDirUniform = new Uniform3Element("windDir", windDir);
+            windDirUniform = new UniformVec3Element("windDir", windDir);
 
             uniforms.Add("animTime", timer);
             uniforms.Add("factorUni", factorUniform);
@@ -41,10 +41,18 @@ namespace openGL2.Shaders.ShaderComAndElements
                 float newX = {PositionVertexShader.Position}.y > 0 ? time :  0;
                 float newZ = {PositionVertexShader.Position}.y > 0 ? time :  0;
 
-                {PositionVertexShader.Position}.x += sin(newX * 6.2831853) * factor * windDir.x;
-                {PositionVertexShader.Position}.z += sin(newZ * 6.2831853) * factor * windDir.z;
+                
+                vec4 tempPos = model * vec4({PositionVertexShader.Position}, 1);
+
+                tempPos.x += sin(newX * 6.2831853) * factor * windDir.x;
+                tempPos.z += sin(newZ * 6.2831853) * factor * windDir.z;
+
+
+                {PositionVertexShader.Position} = vec3 (inverse(model) * tempPos);
 
                 
+                
+                gl_Position = projectionViewModel * vec4({PositionVertexShader.Position}, 1.0);
             ";
         }
 
@@ -82,7 +90,7 @@ namespace openGL2.Shaders.ShaderComAndElements
         {
             Matrix4 windRotation = Matrix4.CreateRotationY(_WindDirRad);
             Vector4 windDirVec4 = new Vector4(windDir.X, windDir.Y, windDir.Z, 0);
-            Vector3 NormalizedVec3WindDir = new Vector3(Vector4.Normalize(windDirVec4 * windRotation));
+            Vector3 NormalizedVec3WindDir = new Vector3((windDirVec4 * windRotation));
             windDirUniform.UpdateValue(NormalizedVec3WindDir);
         }
     }

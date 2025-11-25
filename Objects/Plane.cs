@@ -98,6 +98,7 @@ namespace openGL2.Objects
 
             if (_updateGeometry)
             {
+                OnUIChange?.Invoke(this, EventArgs.Empty);
                 _vertexInformation = GetVertexInformation();
                 _updateGeometry = false;
                 return true;
@@ -130,7 +131,16 @@ namespace openGL2.Objects
             {
                 _updateGeometry = true;
             }
+           
             return true;
         }
+
+        public delegate void tiggeredByUI (Plane info);
+        public event EventHandler OnUIChange;
+        public void OnUpdate (tiggeredByUI triggered)
+        {
+            triggered.Invoke(this);
+        }
+
     }
 }

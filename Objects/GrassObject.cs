@@ -21,12 +21,12 @@ namespace openGL2.Objects
         private VertexInformation GetVertexInfo()
         {
             float[] planeTemp = new float[] {
-                 0.5f, -0.5f, 0.0f,
-                -0.5f, -0.5f, 0.0f,
-                -0.5f,  0.5f, 0.0f,
-                -0.5f,  0.5f, 0.0f,
-                 0.5f,  0.5f, 0.0f,
-                 0.5f, -0.5f, 0.0f,
+                 0.5f,  0f, 0.0f,
+                -0.5f,  0f, 0.0f,
+                -0.5f,  1f, 0.0f,
+                -0.5f,  1f, 0.0f,
+                 0.5f,  1f, 0.0f,
+                 0.5f,  0f, 0.0f,
             };
 
             float[] plane1 = rotate(planeTemp, 0);

@@ -108,14 +108,14 @@ namespace openGL2.Textures
 
 
 
-        protected virtual  void SetTiling(int textureId, TextureWrapMode wrapMode = TextureWrapMode.Repeat)
+        public virtual  void SetTiling(int textureId, TextureWrapMode wrapMode = TextureWrapMode.Repeat)
         {
             GL.BindTexture(TextureTarget.Texture2D, textureId);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)wrapMode);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)wrapMode);
         }
 
-        protected virtual  void SetFilter(int textureId, TextureMinFilter minFilter = TextureMinFilter.Linear, TextureMagFilter magFilter = TextureMagFilter.Linear)
+        public virtual  void SetFilter(int textureId, TextureMinFilter minFilter = TextureMinFilter.Linear, TextureMagFilter magFilter = TextureMagFilter.Linear)
         {
             GL.BindTexture(TextureTarget.Texture2D, textureId);
             GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)minFilter);

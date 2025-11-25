@@ -4,12 +4,12 @@ using OpenTK.Mathematics;
 
 namespace openGL2.Shaders.ShaderComAndElements
 {
-    public class Uniform3Element : UniformElement
+    public class UniformVec3Element : UniformElement
     {
       
         private Vector3 _value;
         public Vector3 Value {get => _value; set => UpdateValue(value); }
-        public Uniform3Element(string name, Vector3 value) : base(name, "vec3")
+        public UniformVec3Element(string name, Vector3 value) : base(name, "vec3")
         {
             Value = value;
 
