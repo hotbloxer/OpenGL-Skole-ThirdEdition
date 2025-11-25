@@ -80,8 +80,7 @@
               "ViewState": "AgIAAEkAAAAAAAAAAADwv2IAAAAMAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-24T10:35:13.329Z",
-              "IsPinned": true,
-              "EditorCaption": ""
+              "IsPinned": true
             },
             {
               "$type": "Bookmark",
@@ -95,7 +94,7 @@
               "RelativeDocumentMoniker": "Shaders\\Shader.cs",
               "ToolTip": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEditionRedo\\Shaders\\Shader.cs",
               "RelativeToolTip": "Shaders\\Shader.cs",
-              "ViewState": "AgIAAPYCAAAAAAAAAAAAwBoDAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAWAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-11-24T13:09:52.683Z",
               "EditorCaption": ""
@@ -122,8 +121,7 @@
               "RelativeToolTip": "Objects\\Figure.cs",
               "ViewState": "AgIAAHsAAAAAAAAAAAAWwJMAAAAbAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-11-24T12:41:40.136Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-11-24T12:41:40.136Z"
             },
             {
               "$type": "Document",
