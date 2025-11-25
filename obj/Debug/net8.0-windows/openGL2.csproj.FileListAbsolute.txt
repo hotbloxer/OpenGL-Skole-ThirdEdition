@@ -197,3 +197,12 @@ C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-w
 C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-windows\openGL2.genruntimeconfig.cache
 C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\obj\Debug\net8.0-windows\ref\openGL2.dll
 C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEdition\bin\Debug\net8.0-windows\PlantUml.Net.dll
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.csproj.AssemblyReference.cache
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.AssemblyInfoInputs.cache
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.AssemblyInfo.cs
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.csproj.CoreCompileInputs.cache
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.sourcelink.json
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.dll
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\refint\openGL2.dll
+C:\Users\p-hou\source\repos\openGL2\OpenGL-Skole-ThirdEditionRedo\obj\Debug\net8.0-windows\openGL2.pdb

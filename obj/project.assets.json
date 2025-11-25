@@ -5550,11 +5550,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\openGL2.csproj",
+      "projectUniqueName": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEditionRedo\\openGL2.csproj",
       "projectName": "openGL2",
-      "projectPath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\openGL2.csproj",
+      "projectPath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEditionRedo\\openGL2.csproj",
       "packagesPath": "C:\\Users\\p-hou\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEdition\\obj\\",
+      "outputPath": "C:\\Users\\p-hou\\source\\repos\\openGL2\\OpenGL-Skole-ThirdEditionRedo\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
